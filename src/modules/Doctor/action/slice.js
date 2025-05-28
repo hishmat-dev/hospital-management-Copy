@@ -39,7 +39,7 @@ const initialState = {
       patients: 23,
       address: "123 Medical Plaza, City, State",
       licenseNumber: "MD12345",
-      consultationFee: "$200",
+      consultationFee: "200",
       schedule: {
         monday: "9:00 AM - 5:00 PM",
         tuesday: "9:00 AM - 5:00 PM",
@@ -63,7 +63,7 @@ const initialState = {
       patients: 18,
       address: "456 Health Center, City, State",
       licenseNumber: "MD12346",
-      consultationFee: "$180",
+      consultationFee: "180",
       schedule: {
         monday: "2:00 PM - 10:00 PM",
         tuesday: "2:00 PM - 10:00 PM",
@@ -87,7 +87,7 @@ const initialState = {
       patients: 35,
       address: "789 Emergency Wing, City, State",
       licenseNumber: "MD12347",
-      consultationFee: "$150",
+      consultationFee: "150",
       schedule: {
         monday: "10:00 PM - 6:00 AM",
         tuesday: "10:00 PM - 6:00 AM",
@@ -111,7 +111,7 @@ const initialState = {
       patients: 15,
       address: "321 Neuro Center, City, State",
       licenseNumber: "MD12348",
-      consultationFee: "$250",
+      consultationFee: "250",
       schedule: {
         monday: "8:00 AM - 4:00 PM",
         tuesday: "8:00 AM - 4:00 PM",
@@ -126,10 +126,9 @@ const initialState = {
   error: null,
   filters: {
     search: "",
-    specialty: "",
     department: "",
     status: "",
-    availability: "",
+    sortBy: ""
   },
   pagination: {
     page: 1,
@@ -147,6 +146,9 @@ export const doctorSlice = createSlice({
     },
     setFilters: (state, action) => {
       state.filters = { ...state.filters, ...action.payload }
+    },
+    resetFilters: (state) => {
+      state.filters = initialState.filters
     },
     setPagination: (state, action) => {
       state.pagination = { ...state.pagination, ...action.payload }
@@ -194,5 +196,5 @@ export const doctorSlice = createSlice({
   },
 })
 
-export const { setSelectedDoctor, setFilters, setPagination, clearError } = doctorSlice.actions
+export const { setSelectedDoctor, setFilters, resetFilters, setPagination, clearError } = doctorSlice.actions
 export default doctorSlice.reducer

@@ -18,7 +18,7 @@ export default function PatientCreateForm() {
 
           <SectionContact formData={formData} handleChange={handleChange} errors={errors} />
 
-          <SectionMedical formData={formData} handleChange={handleChange} errors={errors} />
+          {/* <SectionMedical formData={formData} handleChange={handleChange} errors={errors} /> */}
 
           <Btn onSave={handleSubmit} onCancel={handleCancel} loading={loading} disabled={!isValid} />
         </form>

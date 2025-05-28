@@ -9,8 +9,10 @@ const AppointmentDetail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { appointments, loading } = useSelector((state) => state.appointment)
-  const appointment = appointments.find((apt) => apt.id === Number.parseInt(id))
+  const { appointments, loading } = useSelector((state) => state.appointments)
+
+  // console.log("Appointments:", appointments)
+  const appointment = appointments.find((apt) => apt.id === id)
 
   useEffect(() => {
     if (!appointments.length) {
@@ -21,7 +23,7 @@ const AppointmentDetail = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-color"></div>
       </div>
     )
   }
@@ -32,7 +34,7 @@ const AppointmentDetail = () => {
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Appointment Not Found</h2>
         <button
           onClick={() => navigate("/appointments/list")}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          className="bg-primary-color text-white px-4 py-2 rounded-md "
         >
           Back to Appointments
         </button>
@@ -43,7 +45,7 @@ const AppointmentDetail = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="bg-blue-600 text-white px-6 py-4">
+        <div className="bg-primary-color text-white px-6 py-4">
           <h1 className="text-2xl font-bold">Appointment Details</h1>
         </div>
 
@@ -121,7 +123,7 @@ const AppointmentDetail = () => {
           <div className="mt-8 flex space-x-4">
             <button
               onClick={() => navigate(`/appointments/update/${id}`)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="bg-primary-color text-white px-4 py-2 rounded-md "
             >
               Edit Appointment
             </button>

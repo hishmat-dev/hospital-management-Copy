@@ -32,7 +32,7 @@ export const useAppointmentListing = () => {
   const handleView = useCallback(
     (appointment) => {
       dispatch(setSelectedAppointment(appointment))
-      navigate("/appointments/details")
+      navigate(`/appointments/detail/${appointment.id}`)
     },
     [dispatch, navigate],
   )
@@ -40,7 +40,7 @@ export const useAppointmentListing = () => {
   const handleEdit = useCallback(
     (appointment) => {
       dispatch(setSelectedAppointment(appointment))
-      navigate("/appointments/update")
+      navigate(`/appointments/update/${appointment.id}`)
     },
     [dispatch, navigate],
   )

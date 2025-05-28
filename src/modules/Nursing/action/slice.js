@@ -26,7 +26,7 @@ const initialState = {
     },
     {
       id: 2,
-      patientName: "Jane Smith",
+      patientName: "John Smith",
       room: "102",
       bed: "B",
       nurseName: "Mike Wilson",

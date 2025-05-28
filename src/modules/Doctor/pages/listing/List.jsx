@@ -1,8 +1,4 @@
-
-
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../components/ui/card"
-import { Button } from "../../../../components/ui/button"
-import { Plus, Download } from "lucide-react"
 import { useDoctorListing } from "./listing.hooks"
 import FilterBar from "./components/FilterBar"
 import ListItem from "./components/ListItem"
@@ -20,6 +16,7 @@ export default function DoctorList() {
     handleAddNew,
     getSpecialtyColor,
     getStatusColor,
+    handleResetFilters,
   } = useDoctorListing()
 
   if (loading) {
@@ -32,27 +29,18 @@ export default function DoctorList() {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
       <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Doctor Management</h1>
-        </div>
-        {/* <div className="flex gap-3">
-          <Button onClick={handleExport} variant="outline" className="flex items-center gap-2">
-            <Download className="h-4 w-4" />
-            Export
-          </Button>
-          <Button onClick={handleAddNew} className="flex items-center gap-2">
-            <Plus className="h-4 w-4" />
-            Add Doctor
-          </Button>
-        </div> */}
+        <h1 className="text-3xl font-bold text-gray-900">Doctor Management</h1>
       </div>
 
-      {/* Filters */}
-      <FilterBar filters={filters} onFilterChange={handleFilterChange} />
+      <FilterBar
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onExport={handleExport}
+        onAddNew={handleAddNew}
+        onResetFilters={handleResetFilters}
+      />
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -92,7 +80,6 @@ export default function DoctorList() {
         </Card>
       </div>
 
-      {/* Doctor List */}
       <Card>
         <CardHeader>
           <CardTitle>Doctors ({doctors.length})</CardTitle>

@@ -16,6 +16,7 @@ export default function PatientList() {
     handleExport,
     handleAddNew,
     getStatusColor,
+  handleResetFilters,
   } = usePatientListing()
 
   if (loading) {
@@ -37,8 +38,8 @@ export default function PatientList() {
         onFilterChange={handleFilterChange}
         onExport={handleExport}
         onAddNew={handleAddNew}
-        departments={listingConfig.departments}
         statuses={listingConfig.statuses}
+        onResetFilters={handleResetFilters}
       />
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">

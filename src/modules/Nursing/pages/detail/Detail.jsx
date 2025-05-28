@@ -5,12 +5,15 @@ import { useEffect } from "react"
 import { fetchVitals } from "../../action/slice"
 
 const NursingDetail = () => {
-  const { id } = useParams()
+  const { id, patientName } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { vitals, loading } = useSelector((state) => state.nursing)
-  const vitalRecord = vitals.find((v) => v.id === Number.parseInt(id))
+  console.log("Vitals:", vitals)
+  console.log("Nursing Details :", id, patientName)
+  const vitalRecord = vitals.find((v) => v.patientName === patientName)
+  console.log("Vital Record:", vitalRecord)
 
   useEffect(() => {
     if (!vitals.length) {
@@ -21,7 +24,7 @@ const NursingDetail = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-color"></div>
       </div>
     )
   }
@@ -32,7 +35,7 @@ const NursingDetail = () => {
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Vital Record Not Found</h2>
         <button
           onClick={() => navigate("/nursing/list")}
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+          className="bg-primary-color text-white px-4 py-2 rounded-md "
         >
           Back to Nursing Records
         </button>
@@ -50,22 +53,22 @@ const NursingDetail = () => {
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Patient Information</h3>
+              <h3 className="text-lg text-primary-color font-semibold mb-4">Patient Information</h3>
               <div className="space-y-2">
                 <p>
-                  <span className="font-medium">Patient:</span> {vitalRecord.patientName}
+                  <span className="font-bold ">Patient:</span> {vitalRecord.patientName}
                 </p>
                 <p>
-                  <span className="font-medium">Room:</span> {vitalRecord.room}
+                  <span className="font-bold">Room:</span> {vitalRecord.room}
                 </p>
                 <p>
-                  <span className="font-medium">Bed:</span> {vitalRecord.bed}
+                  <span className="font-bold">Bed:</span> {vitalRecord.bed}
                 </p>
                 <p>
-                  <span className="font-medium">Date:</span> {vitalRecord.date}
+                  <span className="font-bold">Date:</span> {vitalRecord.date}
                 </p>
                 <p>
-                  <span className="font-medium">Time:</span> {vitalRecord.time}
+                  <span className="font-bold">Time:</span> {vitalRecord.time}
                 </p>
               </div>
             </div>

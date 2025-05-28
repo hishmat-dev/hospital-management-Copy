@@ -38,7 +38,8 @@ const initialState = {
       admissionDate: "2024-01-15",
       status: "Admitted",
       medicalHistory: ["Hypertension", "Diabetes Type 2"],
-      emergencyContact: "Jane Smith - +1-555-0124",
+      emergencyContactName: "Jane Smith",
+      emergencyContactPhone: "+1-555-0124",
       insurance: "Blue Cross Blue Shield",
       allergies: ["Penicillin", "Shellfish"],
     },
@@ -56,7 +57,8 @@ const initialState = {
       admissionDate: "2024-01-14",
       status: "Discharged",
       medicalHistory: ["Fracture History"],
-      emergencyContact: "Robert Johnson - +1-555-0125",
+      emergencyContactName: "Jane Smith",
+      emergencyContactPhone: "+1-555-0124",
       insurance: "Aetna",
       allergies: ["None"],
     },
@@ -74,7 +76,8 @@ const initialState = {
       admissionDate: "2024-01-16",
       status: "Under Treatment",
       medicalHistory: ["Asthma"],
-      emergencyContact: "Sarah Davis - +1-555-0127",
+      emergencyContactName: "Jane Smith",
+      emergencyContactPhone: "+1-555-0124",
       insurance: "United Healthcare",
       allergies: ["Dust", "Pollen"],
     },
@@ -92,7 +95,8 @@ const initialState = {
       admissionDate: "2024-01-13",
       status: "Admitted",
       medicalHistory: ["Migraine", "High Blood Pressure"],
-      emergencyContact: "Tom Wilson - +1-555-0129",
+      emergencyContactName: "Jane Smith",
+      emergencyContactPhone: "+1-555-0124",
       insurance: "Cigna",
       allergies: ["Latex"],
     },
@@ -102,11 +106,10 @@ const initialState = {
   error: null,
   filters: {
     search: "",
-    gender: "",
-    bloodGroup: "",
     status: "",
-    department: "",
+    sortBy: "name", 
   },
+  
   pagination: {
     page: 1,
     limit: 10,
@@ -131,6 +134,14 @@ export const patientSlice = createSlice({
     clearError: (state) => {
       state.error = null
     },
+    resetFilters: (state) => {
+      state.filters = {
+        search: "",
+        status: "",
+        sortBy: "name"
+      }
+      state.pagination.page = 1
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -171,5 +182,6 @@ export const patientSlice = createSlice({
   },
 })
 
-export const { setSelectedPatient, setFilters, setPagination, clearError } = patientSlice.actions
+export const { setSelectedPatient, setFilters, setPagination, clearError, resetFilters } = patientSlice.actions
+
 export default patientSlice.reducer

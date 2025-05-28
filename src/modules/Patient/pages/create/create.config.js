@@ -2,6 +2,7 @@ export const createConfig = {
   initialFormData: {
     name: "",
     dateOfBirth: "",
+    date: new Date().toISOString().split("T")[0],
     gender: "",
     nationality: "",
     languages: "",

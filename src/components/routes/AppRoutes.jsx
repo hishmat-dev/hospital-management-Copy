@@ -59,7 +59,7 @@ export default function AppRoutes() {
       {/* Nursing - Modular */}
       <Route path="/nursing/vitals" element={<NursingListing />} />
       <Route path="/nursing/add" element={<NursingCreate />} />
-      <Route path="/nursing/detail/:id" element={<NursingDetail />} />
+      <Route path="/nursing/detail/:patientName" element={<NursingDetail />} />
       <Route path="/nursing/update/:id" element={<NursingUpdate />} />
 
       {/* Catch all route */}

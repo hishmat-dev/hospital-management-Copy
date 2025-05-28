@@ -1,9 +1,9 @@
 
 import { useNavigate } from "react-router-dom"
 
-export default function ActionButtons({ patientId }) {
+export default function ActionButtons({ patientId, patientName }) {
   const navigate = useNavigate()
-
+  console.log("ActionButtons Rendered", { patientId, patientName })
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
@@ -27,7 +27,7 @@ export default function ActionButtons({ patientId }) {
           Order Lab Test
         </button>
         <button
-          onClick={() => navigate(`/nursing/create?patientId=${patientId}`)}
+          onClick={() => navigate(`/nursing/detail/${patientName}`)}
           className="bg-orange-600 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition-colors"
         >
           Record Vitals

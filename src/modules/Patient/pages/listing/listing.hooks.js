@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { fetchPatients, deletePatient, setFilters, setSelectedPatient,setPagination } from "../../action/slice"
+import { fetchPatients, deletePatient, setFilters, setSelectedPatient, setPagination, resetFilters } from "../../action/slice"
 
 export const usePatientListing = () => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ export const usePatientListing = () => {
   const patients = rawPatients.filter((patient) => {
     const matchesSearch = filters.search
       ? patient.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-        patient.id.toLowerCase().includes(filters.search.toLowerCase())
+      patient.id.toLowerCase().includes(filters.search.toLowerCase())
       : true;
     const matchesStatus = filters.status ? patient.status === filters.status : true;
     return matchesSearch && matchesStatus;
@@ -38,15 +38,21 @@ export const usePatientListing = () => {
 
 
   const handleFilterChange = (key, value) => {
-    console.log(`Updating filter: ${key} = ${value}`);
-    dispatch(setFilters({ [key]: value }));
+    // console.log(`Updating filter: ${key} = ${value}`);
+
+    dispatch(setFilters({ ...filters, [key]: value }));
     dispatch(setPagination({ page: 1 }));
   };
+
+  const handleResetFilters = () => {
+    dispatch(resetFilters());
+  };
+
   //added will delete
   const handlePageChange = (newPage) => {
-  dispatch(setPagination({ page: newPage }));
-  dispatch(fetchPatients({ ...filters, page: newPage }));
-};
+    dispatch(setPagination({ page: newPage }));
+    dispatch(fetchPatients({ ...filters, page: newPage }));
+  };
   const handleView = (patient) => {
     dispatch(setSelectedPatient(patient))
     navigate(`/patients/detail/${patient.id}`)
@@ -98,5 +104,6 @@ export const usePatientListing = () => {
     handleAddNew,
     getStatusColor,
     handlePageChange,
+    handleResetFilters,
   }
 }

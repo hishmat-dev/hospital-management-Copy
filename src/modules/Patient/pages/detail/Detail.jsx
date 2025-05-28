@@ -10,6 +10,7 @@ export default function PatientDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { patient, loading, error } = useDetailHooks(id)
+  // console.log("Patient Detail Rendered", patient)
 
   if (loading) {
     return (
@@ -46,13 +47,14 @@ export default function PatientDetail() {
       </div>
 
       {/* Patient Information */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <PersonalInfo patient={patient} />
         <ContactInfo patient={patient} />
+        <MedicalInfo patient={patient} />
       </div>
 
-      <MedicalInfo patient={patient} />
-      <ActionButtons patientId={id} />
+
+      <ActionButtons patientId={id} patientName={patient?.name} />
     </div>
   )
 }

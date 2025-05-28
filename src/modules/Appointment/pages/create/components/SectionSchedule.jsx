@@ -66,17 +66,7 @@ export default function SectionSchedule({ formData, handleChange, errors, timeSl
           </select>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Room/Location</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Room number or location"
-          />
-        </div>
+      
 
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>

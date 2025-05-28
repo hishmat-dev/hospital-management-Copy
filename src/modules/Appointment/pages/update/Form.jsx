@@ -181,7 +181,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
       <div className="flex space-x-4">
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-primary-color text-white px-6 py-2 rounded-md  focus:outline-none focus:ring-2 "
         >
           Update Appointment
         </button>

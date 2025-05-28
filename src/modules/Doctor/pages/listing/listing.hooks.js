@@ -1,21 +1,43 @@
-
-
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { fetchDoctors, deleteDoctor, setFilters, setSelectedDoctor } from "../../action/slice"
+import { fetchDoctors, deleteDoctor, setFilters, setSelectedDoctor, resetFilters,setPagination } from "../../action/slice"
 
 export const useDoctorListing = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { doctors, filters, loading, pagination } = useSelector((state) => state.doctors)
+  const { doctors: rawDoctors, filters, loading, pagination } = useSelector((state) => state.doctors)
+
+  const filteredDoctors = useMemo(() => {
+    return rawDoctors
+      .filter(d =>
+        (!filters.search || d.name.toLowerCase().includes(filters.search.toLowerCase())) &&
+        (!filters.specialty || d.specialty === filters.specialty) &&
+        (!filters.department || d.department === filters.department) &&
+        (!filters.status || d.status === filters.status) &&
+        (!filters.availability || d.availability === filters.availability)
+      )
+      .sort((a, b) => {
+        if (!filters.sortBy) return 0;
+        if (filters.sortBy === "name") return a.name.localeCompare(b.name);
+        if (filters.sortBy === "experience") return parseInt(b.experience) - parseInt(a.experience);
+        if (filters.sortBy === "patients") return b.patients - a.patients;
+        return 0;
+      });
+  }, [rawDoctors, filters]);
 
   useEffect(() => {
     dispatch(fetchDoctors(filters))
   }, [dispatch, filters])
 
-  const handleFilterChange = (newFilters) => {
-    dispatch(setFilters(newFilters))
+  const handleFilterChange = (key, value) => {
+    dispatch(setFilters({ [key]: value }));
+    // Reset to first page on filter change, similar to usePatientListing
+    dispatch(setPagination({ page: 1 }));
+  }
+
+  const handleResetFilters = () => {
+    dispatch(resetFilters());
   }
 
   const handleView = (doctor) => {
@@ -35,8 +57,17 @@ export const useDoctorListing = () => {
   }
 
   const handleExport = () => {
-    // Export functionality
-    console.log("Exporting doctors...")
+    const csvContent = [
+      ["ID", "Name", "Specialty", "Department", "Status", "Availability"],
+      ...filteredDoctors.map(d => [d.id, d.name, d.specialty, d.department, d.status, d.availability])
+    ].map(row => row.join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "doctors.csv";
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   const handleAddNew = () => {
@@ -71,8 +102,8 @@ export const useDoctorListing = () => {
     }
   }
 
-  return {
-    doctors,
+  return useMemo(() => ({
+    doctors: filteredDoctors,
     filters,
     loading,
     pagination,
@@ -84,5 +115,6 @@ export const useDoctorListing = () => {
     handleAddNew,
     getSpecialtyColor,
     getStatusColor,
-  }
+    handleResetFilters,
+  }), [filteredDoctors, filters, loading, pagination]);
 }
