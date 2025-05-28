@@ -60,7 +60,7 @@ export default function AppRoutes() {
       <Route path="/nursing/vitals" element={<NursingListing />} />
       <Route path="/nursing/add" element={<NursingCreate />} />
       <Route path="/nursing/detail/:patientName" element={<NursingDetail />} />
-      <Route path="/nursing/update/:id" element={<NursingUpdate />} />
+      <Route path="/nursing/update/:patientName" element={<NursingUpdate />} />
 
       {/* Catch all route */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

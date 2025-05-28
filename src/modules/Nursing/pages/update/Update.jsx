@@ -6,12 +6,12 @@ import { fetchVitals } from "../../action/slice"
 import Form from "./Form"
 
 const NursingUpdate = () => {
-  const { id } = useParams()
+  const { patientName } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { vitals, loading } = useSelector((state) => state.nursing)
-  const vitalRecord = vitals.find((v) => v.id === Number.parseInt(id))
+  const vitalRecord = vitals.find((v) => v.patientName === patientName)
 
   useEffect(() => {
     if (!vitals.length) {

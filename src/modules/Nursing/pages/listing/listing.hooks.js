@@ -31,7 +31,7 @@ export const useNursingListing = () => {
   const handleView = useCallback(
     (vital) => {
       dispatch(setSelectedVital(vital))
-      navigate(`/nursing/detail/${vital.id}`)
+      navigate(`/nursing/detail/${vital.patientName}`)
     },
     [dispatch, navigate],
   )
@@ -39,7 +39,7 @@ export const useNursingListing = () => {
   const handleEdit = useCallback(
     (vital) => {
       dispatch(setSelectedVital(vital))
-      navigate("/nursing/update")
+      navigate(`/nursing/update/${vital.patientName}`)
     },
     [dispatch, navigate],
   )
