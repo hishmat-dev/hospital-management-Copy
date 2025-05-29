@@ -44,34 +44,34 @@ export default function PatientList() {
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-200 text-[12px]">
+            <thead className="bg-primary-color">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 text-left  font-medium text-white uppercase tracking-wider">
                   Patient
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">Age</th>
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
                   Gender
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
                   Department
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
                   Contact
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
                   Admission
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-gray-200 text-[12px] ">
               {patients.map((patient) => (
                 <ListItem
                   key={patient.id}
@@ -90,13 +90,13 @@ export default function PatientList() {
       {patients.length === 0 && (
         <div className="text-center py-12">
           <div className="text-gray-400 text-lg mb-2">No patients found</div>
-          <div className="text-gray-500">Try adjusting your search criteria</div>
+          <div className="text-white">Try adjusting your search criteria</div>
         </div>
       )}
 
       {/* Pagination */}
       {pagination.total > pagination.limit && (
-        <div className="flex justify-between items-center bg-white px-6 py-3 rounded-lg shadow-md">
+        <div className="flex justify-between items-center bg-white px-3 py-3 rounded-lg shadow-md">
           <div className="text-sm text-gray-700">
             Showing {(pagination.page - 1) * pagination.limit + 1} to{" "}
             {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} results

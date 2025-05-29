@@ -38,14 +38,33 @@ const initialState = {
     department: "Cardiology",
     doctor: "Dr. Sarah Khan",
     consultingDoctor: "Dr. Elina Akhtar",
-    recentVisit: "2025-01-22",
-    upcomingVisit: "2025-02-08",
     admissionDate: "2024-01-15",
     status: "Admitted",
     medicalHistory: ["Hypertension", "Diabetes Type 2"],
     emergencyContact: "Amina Shaikh - +92-301-7654321",
     insurance: "State Life Insurance",
     allergies: ["Penicillin", "Shellfish"],
+    visits: [
+      {
+        visitDate: "2025-01-22",
+        consultingDoctor: "Dr. Elina Akhtar",
+        department: "Cardiology",
+        feePaid: 300,
+        prescription:
+          "Patient advised lifestyle modifications and medication for hypertension and diabetes.",
+        reports: {
+          weight: "80kg",
+          bloodPressure: "140/90",
+          sugarBefore: 160,
+          sugarAfter: 210,
+        },
+        medicines: [
+          { name: "Metformin", schedule: { morning: 1, afternoon: 0, night: 1 } },
+          { name: "Amlodipine", schedule: { morning: 1, afternoon: 0, night: 0 } },
+          { name: "Aspirin", schedule: { morning: 0, afternoon: 1, night: 1 } },
+        ],
+      },
+    ],
   },
   {
     id: "P-2002",
@@ -61,14 +80,31 @@ const initialState = {
     department: "Orthopedics",
     doctor: "Dr. Hamza Raza",
     consultingDoctor: "Dr. Elina Akhtar",
-    recentVisit: "2025-01-12",
-    upcomingVisit: "2025-03-01",
     admissionDate: "2024-12-20",
     status: "Discharged",
     medicalHistory: ["Fracture History"],
     emergencyContact: "Tariq Mehmood - +92-334-5556789",
     insurance: "EFU HealthCare",
     allergies: ["None"],
+    visits: [
+      {
+        visitDate: "2025-01-12",
+        consultingDoctor: "Dr. Elina Akhtar",
+        department: "Orthopedics",
+        feePaid: 300,
+        prescription: "Prescribed calcium supplements and physiotherapy.",
+        reports: {
+          weight: "60kg",
+          bloodPressure: "120/80",
+          sugarBefore: 85,
+          sugarAfter: 130,
+        },
+        medicines: [
+          { name: "Caltrate", schedule: { morning: 1, afternoon: 0, night: 1 } },
+          { name: "Ibuprofen", schedule: { morning: 1, afternoon: 1, night: 0 } },
+        ],
+      },
+    ],
   },
   {
     id: "P-2003",
@@ -84,14 +120,31 @@ const initialState = {
     department: "Emergency",
     doctor: "Dr. Saima Malik",
     consultingDoctor: "Dr. Yasir Mehmood",
-    recentVisit: "2025-01-25",
-    upcomingVisit: "2025-02-15",
     admissionDate: "2024-11-05",
     status: "Under Treatment",
     medicalHistory: ["Asthma"],
     emergencyContact: "Hina Ahmed - +92-300-9988776",
     insurance: "Jubilee Life",
     allergies: ["Dust", "Pollen"],
+    visits: [
+      {
+        visitDate: "2025-01-25",
+        consultingDoctor: "Dr. Yasir Mehmood",
+        department: "Emergency",
+        feePaid: 250,
+        prescription: "Prescribed inhalers and advised avoiding allergens.",
+        reports: {
+          weight: "70kg",
+          bloodPressure: "125/85",
+          sugarBefore: 95,
+          sugarAfter: 110,
+        },
+        medicines: [
+          { name: "Ventolin Inhaler", schedule: { morning: 1, afternoon: 1, night: 1 } },
+          { name: "Montelukast", schedule: { morning: 1, afternoon: 0, night: 1 } },
+        ],
+      },
+    ],
   },
   {
     id: "P-2004",
@@ -107,14 +160,31 @@ const initialState = {
     department: "Neurology",
     doctor: "Dr. Asad Shah",
     consultingDoctor: "Dr. Fariha Siddiqui",
-    recentVisit: "2025-01-20",
-    upcomingVisit: "2025-02-20",
     admissionDate: "2025-01-10",
     status: "Admitted",
     medicalHistory: ["Migraine", "High Blood Pressure"],
     emergencyContact: "Iqbal Baloch - +92-312-3344556",
     insurance: "Adamjee Health",
     allergies: ["Latex"],
+    visits: [
+      {
+        visitDate: "2025-01-20",
+        consultingDoctor: "Dr. Fariha Siddiqui",
+        department: "Neurology",
+        feePaid: 320,
+        prescription: "Prescribed pain management and migraine tracking.",
+        reports: {
+          weight: "65kg",
+          bloodPressure: "150/95",
+          sugarBefore: 110,
+          sugarAfter: 160,
+        },
+        medicines: [
+          { name: "Sumatriptan", schedule: { morning: 1, afternoon: 0, night: 1 } },
+          { name: "Propranolol", schedule: { morning: 1, afternoon: 1, night: 0 } },
+        ],
+      },
+    ],
   },
   ],
   selectedPatient: null,
@@ -141,7 +211,7 @@ export const patientSlice = createSlice({
       state.selectedPatient = action.payload
     },
     setFilters: (state, action) => {
-      console.log("Setting filters:", action.payload)
+      // console.log("Setting filters:", action.payload)
       state.filters = { ...state.filters, ...action.payload }
     },
     setPagination: (state, action) => {

@@ -93,22 +93,34 @@ export const fetchRecentPatients = createAsyncThunk("dashboard/fetchRecentPatien
 
 const initialState = {
   stats: {
-    totalPatients: 0,
-    totalDoctors: 0,
-    totalAppointments: 0,
-    totalBeds: 0,
-    occupiedBeds: 0,
-    availableBeds: 0,
-    emergencyCases: 0,
-    labTests: 0,
-    nursingRecords: 0,
+    totalPatients: 1250,
+    totalDoctors: 85,
+    doctorsOnDuty: 8,
+    totalBeds: 150,
+    todaysAppointments: 120,
+    availableBeds: 30,
+    emergencyCases: 15,
+    surgeriesToday: 4,
+    nursingRecords: 180,
   },
+  specialties: [
+    { id: 1, name: "Cardiology", doctors: 10, patients: 50 },
+    { id: 2, name: "Neurology", doctors: 8, patients: 40 },
+    { id: 3, name: "Orthopedics", doctors: 6, patients: 30 },
+    { id: 4, name: "Pediatrics", doctors: 12, patients: 60 },
+    { id: 5, name: "General Surgery", doctors: 9, patients: 45 },
+  ],
+  recentPatients: [
+    { id: "P-001", name: "John Doe", admittedOn: "2025-05-20", department: "Cardiology", status: "Admitted" },
+    { id: "P-002", name: "Jane Smith", admittedOn: "2025-05-19", department: "Neurology", status: "Outpatient" },
+    { id: "P-003", name: "Robert Johnson", admittedOn: "2025-05-18", department: "Orthopedics", status: "Discharged" },
+  ],
   recentActivities: [],
-  specialties: [],
-  recentPatients: [],
   loading: false,
   error: null,
-}
+  fetched: true, // 👈 mark as already fetched
+};
+
 
 const dashboardSlice = createSlice({
   name: "dashboard",
@@ -128,9 +140,11 @@ const dashboardSlice = createSlice({
         state.loading = true
       })
       .addCase(fetchDashboardStats.fulfilled, (state, action) => {
-        state.loading = false
-        state.stats = action.payload
+        state.loading = false;
+        state.stats = action.payload;
+        state.fetched = true;
       })
+
       .addCase(fetchDashboardStats.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message

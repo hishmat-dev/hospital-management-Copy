@@ -6,9 +6,9 @@ import AppRoutes from "./components/routes/AppRoutes"
 export default function App() {
   return (
     <Provider store={store}>
-      <div className="flex h-screen overflow-hidden bg-gray-50">
+      <div className="flex h-screen overflow-hidden bg-gray-50 font-montserrat">
         {/* Sidebar (fixed left) */}
-        <div className="md:w-64 w-0 md:block">
+        <div className="md:w-56 w-0 md:block">
           <Sidebar />
         </div>
 

@@ -10,7 +10,7 @@ const BedDetail = () => {
   const dispatch = useDispatch()
 
   const { beds, loading } = useSelector((state) => state.beds)
-  console.log("Beds from state:", beds)
+  // console.log("Beds from state:", beds)
   const bed = beds.find((b) => b.id === id)
 
   useEffect(() => {

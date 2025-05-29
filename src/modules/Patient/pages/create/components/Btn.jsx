@@ -12,12 +12,12 @@ export default function Btn({ onSave, onCancel, loading, disabled }) {
       >
         {loading ? (
           <>
-            <Loader2 size={16} className="animate-spin" />
+            <Loader2 size={14} className="animate-spin" />
             <span>Saving...</span>
           </>
         ) : (
           <>
-            <Save size={16} />
+            <Save size={14} />
             <span>Save Patient</span>
           </>
         )}
@@ -29,7 +29,7 @@ export default function Btn({ onSave, onCancel, loading, disabled }) {
         disabled={loading}
         className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 disabled:opacity-50 flex items-center space-x-2"
       >
-        <X size={16} />
+        <X size={14} />
         <span>Cancel</span>
       </button>
     </div>

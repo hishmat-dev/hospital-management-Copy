@@ -24,8 +24,8 @@ export default function LaboratoryList() {
     getPriorityColor,
   } = useLaboratoryListing()
 
-  console.log("test stats", testStats)
-  console.log("lab tests", labTests)
+  // console.log("test stats", testStats)
+  // console.log("lab tests", labTests)
 
   if (loading) {
     return (

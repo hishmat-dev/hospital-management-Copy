@@ -52,7 +52,7 @@ export const usePatientCreate = () => {
           registrationDate: new Date().toISOString().split("T")[0],
         }
 
-        console.log("Creating patient with data:", patientData)
+        // console.log("Creating patient with data:", patientData)
         await dispatch(createPatient(patientData)).unwrap()
         navigate("/patients/list")
       } catch (error) {

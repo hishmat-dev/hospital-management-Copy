@@ -6,7 +6,7 @@ import { fetchBeds } from "../../action/slice"
 import Form from "./Form"
 
 const BedUpdate = () => {
-  console.log("BedUpdate component rendered")
+  // console.log("BedUpdate component rendered")
   const { id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()

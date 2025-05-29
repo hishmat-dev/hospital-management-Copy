@@ -1,7 +1,7 @@
 export default function PersonalInfo({ patient, profile, navigate }) {
 
   return (
-    <div className="bg-white shadow rounded-lg p-3">
+    <div className="bg-white shadow rounded-lg p-3 font-montserrat text-[12px]">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
 
         {/* Patient Info Group */}
@@ -20,7 +20,7 @@ export default function PersonalInfo({ patient, profile, navigate }) {
             </div>
           </div>
 
-          <div className="text-sm sm:text-base">
+          <div >
             <p className="text-gray-500">
               <span className="font-semibold">Date of Birth:</span> {patient?.dateOfBirth || "N/A"}
             </p>
@@ -28,7 +28,7 @@ export default function PersonalInfo({ patient, profile, navigate }) {
               <span className="font-semibold">Age:</span> {patient?.age || "N/A"}
             </p>
           </div>
-          <div className="text-sm sm:text-base">
+          <div className="">
             <p className="text-gray-500">
               <span className="font-semibold">Gender:</span> {patient?.gender}
             </p>
@@ -41,7 +41,7 @@ export default function PersonalInfo({ patient, profile, navigate }) {
         <div className="lg:ml-auto">
           <button
             onClick={() => navigate("/patients/list")}
-            className="bg-primary-color text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
+            className="bg-primary-color font-montserrat text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
           >
             Back to Patients
           </button>
@@ -49,14 +49,14 @@ export default function PersonalInfo({ patient, profile, navigate }) {
       </div>
 
       {/* Additional Info */}
-      <div className="flex justify-between text-sm sm:text-base mt-3">
-        <p className="text-gray-700">
+      <div className="flex flex-col lg:flex-row justify-between  mt-3">
+        <p className="text-gray-500">
           <span className="font-semibold">Consulting Doctor:</span> {patient?.consultingDoctor || "N/A"}
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-500">
           <span className="font-semibold">Recent Visit:</span> {patient?.recentVisit || "N/A"}
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-500">
           <span className="font-semibold">Upcoming Visit:</span> {patient?.upcomingVisit || "N/A"}
         </p>
       </div>

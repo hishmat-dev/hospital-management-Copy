@@ -10,9 +10,9 @@ export default function PatientCreateForm() {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Add New Patient</h1>
+        <h1 className="text-xl font-bold text-gray-900 mb-6">Add New Patient</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-8 text-[12px]">
           <SectionPersonal formData={formData} handleChange={handleChange} errors={errors} />
 
           <SectionContact formData={formData} handleChange={handleChange} errors={errors} />

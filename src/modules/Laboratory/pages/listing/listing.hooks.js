@@ -19,7 +19,7 @@ export const useLaboratoryListing = () => {
 
   const { labTests, loading, filters, pagination, testStats } = useSelector((state) => state.laboratory)
 
-  console.log("stats", testStats)
+  // console.log("stats", testStats)
 
   useEffect(() => {
     dispatch(fetchLabTests({ ...filters, ...pagination }))

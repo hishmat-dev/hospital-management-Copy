@@ -1,39 +1,27 @@
-
-
-import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchPatientById } from "../../action/slice"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPatientById } from "../../action/slice";
 
 export const useDetailHooks = (patientId) => {
-  const dispatch = useDispatch()
-  const { patients, loading, error } = useSelector((state) => state.patients)
-  const [patient, setPatient] = useState(null)
+  const dispatch = useDispatch();
+  const { patients, selectedPatient, loading, error } = useSelector((state) => state.patients);
 
   useEffect(() => {
-    if (patientId) {
-      // Try to find patient in existing state first
-      const existingPatient = patients.find((p) => p.id === patientId)
-      if (existingPatient) {
-        setPatient(existingPatient)
-      } else {
-        // Fetch patient details if not in state
-        dispatch(fetchPatientById(patientId))
-      }
-    }
-  }, [patientId, dispatch, patients])
+    if (!patientId) return;
 
-  useEffect(() => {
-    if (patients.length > 0 && patientId) {
-      const foundPatient = patients.find((p) => p.id === patientId)
-      if (foundPatient) {
-        setPatient(foundPatient)
-      }
-    }
-  }, [patients, patientId])
+    const existing = patients.find((p) => p.id === patientId);
+    if (existing && selectedPatient?.id === patientId) return; // No need to refetch
+
+    dispatch(fetchPatientById(patientId));
+  }, [patientId, dispatch, patients, selectedPatient]);
+
+  const patient = selectedPatient?.id === patientId
+    ? selectedPatient
+    : patients.find((p) => p.id === patientId) || null;
 
   return {
     patient,
     loading,
     error,
-  }
-}
+  };
+};

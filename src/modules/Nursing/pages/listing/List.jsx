@@ -19,7 +19,7 @@ export default function NursingList() {
     formatTime,
   } = useNursingListing()
 
-  console.log("Nursing status:", stats)
+  // console.log("Nursing status:", stats)
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">

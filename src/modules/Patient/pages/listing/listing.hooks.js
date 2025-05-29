@@ -10,7 +10,7 @@ export const usePatientListing = () => {
   const navigate = useNavigate()
   const { patients: rawPatients, filters, loading, pagination } = useSelector((state) => state.patients)
   
-  console.log("Patient Listing Rendered", rawPatients)
+  // console.log("Patient Listing Rendered", rawPatients)
   // Apply client-side filtering
   const patients = rawPatients.filter((patient) => {
     const matchesSearch = filters.search
@@ -57,6 +57,7 @@ export const usePatientListing = () => {
   };
   const handleView = (patient) => {
     dispatch(setSelectedPatient(patient))
+    // console.log("Navigating to patient detail:", patient.id);
     navigate(`/patients/detail/${patient.id}`)
   }
 

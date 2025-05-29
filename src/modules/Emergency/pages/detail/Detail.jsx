@@ -10,7 +10,7 @@ const EmergencyDetail = () => {
   const dispatch = useDispatch()
 
   const { emergencyCases, loading } = useSelector((state) => state.emergency)
-  console.log("Emergency Case:", emergencyCases)
+  // console.log("Emergency Case:", emergencyCases)
   const emergencyCase = emergencyCases.find((c) => c.id === id)
 
   useEffect(() => {

@@ -3,11 +3,11 @@
 export default function SectionContact({ formData, handleChange, errors }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Contact Information</h3>
+      <h3 className="font-semibold text-gray-900 border-b pb-2">Contact Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Phone Number *</label>
           <input
             type="tel"
             name="phone"
@@ -19,11 +19,11 @@ export default function SectionContact({ formData, handleChange, errors }) {
             }`}
             placeholder="+1-555-0123"
           />
-          {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+          {errors.phone && <p className="text-red-500  mt-1">{errors.phone}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <label className="block  font-medium text-gray-700 mb-1">Email Address</label>
           <input
             type="email"
             name="email"
@@ -34,11 +34,11 @@ export default function SectionContact({ formData, handleChange, errors }) {
             }`}
             placeholder="patient@email.com"
           />
-          {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+          {errors.email && <p className="text-red-500  mt-1">{errors.email}</p>}
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+          <label className="block  font-medium text-gray-700 mb-1">Address</label>
           <textarea
             name="address"
             rows={3}
@@ -50,7 +50,7 @@ export default function SectionContact({ formData, handleChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Emergency Contact Name</label>
+          <label className="block  font-medium text-gray-700 mb-1">Emergency Contact Name</label>
           <input
             type="text"
             name="emergencyContactName"
@@ -62,7 +62,7 @@ export default function SectionContact({ formData, handleChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Emergency Contact Phone</label>
+          <label className="block  font-medium text-gray-700 mb-1">Emergency Contact Phone</label>
           <input
             type="tel"
             name="emergencyContactPhone"

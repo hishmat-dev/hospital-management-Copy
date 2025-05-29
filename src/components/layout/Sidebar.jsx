@@ -36,7 +36,7 @@ export default function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed z-50 top-0 left-0 h-full w-64 bg-white text-gray-900 p-4 overflow-y-auto scrollbar-hide transform transition-transform duration-300 ease-in-out
+          fixed z-50 top-0 left-0 h-full w-56 bg-white text-gray-900 p-4 overflow-y-auto scrollbar-hide transform transition-transform duration-300 ease-in-out
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:static md:flex md:flex-col
         `}
         style={{
@@ -45,7 +45,7 @@ export default function Sidebar() {
         }}
       >
         {/* Navigation */}
-        <nav className="space-y-2">
+        <nav className="space-y-2 text-[12px]">
           {menu.map((item, index) => (
             <div key={index}>
               {item.children ? (
@@ -69,7 +69,7 @@ export default function Sidebar() {
                   </button>
 
                   {openMenus[item.title] && (
-                    <div className="ml-6 mt-1 space-y-1 text-sm">
+                    <div className="ml-6 mt-1 space-y-1 ">
                       {item.children.map((child, childIndex) => (
                         <Link
                           key={childIndex}

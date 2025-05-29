@@ -1,19 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Users, Calendar, Bed, UserCheck, AlertTriangle, Activity } from "lucide-react";
-import { fetchDashboardStats, fetchSpecialties, fetchRecentPatients } from "../../store/slices/dashboardSlice";
+// import { fetchDashboardStats, fetchSpecialties, fetchRecentPatients } from "../../store/slices/dashboardSlice";
 import { Table, Tag } from "antd"; // Import Ant Design components
 
 export default function Dashboard() {
   const dispatch = useDispatch();
-  const { stats = {}, specialties = [], recentPatients = [] } = useSelector((state) => state.dashboard || {});
+  const { stats , specialties , recentPatients , fetched } = useSelector((state) => state.dashboard || {});
 
+  console.log("Dashboard stats:");
   // Dispatch thunks when the component mounts
-  useEffect(() => {
-    dispatch(fetchDashboardStats());
-    dispatch(fetchSpecialties());
-    dispatch(fetchRecentPatients());
-  }, [dispatch]);
 
   const StatCard = ({ icon, title, value, color }) => (
     <div className="bg-white rounded-lg shadow-md p-4 border-l-4" style={{ borderLeftColor: color }}>
