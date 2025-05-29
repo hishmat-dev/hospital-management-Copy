@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -10,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "Inter", "system-ui", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        montserrat: ['Montserrat', 'sans-serif'],
       },
       colors: {
         "blue-hosta": "#64C4B2",

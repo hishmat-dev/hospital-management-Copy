@@ -9,7 +9,8 @@ export const usePatientListing = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { patients: rawPatients, filters, loading, pagination } = useSelector((state) => state.patients)
-
+  
+  console.log("Patient Listing Rendered", rawPatients)
   // Apply client-side filtering
   const patients = rawPatients.filter((patient) => {
     const matchesSearch = filters.search
@@ -20,6 +21,7 @@ export const usePatientListing = () => {
     return matchesSearch && matchesStatus;
   });
 
+  // console.log(patients)
   // Apply sorting
   const sortedPatients = [...patients].sort((a, b) => {
     if (filters.sortBy === "name") {

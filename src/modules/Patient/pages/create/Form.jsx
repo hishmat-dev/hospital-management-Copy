@@ -1,7 +1,6 @@
 
 import SectionPersonal from "./components/SectionPersonal"
 import SectionContact from "./components/SectionContact"
-import SectionMedical from "./components/SectionMedical"
 import Btn from "./components/Btn"
 import { usePatientCreate } from "./create.hooks"
 

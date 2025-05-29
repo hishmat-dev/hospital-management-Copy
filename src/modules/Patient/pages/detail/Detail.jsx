@@ -5,6 +5,7 @@ import ContactInfo from "./components/ContactInfo"
 import MedicalInfo from "./components/MedicalInfo"
 import ActionButtons from "./components/ActionButtons"
 import { useDetailHooks } from "./detail.hooks"
+import profile from "../../../../components/ui/profile.jpg"
 
 export default function PatientDetail() {
   const { id } = useParams()
@@ -31,24 +32,10 @@ export default function PatientDetail() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">{patient?.name}</h1>
-            <p className="text-gray-600">Patient ID: {patient?.id}</p>
-          </div>
-          <button
-            onClick={() => navigate("/patients/list")}
-            className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
-          >
-            Back to Patients
-          </button>
-        </div>
-      </div>
+      <PersonalInfo patient={patient} profile={profile} navigate={navigate} />
 
       {/* Patient Information */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <PersonalInfo patient={patient} />
+      <div className="space-y-6 ">
         <ContactInfo patient={patient} />
         <MedicalInfo patient={patient} />
       </div>
