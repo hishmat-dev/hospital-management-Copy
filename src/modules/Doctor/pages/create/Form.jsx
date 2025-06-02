@@ -11,7 +11,7 @@ export default function DoctorCreateForm() {
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Add New Doctor</h1>
+        <h1 className="text-[12px] font-bold text-gray-900 mb-3">Add New Doctor</h1>
 
         <form onSubmit={handleSubmit} className="space-y-8">
           <SectionPersonal formData={formData} handleChange={handleChange} errors={errors} />
