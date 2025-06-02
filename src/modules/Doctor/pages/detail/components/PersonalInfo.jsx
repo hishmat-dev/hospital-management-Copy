@@ -33,8 +33,9 @@ export default function PersonalInfo({ doctor, profile, navigate }) {
               <span className="font-semibold">Gender:</span> {doctor?.gender || "N/A"}
             </p>
             <p className="text-gray-500">
-              <span className="font-semibold">Specialization:</span> {doctor?.specialization || "N/A"}
+              <span className="font-semibold">Phone:</span> {doctor?.phone || "N/A"}
             </p>
+
           </div>
         </div>
 
@@ -50,12 +51,7 @@ export default function PersonalInfo({ doctor, profile, navigate }) {
 
       {/* Additional Info */}
       <div className="flex flex-col lg:flex-row justify-between mt-3">
-        <p className="text-gray-500">
-          <span className="font-semibold">Department:</span> {doctor?.department || "N/A"}
-        </p>
-        <p className="text-gray-500">
-          <span className="font-semibold">Phone:</span> {doctor?.phone || "N/A"}
-        </p>
+      
         <p className="text-gray-500">
           <span className="font-semibold">Email:</span> {doctor?.email || "N/A"}
         </p>

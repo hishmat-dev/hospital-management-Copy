@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import {  DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { usePatientListing } from "../../../../Patient/pages/listing/listing.hooks";
 

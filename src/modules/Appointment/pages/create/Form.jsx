@@ -11,10 +11,10 @@ export default function AppointmentCreateForm() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Book New Appointment</h1>
+      <div className="bg-white rounded-lg shadow-md p-3 text-[12px]">
+        <h1 className=" font-bold text-gray-900 mb-6">Book New Appointment</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <SectionPatient formData={formData} handleChange={handleChange} errors={errors} patients={patients} />
 
           <SectionDoctor formData={formData} handleChange={handleChange} errors={errors} doctors={doctors} />

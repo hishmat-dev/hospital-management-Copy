@@ -30,7 +30,7 @@ export default function DoctorDetail() {
   // }
 
   return (
-    <div className="text-[12px] space-y-6">
+    <div className="text-[12px] space-y-3">
       {/* Header */}
       <PersonalInfo
         doctor={doctor}
@@ -43,7 +43,7 @@ export default function DoctorDetail() {
         <ProfessionalInfo doctor={doctor} />
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-3">
         <div className="md:w-4/6">
           <AppointmentsTable doctor={doctor} />
         </div>

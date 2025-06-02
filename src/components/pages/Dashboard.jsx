@@ -15,14 +15,14 @@ export default function Dashboard() {
   // Dispatch thunks when the component mounts
 
   const StatCard = ({ icon, title, value, color, onClick }) => (
-    <div className="bg-white rounded-lg shadow-md p-4 border-l-4 hover:cursor-pointer" style={{ borderLeftColor: color }} onClick={onClick}>
+    <div className="bg-white rounded-lg shadow-md p-4 border-l-4 hover:cursor-pointer border-l-primary-color " onClick={onClick}>
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-3xl font-bold text-gray-900">{value}</p>
+          <p className="text-[12px] font-medium text-gray-600">{title}</p>
+          <p className="text-xl font-bold text-gray-900">{value}</p>
         </div>
-        <div className="p-3 rounded-full" style={{ backgroundColor: `${color}20` }}>
-          {React.cloneElement(icon, { size: 24, color })}
+        <div className="p-3 rounded-full  ">
+          {React.cloneElement(icon, { size: 24, className: `text-primary-color` })}
         </div>
       </div>
     </div>
@@ -103,12 +103,12 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-        <StatCard icon={<Users />} title="Total Patients" value={stats.totalPatients} color="#3B82F6" />
-        <StatCard icon={<Calendar />} title="Today's Appointments" value={stats.todaysAppointments} color="#10B981" onClick={handleAppointmentList} />
-        <StatCard icon={<Bed />} title="Available Beds" value={stats.availableBeds} color="#8B5CF6" />
-        <StatCard icon={<UserCheck />} title="Doctors On Duty" value={stats.doctorsOnDuty} color="#F59E0B" />
-        <StatCard icon={<AlertTriangle />} title="Emergency Cases" value={stats.emergencyCases} color="#EF4444" />
-        <StatCard icon={<Activity />} title="Surgeries Today" value={stats.surgeriesToday} color="#06B6D4" />
+        <StatCard icon={<Users />} title="Total Patients" value={stats.totalPatients}  />
+        <StatCard icon={<Calendar />} title="Today's Appointments" value={stats.todaysAppointments}  onClick={handleAppointmentList} />
+        <StatCard icon={<Bed />} title="Available Beds" value={stats.availableBeds}  />
+        <StatCard icon={<UserCheck />} title="Doctors On Duty" value={stats.doctorsOnDuty}  />
+        <StatCard icon={<AlertTriangle />} title="Emergency Cases" value={stats.emergencyCases}  />
+        <StatCard icon={<Activity />} title="Surgeries Today" value={stats.surgeriesToday}  />
       </div>
 
       <StatsCards occupancyStats={occupancyStats} />

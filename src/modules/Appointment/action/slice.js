@@ -27,6 +27,7 @@ const initialState = {
       patientPhone: "+1-555-0123",
       doctorId: "D-001",
       doctorName: "Dr. Sarah Wilson",
+      specility:"ortho",
       date: "2024-01-20",
       time: "10:00 AM",
       department: "Cardiology",

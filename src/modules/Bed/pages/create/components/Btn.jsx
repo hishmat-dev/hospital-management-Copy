@@ -3,7 +3,7 @@ import { Save, X, Loader2 } from "lucide-react"
 
 export default function Btn({ onSave, onCancel, loading, disabled }) {
   return (
-    <div className="flex space-x-4 pt-6 border-t">
+    <div className="flex space-x-4 pt-6 border-t text-[12px]">
       <button
         type="submit"
         onClick={onSave}

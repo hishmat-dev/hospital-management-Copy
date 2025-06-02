@@ -31,12 +31,12 @@ export default function SectionFeatures({ formData, handleChange, errors }) {
   ]
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Features & Equipment</h3>
+    <div className="space-y-2 text-[12px]">
+      <h3 className="font-semibold text-gray-900 border-b pb-2">Features & Equipment</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Daily Rate ($)</label>
+          <label className="block  font-medium text-gray-700 mb-1">Daily Rate ($)</label>
           <input
             type="number"
             name="dailyRate"
@@ -50,7 +50,7 @@ export default function SectionFeatures({ formData, handleChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Maximum Occupancy</label>
+          <label className="block  font-medium text-gray-700 mb-1">Maximum Occupancy</label>
           <input
             type="number"
             name="maxOccupancy"
@@ -64,7 +64,7 @@ export default function SectionFeatures({ formData, handleChange, errors }) {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Available Features</label>
+          <label className="block  font-medium text-gray-700 mb-2">Available Features</label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {availableFeatures.map((feature) => (
               <label key={feature} className="flex items-center space-x-2 cursor-pointer">
@@ -74,14 +74,14 @@ export default function SectionFeatures({ formData, handleChange, errors }) {
                   onChange={() => handleFeatureChange(feature)}
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
-                <span className="text-sm text-gray-700">{feature}</span>
+                <span className=" text-gray-700">{feature}</span>
               </label>
             ))}
           </div>
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <label className="block  font-medium text-gray-700 mb-1">Description</label>
           <textarea
             name="description"
             rows={3}
@@ -93,7 +93,7 @@ export default function SectionFeatures({ formData, handleChange, errors }) {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Special Instructions</label>
+          <label className="block  font-medium text-gray-700 mb-1">Special Instructions</label>
           <textarea
             name="specialInstructions"
             rows={2}

@@ -13,7 +13,7 @@ export default function ListItem({
   return (
     <tr className="hover:bg-gray-50 transition-colors">
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{appointment.id}</div>
+        <div className=" font-medium text-gray-900">{appointment.id}</div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
@@ -24,8 +24,8 @@ export default function ListItem({
             </div>
           </div>
           <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">{appointment.patientName}</div>
-            <div className="text-sm text-gray-500">{appointment.patientId}</div>
+            <div className=" font-medium text-gray-900">{appointment.patientName}</div>
+            <div className=" text-gray-500">{appointment.patientId}</div>
           </div>
         </div>
       </td>
@@ -34,25 +34,25 @@ export default function ListItem({
         <div className="flex items-center">
           <Stethoscope className="h-4 w-4 text-gray-400 mr-2" />
           <div>
-            <div className="text-sm font-medium text-gray-900">{appointment.doctorName}</div>
-            <div className="text-sm text-gray-500">{appointment.department}</div>
+            <div className=" font-medium text-gray-900">{appointment.doctorName}</div>
+            <div className=" text-gray-500">{appointment.department}</div>
           </div>
         </div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="flex items-center text-sm text-gray-900">
+        <div className="flex items-center  text-gray-900">
           <Calendar className="h-4 w-4 mr-1" />
           {appointment.date}
         </div>
-        <div className="flex items-center text-sm text-gray-500 mt-1">
+        <div className="flex items-center  text-gray-500 mt-1">
           <Clock className="h-4 w-4 mr-1" />
           {appointment.time}
         </div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(appointment.type)}`}>
+        <span className={`px-2 py-1 rounded-full  font-medium ${getTypeColor(appointment.type)}`}>
           {appointment.type}
         </span>
       </td>
@@ -61,7 +61,7 @@ export default function ListItem({
         <select
           value={appointment.status}
           onChange={(e) => onStatusChange(appointment.id, e.target.value)}
-          className={`px-2 py-1 rounded-full text-xs font-medium border-0 ${getStatusColor(appointment.status)}`}
+          className={`px-2 py-1 rounded-full  font-medium border-0 ${getStatusColor(appointment.status)}`}
         >
           <option value="Scheduled">Scheduled</option>
           <option value="Confirmed">Confirmed</option>
@@ -72,7 +72,7 @@ export default function ListItem({
         </select>
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+      <td className="px-6 py-4 whitespace-nowrap  font-medium">
         <div className="flex space-x-2">
           <button
             onClick={() => onView(appointment)}

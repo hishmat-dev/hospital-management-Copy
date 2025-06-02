@@ -5,7 +5,7 @@ export default function ProfessionalInfo({ doctor }) {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
         <div className="mb-3 sm:mb-0 sm:min-w-[100px]">
           <label className="block font-medium text-gray-700">Specialization</label>
-          <p className="mt-0.5 text-gray-900">{doctor?.specialization || "N/A"}</p>
+          <p className="mt-0.5 text-gray-900">{doctor?.specialty || "N/A"}</p>
         </div>
         <div className="mb-3 sm:mb-0 sm:min-w-[100px]">
           <label className="block font-medium text-gray-700">Department</label>
@@ -35,7 +35,7 @@ export default function ProfessionalInfo({ doctor }) {
         </div>
         <div className="mb-3 sm:mb-0 sm:min-w-[100px]">
           <label className="block font-medium text-gray-700">Qualifications</label>
-          <p className="mt-0.5 text-gray-900">{doctor?.qualifications || "N/A"}</p>
+          <p className="mt-0.5 text-gray-900">{doctor?.qualification || "N/A"}</p>
         </div>
       </div>
     </div>

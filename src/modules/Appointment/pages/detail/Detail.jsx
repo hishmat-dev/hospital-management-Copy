@@ -31,7 +31,7 @@ const AppointmentDetail = () => {
   if (!appointment) {
     return (
       <div className="text-center py-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Appointment Not Found</h2>
+        <h2 className=" font-bold text-gray-900 mb-4">Appointment Not Found</h2>
         <button
           onClick={() => navigate("/appointments/list")}
           className="bg-primary-color text-white px-4 py-2 rounded-md "
@@ -43,16 +43,16 @@ const AppointmentDetail = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-3 text-[12px]">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-primary-color text-white px-6 py-4">
-          <h1 className="text-2xl font-bold">Appointment Details</h1>
+          <h1 className=" font-bold">Appointment Details</h1>
         </div>
 
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Patient Information</h3>
+              <h3 className=" font-semibold mb-4">Patient Information</h3>
               <div className="space-y-2">
                 <p>
                   <span className="font-medium">Name:</span> {appointment.patientName}
@@ -73,7 +73,7 @@ const AppointmentDetail = () => {
                   <span className="font-medium">Doctor:</span> {appointment.doctorName}
                 </p>
                 <p>
-                  <span className="font-medium">Specialization:</span> {appointment.specialization}
+                  <span className="font-medium">Specialization:</span> {appointment.specility}
                 </p>
               </div>
             </div>
