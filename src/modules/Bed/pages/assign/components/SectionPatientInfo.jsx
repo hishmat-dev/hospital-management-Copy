@@ -8,13 +8,26 @@ export default function SectionPatientInfo({ formData, handleChange, errors }) {
           <label className="block  font-medium text-gray-700">Patient Name *</label>
           <input
             type="text"
-            name="name"
+            name="patientName"
             placeholder="Enter patient name"
-            value={formData.name}
+            value={formData.patientName}
             onChange={handleChange}
             className="mt-1 w-full border border-gray-300 p-2 rounded-lg"
           />
-          {errors.name && <p className="text-red-500 ">{errors.name}</p>}
+          {errors.patientName && <p className="text-red-500 ">{errors.patientName}</p>}
+        </div>
+
+        <div>
+          <label className="block  font-medium text-gray-700">Patient ID</label>
+          <input
+            type="text"
+            name="patientId"
+            placeholder="Enter patient ID"
+            value={formData.patientId}
+            onChange={handleChange}
+            className="mt-1 w-full border border-gray-300 p-2 rounded-lg bg-gray-100"
+          />
+          {errors.patientId && <p className="text-red-500 ">{errors.patientId}</p>}
         </div>
 
         <div>
@@ -25,7 +38,7 @@ export default function SectionPatientInfo({ formData, handleChange, errors }) {
             placeholder="Patient phone number"
             value={formData.phone}
             onChange={handleChange}
-            className="mt-1 w-full border border-gray-300 p-2 rounded-lg bg-gray-100"
+            className="mt-1 w-full border border-gray-300 p-2 rounded-lg"
           />
           {errors.phone && <p className="text-red-500 ">{errors.phone}</p>}
         </div>
@@ -40,9 +53,7 @@ export default function SectionPatientInfo({ formData, handleChange, errors }) {
             onChange={handleChange}
             className="mt-1 w-full border border-gray-300 p-2 rounded-lg"
           />
-          {errors.chiefComplaint && (
-            <p className="text-red-500 ">{errors.chiefComplaint}</p>
-          )}
+          {errors.chiefComplaint && <p className="text-red-500 ">{errors.chiefComplaint}</p>}
         </div>
 
         <div>

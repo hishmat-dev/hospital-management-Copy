@@ -1,31 +1,44 @@
 import { useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { assignBed } from "../../action/slice";
 
 export const useAssignBed = () => {
+  const dispatch = useDispatch();
+  const beds = useSelector((state) => state.beds.beds); // Fetch beds from Redux store
   const [formData, setFormData] = useState({
-    name: "",
+    patientName: "",
+    patientId: "",
     phone: "",
     chiefComplaint: "",
     gender: "",
     age: "",
-    roomType: "",
-    roomNo: "",
+    roomNumber: "",
+    bedNumber: "",
     admissionDate: "",
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Sample bed data (replace with API call in a real app)
-  const beds = [
-    { id: 1, number: "101" },
-    { id: 2, number: "102" },
-    { id: 3, number: "103" },
-  ];
+  // Define resetForm function to handle form reset logic
+  const resetForm = useCallback(() => {
+    setFormData({
+      patientName: "",
+      patientId: "",
+      phone: "",
+      chiefComplaint: "",
+      gender: "",
+      age: "",
+      roomNumber: "",
+      bedNumber: "",
+      admissionDate: "",
+    });
+    setErrors({});
+  }, []);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Basic validation
-    if (value.trim() === "" && ["name", "roomType", "roomNo", "admissionDate"].includes(name)) {
+    if (value.trim() === "" && ["patientName", "roomNumber", "bedNumber", "admissionDate"].includes(name)) {
       setErrors((prev) => ({
         ...prev,
         [name]: `${name.replace(/([A-Z])/g, " $1").trim()} is required`,
@@ -39,28 +52,30 @@ export const useAssignBed = () => {
     (e) => {
       e.preventDefault();
       setLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        console.log("Bed assigned:", formData);
+      const { patientName, patientId, roomNumber, bedNumber } = formData;
+      const bedId = beds.find((bed) => bed.roomNumber === roomNumber && bed.bedNumber === bedNumber)?.id;
+      if (bedId) {
+        dispatch(assignBed({ bedId, patientId, patientName }))
+          .unwrap()
+          .then(() => {
+            setLoading(false);
+            resetForm(); // Use resetForm instead of handleCancel
+          })
+          .catch((err) => {
+            setLoading(false);
+            setErrors({ ...errors, submit: err.message || "Failed to assign bed" });
+          });
+      } else {
         setLoading(false);
-      }, 1000);
+        setErrors({ ...errors, submit: "Invalid room or bed number" });
+      }
     },
-    [formData]
+    [formData, dispatch, errors, beds, resetForm] // Update dependencies
   );
 
   const handleCancel = useCallback(() => {
-    setFormData({
-      name: "",
-      phone: "",
-      chiefComplaint: "",
-      gender: "",
-      age: "",
-      roomType: "",
-      roomNo: "",
-      admissionDate: "",
-    });
-    setErrors({});
-  }, []);
+    resetForm(); // Reuse resetForm logic for cancellation
+  }, [resetForm]);
 
-  return { beds, formData, errors, loading, handleChange, handleSubmit, handleCancel };
+  return { formData, errors, loading, handleChange, handleSubmit, handleCancel };
 };

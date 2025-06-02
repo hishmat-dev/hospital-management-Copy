@@ -1,5 +1,5 @@
 import SectionPatientInfo from "./components/SectionPatientInfo";
-import SectionRoomInfo from "./components/SectionRoomInfo";
+import SectionBedInfo from "./components/SectionBedInfo";
 import Btn from "./components/Btn";
 
 export const AssignForm = ({
@@ -10,7 +10,6 @@ export const AssignForm = ({
   handleCancel,
   loading,
   roomOptions,
-  roomTypeOptions,
 }) => {
   return (
     <div className="space-y-3">
@@ -21,12 +20,11 @@ export const AssignForm = ({
             handleChange={handleChange}
             errors={errors}
           />
-          <SectionRoomInfo
+          <SectionBedInfo
             formData={formData}
             handleChange={handleChange}
             errors={errors}
             roomOptions={roomOptions}
-            roomTypeOptions={roomTypeOptions}
           />
           <Btn onSave={handleSubmit} onCancel={handleCancel} loading={loading} />
         </form>
