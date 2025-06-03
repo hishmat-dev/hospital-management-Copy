@@ -47,7 +47,7 @@ export const menu = [
     children: [
       { title: "Add Bed", path: "/beds/add" },
       { title: "Bed List", path: "/beds/list" },
-      { title: "Assign Bed", path: "/beds/assign" },
+      // { title: "Assign Bed", path: "/beds/assign" },
     ],
   },
   {
@@ -67,7 +67,7 @@ export const menu = [
     ],
   },
   {
-    title: "Nursing",
+    title: "Vitals Tracking",
     icon: <Activity size={18} />,
     children: [
       { title: "Add Vitals", path: "/nursing/add" },

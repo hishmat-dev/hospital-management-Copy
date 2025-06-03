@@ -57,7 +57,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Patient Name</label>
+          <label className="block  font-medium text-gray-700 mb-2">Patient Name</label>
           <input
             type="text"
             name="patientName"
@@ -69,7 +69,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Patient ID</label>
+          <label className="block  font-medium text-gray-700 mb-2">Patient ID</label>
           <input
             type="text"
             name="patientId"
@@ -81,7 +81,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Test Type</label>
+          <label className="block  font-medium text-gray-700 mb-2">Test Type</label>
           <select
             name="testType"
             value={formData.testType}
@@ -101,7 +101,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+          <label className="block  font-medium text-gray-700 mb-2">Category</label>
           <select
             name="category"
             value={formData.category}
@@ -120,7 +120,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+          <label className="block  font-medium text-gray-700 mb-2">Priority</label>
           <select
             name="priority"
             value={formData.priority}
@@ -135,7 +135,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+          <label className="block  font-medium text-gray-700 mb-2">Status</label>
           <select
             name="status"
             value={formData.status}
@@ -150,7 +150,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Doctor Name</label>
+          <label className="block  font-medium text-gray-700 mb-2">Doctor Name</label>
           <input
             type="text"
             name="doctorName"
@@ -162,7 +162,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Sample Date</label>
+          <label className="block  font-medium text-gray-700 mb-2">Sample Date</label>
           <input
             type="date"
             name="sampleDate"
@@ -174,7 +174,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Test Results</label>
+        <label className="block  font-medium text-gray-700 mb-2">Test Results</label>
         <textarea
           name="results"
           value={formData.results}
@@ -186,7 +186,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+        <label className="block  font-medium text-gray-700 mb-2">Notes</label>
         <textarea
           name="notes"
           value={formData.notes}
@@ -196,17 +196,17 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         />
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex justify-end space-x-4">
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-primary-color text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Update Test
         </button>
         <button
           type="button"
           onClick={() => navigate("/laboratory/list")}
-          className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          className="bg-red-color text-white px-6 py-2 rounded-md  focus:outline-none focus:ring-2 focus:ring-gray-500"
         >
           Cancel
         </button>

@@ -46,7 +46,7 @@ export const useEmergencyListing = () => {
   const handleEdit = useCallback(
     (emergencyCase) => {
       dispatch(setSelectedCase(emergencyCase));
-      navigate("/emergency/update");
+      navigate(`/emergency/update/${emergencyCase.id}`);
     },
     [dispatch, navigate],
   );

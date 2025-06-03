@@ -5,11 +5,11 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Test Information</h3>
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Test Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Test Category *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Test Category *</label>
           <select
             name="testType"
             required
@@ -29,11 +29,11 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
             <option value="Hematology">Hematology</option>
             <option value="Immunology">Immunology</option>
           </select>
-          {errors.testType && <p className="text-red-500 text-xs mt-1">{errors.testType}</p>}
+          {errors.testType && <p className="text-red-500  mt-1">{errors.testType}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Specific Test *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Specific Test *</label>
           <select
             name="testName"
             required
@@ -51,12 +51,12 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
             ))}
             <option value="Custom">Custom Test</option>
           </select>
-          {errors.testName && <p className="text-red-500 text-xs mt-1">{errors.testName}</p>}
+          {errors.testName && <p className="text-red-500  mt-1">{errors.testName}</p>}
         </div>
 
         {formData.testName === "Custom" && (
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Custom Test Name *</label>
+            <label className="block  font-medium text-gray-700 mb-1">Custom Test Name *</label>
             <input
               type="text"
               name="customTestName"
@@ -70,7 +70,7 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Ordered By *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Ordered By *</label>
           <select
             name="orderedBy"
             required
@@ -87,11 +87,11 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
               </option>
             ))}
           </select>
-          {errors.orderedBy && <p className="text-red-500 text-xs mt-1">{errors.orderedBy}</p>}
+          {errors.orderedBy && <p className="text-red-500  mt-1">{errors.orderedBy}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Priority *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Priority *</label>
           <select
             name="priority"
             required
@@ -106,11 +106,11 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
             <option value="STAT">STAT (Immediate)</option>
             <option value="Routine">Routine</option>
           </select>
-          {errors.priority && <p className="text-red-500 text-xs mt-1">{errors.priority}</p>}
+          {errors.priority && <p className="text-red-500  mt-1">{errors.priority}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Sample Type</label>
+          <label className="block  font-medium text-gray-700 mb-1">Sample Type</label>
           <select
             name="sampleType"
             value={formData.sampleType}
@@ -129,7 +129,7 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Expected Duration</label>
+          <label className="block  font-medium text-gray-700 mb-1">Expected Duration</label>
           <select
             name="expectedDuration"
             value={formData.expectedDuration}
@@ -147,7 +147,7 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Clinical Information</label>
+          <label className="block  font-medium text-gray-700 mb-1">Clinical Information</label>
           <textarea
             name="clinicalInfo"
             rows={3}
@@ -159,7 +159,7 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Special Instructions</label>
+          <label className="block  font-medium text-gray-700 mb-1">Special Instructions</label>
           <textarea
             name="instructions"
             rows={2}

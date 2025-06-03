@@ -3,11 +3,11 @@
 export default function SectionPatient({ formData, handleChange, errors, patients = [] }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Patient Information</h3>
+      <h3 className="font-semibold text-gray-900 border-b pb-2">Patient Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Select Patient *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Select Patient *</label>
           <select
             name="patientId"
             required
@@ -24,11 +24,11 @@ export default function SectionPatient({ formData, handleChange, errors, patient
               </option>
             ))}
           </select>
-          {errors.patientId && <p className="text-red-500 text-xs mt-1">{errors.patientId}</p>}
+          {errors.patientId && <p className="text-red-500  mt-1">{errors.patientId}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Patient Age</label>
+          <label className="block  font-medium text-gray-700 mb-1">Patient Age</label>
           <input
             type="text"
             name="patientAge"
@@ -41,7 +41,7 @@ export default function SectionPatient({ formData, handleChange, errors, patient
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Patient Gender</label>
+          <label className="block  font-medium text-gray-700 mb-1">Patient Gender</label>
           <input
             type="text"
             name="patientGender"
@@ -54,7 +54,7 @@ export default function SectionPatient({ formData, handleChange, errors, patient
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
+          <label className="block  font-medium text-gray-700 mb-1">Department</label>
           <input
             type="text"
             name="department"

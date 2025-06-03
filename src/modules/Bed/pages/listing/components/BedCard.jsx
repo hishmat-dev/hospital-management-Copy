@@ -12,7 +12,7 @@ export default function BedCard({
   getTypeColor,
 }) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-3 border-l-4 border-blue-500 hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg shadow-md p-3 border-l-4 border-primary-color hover:shadow-lg transition-shadow">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className=" font-semibold text-gray-900 flex items-center space-x-2">
@@ -51,14 +51,14 @@ export default function BedCard({
           <div className="flex space-x-2">
             <button
               onClick={() => onDischarge(bed.id)}
-              className="flex-1 bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700  flex items-center justify-center space-x-1"
+              className="flex-1 bg-red-color text-white px-3 py-2 rounded-lg hover:bg-red-700  flex items-center justify-center space-x-1"
             >
               <User size={14} />
               <span>Discharge</span>
             </button>
             <button
               onClick={() => onView(bed)}
-              className="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 "
+              className="bg-primary-color text-white px-3 py-2 rounded-lg "
             >
               <Eye size={14} />
             </button>
@@ -98,7 +98,7 @@ export default function BedCard({
             </button>
             <button
               onClick={() => onDelete(bed.id)}
-              className="bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700 "
+              className="bg-red-color text-white px-3 py-2 rounded-lg  "
             >
               <Trash2 size={14} />
             </button>

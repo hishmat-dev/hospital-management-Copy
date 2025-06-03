@@ -32,16 +32,14 @@ export default function EmergencyList() {
     )
   }
 
-  // console.log("Emergency status:", emergencyStats)
-
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 text-[12px] " >
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center space-x-3">
+        <h1 className=" font-bold text-gray-900 flex items-center space-x-3">
           <div className="bg-red-100 p-2 rounded-lg">
             <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">!</span>
+              <span className="text-white font-bold">!</span>
             </div>
           </div>
           <span>Emergency Department</span>

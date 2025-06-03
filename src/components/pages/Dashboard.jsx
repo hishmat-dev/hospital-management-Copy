@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Users, Calendar, Bed, UserCheck, AlertTriangle, Activity } from "lucide-react";
 // import { fetchDashboardStats, fetchSpecialties, fetchRecentPatients } from "../../store/slices/dashboardSlice";
 import { Table, Tag } from "antd"; // Import Ant Design components
@@ -7,14 +7,13 @@ import { useBedListing } from "../../modules/Bed/pages/listing/listing.hooks";
 import StatsCards from "../../modules/Bed/pages/listing/components/StatsCards"
 import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
-  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
-  const { stats , specialties , recentPatients , fetched } = useSelector((state) => state.dashboard || {});
+  const { stats , specialties , recentPatients  } = useSelector((state) => state.dashboard || {});
 
-  console.log("Dashboard stats:");
   // Dispatch thunks when the component mounts
 
-  const StatCard = ({ icon, title, value, color, onClick }) => (
+  const StatCard = ({ icon, title, value, onClick }) => (
     <div className="bg-white rounded-lg shadow-md p-4 border-l-4 hover:cursor-pointer border-l-primary-color " onClick={onClick}>
       <div className="flex items-center justify-between">
         <div>
@@ -93,10 +92,10 @@ export default function Dashboard() {
   }
   return (
 
-    <div className="space-y-6">
+    <div className="space-y-6 text-[12px]">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Hospital Dashboard</h1>
+        <h1 className="text-xl font-bold text-gray-900 mb-2">Hospital Dashboard</h1>
         <p className="text-gray-600">Welcome to TapMed Hospital Management System</p>
       </div>
 
@@ -116,7 +115,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Available Specialties */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Available Specialties</h2>
+          <h2 className="font-bold text-gray-900 mb-4">Available Specialties</h2>
           <Table
             columns={specialtyColumns}
             dataSource={specialties}
@@ -128,7 +127,7 @@ export default function Dashboard() {
 
         {/* Recent Patients */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Patients</h2>
+          <h2 className="font-bold text-gray-900 mb-4">Recent Patients</h2>
           <Table
             columns={patientColumns}
             dataSource={recentPatients}

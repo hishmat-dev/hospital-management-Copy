@@ -6,7 +6,7 @@ export default function Btn({ onSave, onCancel, loading }) {
       <button
         type="button"
         onClick={onCancel}
-        className="border px-4 py-2 rounded-lg hover:bg-gray-100"
+        className="border px-4 py-2 rounded-lg text-white bg-red-color"
       >
         Cancel
       </button>
@@ -14,7 +14,7 @@ export default function Btn({ onSave, onCancel, loading }) {
         type="submit"
         onClick={onSave}
         disabled={loading}
-        className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 disabled:opacity-60"
+        className="bg-primary-color text-white px-6 py-2 rounded-lg disabled:opacity-60"
       >
         {loading ? "Assigning..." : "Assign Bed"}
       </button>

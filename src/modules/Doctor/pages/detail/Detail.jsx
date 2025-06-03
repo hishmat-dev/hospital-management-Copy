@@ -34,9 +34,9 @@ export default function DoctorDetail() {
       {/* Header */}
       <PersonalInfo
         doctor={doctor}
-        profile={profile} 
+        profile={profile}
         navigate={navigate}
-      /> 
+      />
 
       {/* Doctor Information */}
       <div className="">
@@ -44,12 +44,12 @@ export default function DoctorDetail() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-3">
-        <div className="md:w-4/6">
+        <div className="w-full">
           <AppointmentsTable doctor={doctor} />
         </div>
-        <div className="md:w-2/6">
-          <ScheduleInfo doctor={doctor} />
-        </div>
+      </div>
+      <div className="md:w-2/6">
+        <ScheduleInfo doctor={doctor} />
       </div>
 
       <ActionButtons doctorId={id} />

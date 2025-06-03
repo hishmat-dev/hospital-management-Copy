@@ -5,12 +5,12 @@ import { listingHelper } from "../../listing/listing.helper"
 
 const LabTestDetail = ({ test }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6">
+    <div className="bg-white shadow-lg rounded-lg p-3 text-[12px]">
       <div className="border-b pb-4 mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Lab Test Details</h2>
+        <h2 className="font-bold text-gray-900">Lab Test Details</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         <Section title="Patient Information">
           <InfoItem label="Patient" value={test.patientName} />
           <InfoItem label="Patient ID" value={test.patientId} />
@@ -53,7 +53,7 @@ const LabTestDetail = ({ test }) => {
       </div>
 
       {test.results && (
-        <div className="mt-10">
+        <div className="">
           <Section title="Test Results">
             <div className="bg-gray-100 text-sm text-gray-800 p-4 rounded-md border space-y-2">
               {Object.entries(test.results).map(([key, value]) => (
@@ -71,12 +71,14 @@ const LabTestDetail = ({ test }) => {
       {test.notes && (
         <div className="mt-10">
           <Section title="Notes">
-            <div className="bg-gray-100 text-sm text-gray-800 p-4 rounded-md border">
+            <div className="bg-gray-100 text-gray-800 p-4 rounded-md border">
               <p>{test.notes}</p>
             </div>
           </Section>
         </div>
       )}
+
+    
     </div>
   )
 }

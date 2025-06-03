@@ -48,7 +48,7 @@ export default function ListItem({ patient, onView, onEdit, onDelete, getStatusC
       </td>
 
       <td className="px-3 py-2 whitespace-nowrap">
-        <span className={`px-2 py-1 rounded-full  font-medium ${getStatusColor(patient.status)}`}>
+        <span className={`px-2 py-1 rounded-sm ${getStatusColor(patient.status)}`}>
           {patient.status}
         </span>
       </td>

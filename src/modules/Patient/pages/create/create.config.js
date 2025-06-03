@@ -17,6 +17,8 @@ export const createConfig = {
     currentMedications: "",
     insuranceProvider: "",
     insuranceNumber: "",
+    age: "", 
+    maritalStatus: "", 
   },
 
   bloodGroups: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],

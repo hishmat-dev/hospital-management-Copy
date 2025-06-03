@@ -43,10 +43,10 @@ const BedUpdate = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="p-3 text-[12px]">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="bg-primary-color text-white px-6 py-4">
-          <h1 className="text-2xl font-bold">Update Bed - {bed.bedNumber}</h1>
+        <div className="bg-primary-color text-white px-6 py-2">
+          <h1 className="text-sm font-bold">Update Bed - {bed.bedNumber}</h1>
         </div>
         <div className="p-6">
           <Form initialData={bed} isUpdate={true} />

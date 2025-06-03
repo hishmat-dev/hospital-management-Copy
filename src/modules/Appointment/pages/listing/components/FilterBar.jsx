@@ -19,7 +19,7 @@ export default function FilterBar({ filters, onFilterChange, onExport, onAddNew,
           </button>
           <button
             onClick={onAddNew}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2"
+            className="bg-primary-color text-white px-4 py-2 rounded-lg  flex items-center space-x-2"
           >
             <Plus size={16} />
             <span>Book Appointment</span>

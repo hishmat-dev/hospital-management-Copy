@@ -66,10 +66,10 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-3">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Bed Number</label>
+          <label className="block  font-medium text-gray-700 mb-2">Bed Number</label>
           <input
             type="text"
             name="bedNumber"
@@ -81,7 +81,7 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Ward</label>
+          <label className="block  font-medium text-gray-700 mb-2">Ward</label>
           <select
             name="roomNumber"
             value={formData.roomNumber}
@@ -100,7 +100,7 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Bed Type</label>
+          <label className="block  font-medium text-gray-700 mb-2">Bed Type</label>
           <select
             name="type"
             value={formData.type}
@@ -115,7 +115,7 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+          <label className="block  font-medium text-gray-700 mb-2">Status</label>
           <select
             name="status"
             value={formData.status}
@@ -131,7 +131,7 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Features</label>
+        <label className="block  font-medium text-gray-700 mb-2">Features</label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {availableFeatures.map((feature) => (
             <label key={feature} className="flex items-center">
@@ -141,14 +141,14 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
                 onChange={() => handleFeatureChange(feature)}
                 className="mr-2"
               />
-              <span className="text-sm">{feature}</span>
+              <span className="">{feature}</span>
             </label>
           ))}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+        <label className="block  font-medium text-gray-700 mb-2">Notes</label>
         <textarea
           name="notes"
           value={formData.notes}
@@ -158,7 +158,7 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
         />
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex justify-end space-x-4">
         <button
           type="submit"
           className="bg-primary-color text-white px-6 py-2 rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -168,7 +168,7 @@ const BedUpdateForm = ({ initialData, isUpdate = false }) => {
         <button
           type="button"
           onClick={() => navigate("/beds/list")}
-          className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          className="bg-red-color text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
         >
           Cancel
         </button>

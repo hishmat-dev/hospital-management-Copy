@@ -1,8 +1,10 @@
 import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { assignBed } from "../../action/slice";
+import { useNavigate } from "react-router-dom";
 
-export const useAssignBed = () => {
+export const useAssignBed = (bed) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const beds = useSelector((state) => state.beds.beds); // Fetch beds from Redux store
   const [formData, setFormData] = useState({
@@ -12,8 +14,8 @@ export const useAssignBed = () => {
     chiefComplaint: "",
     gender: "",
     age: "",
-    roomNumber: "",
-    bedNumber: "",
+    roomNumber: bed?.roomNumber || "", // Pre-populate roomNumber
+    bedNumber: bed?.bedNumber || "",   // Pre-populate bedNumber
     admissionDate: "",
   });
   const [errors, setErrors] = useState({});
@@ -28,12 +30,12 @@ export const useAssignBed = () => {
       chiefComplaint: "",
       gender: "",
       age: "",
-      roomNumber: "",
-      bedNumber: "",
+      roomNumber: bed?.roomNumber || "", // Keep roomNumber on reset
+      bedNumber: bed?.bedNumber || "",   // Keep bedNumber on reset
       admissionDate: "",
     });
     setErrors({});
-  }, []);
+  }, [bed]);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -59,7 +61,8 @@ export const useAssignBed = () => {
           .unwrap()
           .then(() => {
             setLoading(false);
-            resetForm(); // Use resetForm instead of handleCancel
+            resetForm();
+            navigate("/beds/list"); // Navigate after successful submission
           })
           .catch((err) => {
             setLoading(false);
@@ -70,12 +73,13 @@ export const useAssignBed = () => {
         setErrors({ ...errors, submit: "Invalid room or bed number" });
       }
     },
-    [formData, dispatch, errors, beds, resetForm] // Update dependencies
+    [formData, dispatch, errors, beds, resetForm, navigate]
   );
 
   const handleCancel = useCallback(() => {
-    resetForm(); // Reuse resetForm logic for cancellation
-  }, [resetForm]);
+    resetForm();
+    navigate("/beds/list");
+  }, [resetForm, navigate]);
 
   return { formData, errors, loading, handleChange, handleSubmit, handleCancel };
 };

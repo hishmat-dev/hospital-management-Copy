@@ -40,7 +40,7 @@ export default function AppRoutes() {
       {/* Bed Management - Modular */}
       <Route path="/beds/list" element={<BedListing />} />
       <Route path="/beds/add" element={<BedCreate />} />
-      <Route path="/beds/assign" element={<BedAssign/>} />
+      <Route path="/beds/assign/:id" element={<BedAssign/>} />
       <Route path="/beds/detail/:id" element={<BedDetail />} />
       <Route path="/beds/update/:id" element={<BedUpdate />} />
 

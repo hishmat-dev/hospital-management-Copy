@@ -27,7 +27,7 @@ export default function Btn({ onSave, onCancel, loading, disabled }) {
         type="button"
         onClick={onCancel}
         disabled={loading}
-        className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 disabled:opacity-50 flex items-center space-x-2"
+        className="bg-red-color text-white px-6 py-2 rounded-lg disabled:opacity-50 flex items-center space-x-2"
       >
         <X size={16} />
         <span>Cancel</span>

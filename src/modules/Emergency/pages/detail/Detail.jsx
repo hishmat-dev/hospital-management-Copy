@@ -1,4 +1,3 @@
-"use client"
 import { useParams, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
@@ -10,7 +9,7 @@ const EmergencyDetail = () => {
   const dispatch = useDispatch()
 
   const { emergencyCases, loading } = useSelector((state) => state.emergency)
-  // console.log("Emergency Case:", emergencyCases)
+  
   const emergencyCase = emergencyCases.find((c) => c.id === id)
 
   useEffect(() => {
@@ -42,10 +41,10 @@ const EmergencyDetail = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="p-3 text-[12px]">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-primary-color text-white px-6 py-4">
-          <h1 className="text-2xl font-bold">Emergency Case Details</h1>
+          <h1 className=" font-bold">Emergency Case Details</h1>
         </div>
 
         <div className="p-6">
@@ -175,16 +174,16 @@ const EmergencyDetail = () => {
             </div>
           )}
 
-          <div className="mt-8 flex space-x-4">
+          <div className="mt-4 flex justify-end space-x-4">
             <button
               onClick={() => navigate(`/emergency/update/${id}`)}
-              className="bg-primary-color text-white px-4 py-2 rounded-md hover:bg-red-700"
+              className="bg-primary-color text-white px-4 py-2 rounded-md "
             >
               Update Case
             </button>
             <button
-              onClick={() => navigate("/emergency/list")}
-              className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700"
+              onClick={() => navigate("/emergency/queue")}
+              className="bg-red-color text-white px-4 py-2 rounded-md"
             >
               Back to List
             </button>

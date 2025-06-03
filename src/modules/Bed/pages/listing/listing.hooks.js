@@ -63,7 +63,7 @@ export const useBedListing = () => {
   const handleAssign = useCallback(
     (bed) => {
       dispatch(setSelectedBed(bed))
-      navigate("/beds/assign")
+      navigate(`/beds/assign/${bed.id}`)
     },
     [dispatch, navigate],
   )
