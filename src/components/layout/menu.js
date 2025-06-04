@@ -56,6 +56,7 @@ export const menu = [
     children: [
       { title: "Add Lab Test", path: "/laboratory/add" },
       { title: "Lab Reports", path: "/laboratory/reports" },
+      // { title: "CBC Templete", path: "/laboratory/templete/CBC" },
     ],
   },
   {

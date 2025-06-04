@@ -9,6 +9,7 @@ import { BedCreate, BedListing, BedDetail, BedUpdate, BedAssign } from "../../mo
 import { LaboratoryCreate, LaboratoryListing, LaboratoryDetail, LaboratoryUpdate } from "../../modules/Laboratory"
 import { EmergencyCreate, EmergencyListing, EmergencyDetail, EmergencyUpdate } from "../../modules/Emergency"
 import { NursingCreate, NursingListing, NursingDetail, NursingUpdate } from "../../modules/Nursing"
+import CBC from "../../modules/Laboratory/pages/update/Templetes/CBC"
 
 export default function AppRoutes() {
   return (
@@ -49,6 +50,7 @@ export default function AppRoutes() {
       <Route path="/laboratory/add" element={<LaboratoryCreate />} />
       <Route path="/laboratory/detail/:id" element={<LaboratoryDetail />} />
       <Route path="/laboratory/update/:id" element={<LaboratoryUpdate />} />
+      <Route path="/laboratory/templete/CBC" element={<CBC/>} />
 
       {/* Emergency - Modular */}
       <Route path="/emergency/queue" element={<EmergencyListing />} />
