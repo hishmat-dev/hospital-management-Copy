@@ -17,7 +17,7 @@ export default function SectionContact({ formData, handleChange, errors }) {
             className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
               errors.phone ? "border-red-500" : "border-gray-300"
             }`}
-            placeholder="+1-555-0123"
+            placeholder="+92-345-0010123"
           />
           {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
         </div>
@@ -70,7 +70,7 @@ export default function SectionContact({ formData, handleChange, errors }) {
             value={formData.emergencyContactPhone}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="+1-555-0124"
+            placeholder="+92-345-0010124"
           />
         </div>
       </div>

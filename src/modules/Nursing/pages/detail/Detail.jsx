@@ -10,7 +10,7 @@ const NursingDetail = () => {
   const dispatch = useDispatch()
 
   const { vitals, loading } = useSelector((state) => state.nursing)
-  // console.log("Vitals:", vitals)
+  console.log("Vitals:", vitals)
   // console.log("Nursing Details :", id, patientName)
   const vitalRecord = vitals.find((v) => v.patientName === patientName)
   // console.log("Vital Record:", vitalRecord)

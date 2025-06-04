@@ -47,7 +47,7 @@ export default function LaboratoryList() {
             </div>
             <div className="ml-4">
               <div className=" text-gray-900">{record.patientName}</div>
-              <div className="text-xs text-gray-500">{record.patientId}</div>
+              <div className=" text-gray-500">{record.patientId}</div>
             </div>
           </div>
         )
@@ -56,7 +56,7 @@ export default function LaboratoryList() {
           <div>
             <div className=" text-gray-900">{record.testName}</div>
             <div className="flex items-center space-x-1 mt-1">
-              <span className={`px-2 py-1 rounded-full text-xs ${record.testType}`}>
+              <span className={`${record.testType}`}>
                 {record.testType}
               </span>
             </div>
@@ -66,7 +66,7 @@ export default function LaboratoryList() {
         return (
           <div className="flex items-center">
             <Stethoscope className="h-4 w-4 text-gray-400 mr-2" />
-            <div className=" text-gray-900">{record.orderedBy}</div>
+            <div className=" text-gray-900">{record.doctorName}</div>
           </div>
         )
       case "dates":
@@ -74,12 +74,12 @@ export default function LaboratoryList() {
           <div>
             <div className="flex items-center  text-gray-900">
               <Calendar className="h-4 w-4 mr-1" />
-              {record.orderDate}
+              {record.orderedDate}
             </div>
             {record.reportDate && (
-              <div className="flex items-center text-xs text-gray-500 mt-1">
+              <div className="flex items-center  text-gray-500 mt-1">
                 <Clock className="h-4 w-4 mr-1" />
-                Report: {record.reportDate}
+                Report: {record.expectedDate}
               </div>
             )}
           </div>
@@ -87,8 +87,7 @@ export default function LaboratoryList() {
       case "priority":
         return (
           <div className="flex items-center space-x-1">
-            <AlertCircle className="h-4 w-4 text-gray-400" />
-            <span className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(record.priority)}`}>
+            <span className={`px-2 py-1 rounded-full  ${getPriorityColor(record.priority)}`}>
               {record.priority}
             </span>
           </div>
@@ -99,7 +98,7 @@ export default function LaboratoryList() {
             value={record.status}
             onChange={(value) => handleStatusChange(record.id, value)}
             className={`w-full max-w-[120px]  ${getStatusColor(record.status)}`}
-            popupClassName="text-xs"
+            popupClassName=""
             bordered={false}
             getPopupContainer={(trigger) => trigger.parentNode}
           >
@@ -127,15 +126,7 @@ export default function LaboratoryList() {
             >
               <Edit size={12} />
             </button>
-            {record.status === "Completed" && (
-              <button
-                onClick={() => handleDownloadReport(record.id)}
-                className="text-purple-600 hover:text-purple-900"
-                title="Download Report"
-              >
-                <Download size={12} />
-              </button>
-            )}
+           
             <button
               onClick={() => handleDelete(record.id)}
               className="text-red-600 hover:text-red-900"

@@ -4,7 +4,7 @@ const initialState = {
   vitals : [
   {
     id: 1,
-    patientName: "Owais Shaikh",
+    patientName: "Ahmed Shaikh",
     room: "201",
     bed: "A",
     nurseName: "Nurse Hira Khan",

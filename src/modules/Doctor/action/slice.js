@@ -26,9 +26,9 @@ const initialState = {
   doctors: [
     {
       id: "D-001",
-      name: "Dr. Sarah Wilson",
+      name: "Dr. Ayesha Khan",
       specialty: "Cardiology",
-      phone: "+1-555-1001",
+      phone: "+92-345-0011001",
       email: "sarah.wilson@hospital.com",
       experience: "15 years",
       qualification: "MD, FACC",
@@ -45,7 +45,7 @@ const initialState = {
         tuesday: "9:00 AM - 5:00 PM",
         wednesday: "9:00 AM - 5:00 PM",
         thursday: "9:00 AM - 5:00 PM",
-        friday: "9:00 AM - 3:00 PM",
+        friday: "9:00 AM - 3:00 PM"
       },
       appointments: [
         {
@@ -58,7 +58,7 @@ const initialState = {
           feePaid: 300,
           paymentStatus: "Paid",
           appointmentStatus: "Confirmed",
-          prescription: "Diabetes management.",
+          prescription: "Diabetes management."
         },
         {
           patientId: "P-2003",
@@ -70,15 +70,15 @@ const initialState = {
           feePaid: 300,
           paymentStatus: "Paid",
           appointmentStatus: "Cancelled",
-          prescription: "Arrhythmia.",
-        },
-      ],
+          prescription: "Arrhythmia."
+        }
+      ]
     },
     {
       id: "D-002",
-      name: "Dr. Michael Brown",
+      name: "Dr. Hassan Malik",
       specialty: "Orthopedics",
-      phone: "+1-555-1002",
+      phone: "+92-345-0011002",
       email: "michael.brown@hospital.com",
       experience: "12 years",
       qualification: "MD, MS Orthopedics",
@@ -95,7 +95,7 @@ const initialState = {
         tuesday: "2:00 PM - 10:00 PM",
         wednesday: "2:00 PM - 10:00 PM",
         thursday: "2:00 PM - 10:00 PM",
-        friday: "2:00 PM - 8:00 PM",
+        friday: "2:00 PM - 8:00 PM"
       },
       appointments: [
         {
@@ -113,20 +113,20 @@ const initialState = {
             weight: "60kg",
             bloodPressure: "120/80",
             sugarBefore: 85,
-            sugarAfter: 130,
+            sugarAfter: 130
           },
           medicines: [
             { name: "Caltrate", schedule: { morning: 1, afternoon: 0, night: 1 } },
-            { name: "Ibuprofen", schedule: { morning: 1, afternoon: 1, night: 0 } },
-          ],
-        },
-      ],
+            { name: "Ibuprofen", schedule: { morning: 1, afternoon: 1, night: 0 } }
+          ]
+        }
+      ]
     },
     {
       id: "D-003",
-      name: "Dr. Lisa Anderson",
+      name: "Dr. Sana Iqbal",
       specialty: "Emergency Medicine",
-      phone: "+1-555-1003",
+      phone: "+92-345-0011003",
       email: "lisa.anderson@hospital.com",
       experience: "8 years",
       qualification: "MD, Emergency Medicine",
@@ -143,7 +143,7 @@ const initialState = {
         tuesday: "10:00 PM - 6:00 AM",
         wednesday: "10:00 PM - 6:00 AM",
         thursday: "10:00 PM - 6:00 AM",
-        friday: "10:00 PM - 6:00 AM",
+        friday: "10:00 PM - 6:00 AM"
       },
       appointments: [
         {
@@ -161,20 +161,20 @@ const initialState = {
             weight: "70kg",
             bloodPressure: "125/85",
             sugarBefore: 95,
-            sugarAfter: 110,
+            sugarAfter: 110
           },
           medicines: [
             { name: "Ventolin Inhaler", schedule: { morning: 1, afternoon: 1, night: 1 } },
-            { name: "Montelukast", schedule: { morning: 1, afternoon: 0, night: 1 } },
-          ],
-        },
-      ],
+            { name: "Montelukast", schedule: { morning: 1, afternoon: 0, night: 1 } }
+          ]
+        }
+      ]
     },
     {
       id: "D-004",
-      name: "Dr. James Miller",
+      name: "Dr. Farhan Ahmed",
       specialty: "Neurology",
-      phone: "+1-555-1004",
+      phone: "+92-345-0011004",
       email: "james.miller@hospital.com",
       experience: "20 years",
       qualification: "MD, PhD Neurology",
@@ -191,7 +191,7 @@ const initialState = {
         tuesday: "8:00 AM - 4:00 PM",
         wednesday: "8:00 AM - 4:00 PM",
         thursday: "8:00 AM - 4:00 PM",
-        friday: "8:00 AM - 2:00 PM",
+        friday: "8:00 AM - 2:00 PM"
       },
       appointments: [
         {
@@ -209,15 +209,15 @@ const initialState = {
             weight: "65kg",
             bloodPressure: "150/95",
             sugarBefore: 110,
-            sugarAfter: 160,
+            sugarAfter: 160
           },
           medicines: [
             { name: "Sumatriptan", schedule: { morning: 1, afternoon: 0, night: 1 } },
-            { name: "Propranolol", schedule: { morning: 1, afternoon: 1, night: 0 } },
-          ],
-        },
-      ],
-    },
+            { name: "Propranolol", schedule: { morning: 1, afternoon: 1, night: 0 } }
+          ]
+        }
+      ]
+    }
   ],
   selectedDoctor: null,
   loading: false,

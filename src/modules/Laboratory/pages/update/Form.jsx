@@ -1,5 +1,3 @@
-
-
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -23,7 +21,9 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
     orderedDate: initialData?.orderedDate || "",
     sampleDate: initialData?.sampleDate || "",
     expectedDate: initialData?.expectedDate || "",
-    results: initialData?.results || "",
+    results: initialData?.results?.length
+      ? initialData.results
+      : [{ name: "", value: "", unit: "" }],
     notes: initialData?.notes || "",
   })
 
@@ -32,6 +32,29 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }))
+  }
+
+  const handleResultChange = (index, field, value) => {
+    const updatedResults = [...formData.results]
+    updatedResults[index][field] = value
+    setFormData((prev) => ({
+      ...prev,
+      results: updatedResults,
+    }))
+  }
+
+  const handleAddResult = () => {
+    setFormData((prev) => ({
+      ...prev,
+      results: [...prev.results, { name: "", value: "", unit: "" }],
+    }))
+  }
+
+  const handleRemoveResult = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      results: prev.results.filter((_, i) => i !== index),
     }))
   }
 
@@ -56,137 +79,105 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Patient Name</label>
-          <input
-            type="text"
-            name="patientName"
-            value={formData.patientName}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        {/* Patient Info Inputs */}
+        {[
+          ["Patient Name", "patientName", "text"],
+          ["Patient ID", "patientId", "text"],
+          ["Patient Age", "patientAge", "number"],
+          ["Patient Gender", "patientGender", "text"],
+          ["Doctor Name", "doctorName", "text"],
+          ["Department", "department", "text"],
+          ["Ordered Date", "orderedDate", "date"],
+          ["Sample Date", "sampleDate", "date"],
+          ["Expected Date", "expectedDate", "date"],
+        ].map(([label, name, type]) => (
+          <div key={name}>
+            <label className="block font-medium text-gray-700 mb-2">{label}</label>
+            <input
+              type={type}
+              name={name}
+              value={formData[name]}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required={["patientName", "patientId", "doctorName"].includes(name)}
+            />
+          </div>
+        ))}
 
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Patient ID</label>
-          <input
-            type="text"
-            name="patientId"
-            value={formData.patientId}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Test Type</label>
-          <select
-            name="testType"
-            value={formData.testType}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Select Test Type</option>
-            <option value="Blood Test">Blood Test</option>
-            <option value="Urine Test">Urine Test</option>
-            <option value="X-Ray">X-Ray</option>
-            <option value="CT Scan">CT Scan</option>
-            <option value="MRI">MRI</option>
-            <option value="ECG">ECG</option>
-            <option value="Ultrasound">Ultrasound</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Category</label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="">Select Category</option>
-            <option value="Hematology">Hematology</option>
-            <option value="Biochemistry">Biochemistry</option>
-            <option value="Microbiology">Microbiology</option>
-            <option value="Radiology">Radiology</option>
-            <option value="Cardiology">Cardiology</option>
-            <option value="Pathology">Pathology</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Priority</label>
-          <select
-            name="priority"
-            value={formData.priority}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="low">Low</option>
-            <option value="normal">Normal</option>
-            <option value="high">High</option>
-            <option value="urgent">Urgent</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Status</label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Doctor Name</label>
-          <input
-            type="text"
-            name="doctorName"
-            value={formData.doctorName}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block  font-medium text-gray-700 mb-2">Sample Date</label>
-          <input
-            type="date"
-            name="sampleDate"
-            value={formData.sampleDate}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        {/* Dropdowns */}
+        {[
+          ["Test Type", "testType", ["Blood Test", "Urine Test", "X-Ray", "CT Scan", "MRI", "ECG", "Ultrasound"]],
+          ["Category", "category", ["Hematology", "Biochemistry", "Microbiology", "Radiology", "Cardiology", "Pathology"]],
+          ["Priority", "priority", ["low", "normal", "high", "urgent"]],
+          ["Status", "status", ["pending", "in-progress", "completed", "cancelled"]],
+        ].map(([label, name, options]) => (
+          <div key={name}>
+            <label className="block font-medium text-gray-700 mb-2">{label}</label>
+            <select
+              name={name}
+              value={formData[name]}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required={["testType", "category"].includes(name)}
+            >
+              <option value="">Select {label}</option>
+              {options.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
       </div>
 
+      {/* Test Results Section */}
       <div>
-        <label className="block  font-medium text-gray-700 mb-2">Test Results</label>
-        <textarea
-          name="results"
-          value={formData.results}
-          onChange={handleChange}
-          rows={4}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter test results here..."
-        />
+        <label className="block font-medium text-gray-700 mb-2">Test Results</label>
+        {formData.results.map((result, index) => (
+          <div key={index} className="flex gap-2 mb-2">
+            <input
+              type="text"
+              placeholder="Test Name"
+              value={result.name}
+              onChange={(e) => handleResultChange(index, "name", e.target.value)}
+              className="w-1/3 px-3 py-2 border border-gray-300 rounded-md"
+            />
+            <input
+              type="text"
+              placeholder="Value"
+              value={result.value}
+              onChange={(e) => handleResultChange(index, "value", e.target.value)}
+              className="w-1/3 px-3 py-2 border border-gray-300 rounded-md"
+            />
+            <input
+              type="text"
+              placeholder="Unit"
+              value={result.unit}
+              onChange={(e) => handleResultChange(index, "unit", e.target.value)}
+              className="w-1/4 px-3 py-2 border border-gray-300 rounded-md"
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveResult(index)}
+              className="text-red-500 font-bold"
+            >
+              &times;
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={handleAddResult}
+          className="mt-2 px-4 py-1 bg-green-600 text-white rounded-md"
+        >
+          + Add Result
+        </button>
       </div>
 
+      {/* Notes */}
       <div>
-        <label className="block  font-medium text-gray-700 mb-2">Notes</label>
+        <label className="block font-medium text-gray-700 mb-2">Notes</label>
         <textarea
           name="notes"
           value={formData.notes}
@@ -196,17 +187,18 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         />
       </div>
 
+      {/* Buttons */}
       <div className="flex justify-end space-x-4">
         <button
           type="submit"
-          className="bg-primary-color text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-primary-color text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2"
         >
-          Update Test
+          {isUpdate ? "Update Test" : "Submit Test"}
         </button>
         <button
           type="button"
-          onClick={() => navigate("/laboratory/list")}
-          className="bg-red-color text-white px-6 py-2 rounded-md  focus:outline-none focus:ring-2 focus:ring-gray-500"
+          onClick={() => navigate("/laboratory/reports")}
+          className="bg-red-600 text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
         >
           Cancel
         </button>

@@ -67,7 +67,7 @@ export default function SectionPatient({ formData, handleChange, errors }) {
             value={formData.contactNumber}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-            placeholder="+1-555-0123"
+            placeholder="+92-345-0010123"
           />
         </div>
 
@@ -91,7 +91,7 @@ export default function SectionPatient({ formData, handleChange, errors }) {
             value={formData.emergencyContactPhone}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-            placeholder="+1-555-0124"
+            placeholder="+92-345-0010124"
           />
         </div>
 
