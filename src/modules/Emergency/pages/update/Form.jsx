@@ -71,10 +71,10 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Patient Name</label>
+          <label className="block  font-medium text-gray-700 mb-2">Patient Name</label>
           <input
             type="text"
             name="patientName"
@@ -86,7 +86,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Age</label>
+          <label className="block  font-medium text-gray-700 mb-2">Age</label>
           <input
             type="number"
             name="age"
@@ -98,7 +98,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+          <label className="block  font-medium text-gray-700 mb-2">Gender</label>
           <select
             name="gender"
             value={formData.gender}
@@ -114,7 +114,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+          <label className="block  font-medium text-gray-700 mb-2">Phone</label>
           <input
             type="tel"
             name="phone"
@@ -126,7 +126,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Triage Level</label>
+          <label className="block  font-medium text-gray-700 mb-2">Triage Level</label>
           <select
             name="triageLevel"
             value={formData.triageLevel}
@@ -141,7 +141,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+          <label className="block  font-medium text-gray-700 mb-2">Status</label>
           <select
             name="status"
             value={formData.status}
@@ -160,7 +160,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         <h3 className="text-lg font-semibold mb-4">Vital Signs</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Blood Pressure</label>
+            <label className="block  font-medium text-gray-700 mb-2">Blood Pressure</label>
             <input
               type="text"
               name="vitals.bloodPressure"
@@ -172,7 +172,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Heart Rate (bpm)</label>
+            <label className="block  font-medium text-gray-700 mb-2">Heart Rate (bpm)</label>
             <input
               type="number"
               name="vitals.heartRate"
@@ -183,7 +183,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Temperature (°F)</label>
+            <label className="block  font-medium text-gray-700 mb-2">Temperature (°F)</label>
             <input
               type="number"
               step="0.1"
@@ -197,7 +197,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Chief Complaint</label>
+        <label className="block  font-medium text-gray-700 mb-2">Chief Complaint</label>
         <textarea
           name="chiefComplaint"
           value={formData.chiefComplaint}
@@ -209,7 +209,7 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Clinical Notes</label>
+        <label className="block  font-medium text-gray-700 mb-2">Clinical Notes</label>
         <textarea
           name="notes"
           value={formData.notes}
@@ -228,8 +228,8 @@ const EmergencyUpdateForm = ({ initialData, isUpdate = false }) => {
         </button>
         <button
           type="button"
-          onClick={() => navigate("/emergency/list")}
-          className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          onClick={() => navigate("/emergency/queue")}
+          className="bg-primary-color text-white px-6 py-2 rounded-md  focus:outline-none focus:ring-2 "
         >
           Cancel
         </button>

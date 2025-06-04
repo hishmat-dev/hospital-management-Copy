@@ -70,4 +70,29 @@ export const listingHelper = {
     a.click()
     window.URL.revokeObjectURL(url)
   },
+  downloadReport: (test) => {
+    const reportContent = `
+Lab Test Report
+---------------
+Test ID: ${test.id}
+Patient: ${test.patientName}
+Test Type: ${test.testType}
+Category: ${test.testCategory}
+Priority: ${test.priority}
+Status: ${test.status}
+Collection Date: ${test.collectionDate}
+Ordering Doctor: ${test.orderingDoctor}
+Generated: ${new Date().toISOString()}
+    `.trim()
+
+    const blob = new Blob([reportContent], { type: "text/plain" })
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `lab-test-report-${test.id}-${new Date().toISOString().split("T")[0]}.txt`
+    a.click()
+    window.URL.revokeObjectURL(url)
+  },
+
 }
+

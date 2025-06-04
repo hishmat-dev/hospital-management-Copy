@@ -26,7 +26,7 @@ const initialState = {
   patients : [
   {
     id: "P-2001",
-    name: "Owais Shaikh",
+    name: "Ahmed Shaikh",
     age: 45,
     gender: "Male",
     phone: "+92-300-1234567",

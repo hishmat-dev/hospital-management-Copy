@@ -47,7 +47,7 @@ export const useLaboratoryListing = () => {
   const handleEdit = useCallback(
     (labTest) => {
       dispatch(setSelectedTest(labTest))
-      navigate("/laboratory/update")
+      navigate(`/laboratory/update/${labTest.id}`)
     },
     [dispatch, navigate],
   )
@@ -67,13 +67,28 @@ export const useLaboratoryListing = () => {
     },
     [dispatch],
   )
+  
+  const handleDownloadReport = useCallback(
+  
+    (testId) => {
+      const test = labTests.find((t) => t.id === testId)
+      console.log("Downloading report for test ID:", testId, test)
+      if (test) {
+        listingHelper.downloadReport(test)
+      } else {
+        alert("Test not found")
+      }
+    },
+    [labTests],
+  )
+
 
   const handleExport = useCallback(() => {
     listingHelper.exportToCSV(labTests)
   }, [labTests])
 
   const handleAddNew = useCallback(() => {
-    navigate("/laboratory/order")
+    navigate("/laboratory/add")
   }, [navigate])
 
   const getStatusColor = useCallback((status) => {
@@ -95,6 +110,7 @@ export const useLaboratoryListing = () => {
     handleEdit,
     handleDelete,
     handleUpdateResults,
+    handleDownloadReport,
     handleExport,
     handleAddNew,
     getStatusColor,

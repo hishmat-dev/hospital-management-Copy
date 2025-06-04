@@ -10,7 +10,7 @@ const NursingDetail = () => {
   const dispatch = useDispatch()
 
   const { vitals, loading } = useSelector((state) => state.nursing)
-  // console.log("Vitals:", vitals)
+  console.log("Vitals:", vitals)
   // console.log("Nursing Details :", id, patientName)
   const vitalRecord = vitals.find((v) => v.patientName === patientName)
   // console.log("Vital Record:", vitalRecord)
@@ -44,7 +44,7 @@ const NursingDetail = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 text-[12px]">
+    <div className=" p-3 text-[12px]">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-primary-color text-white px-6 py-4">
           <h1 className="text-xl font-bold">Nursing Vital Signs Record</h1>
@@ -149,13 +149,13 @@ const NursingDetail = () => {
           {vitalRecord.notes && (
             <div className="mt-6">
               <h3 className="text-lg font-semibold mb-4">Nursing Notes</h3>
-              <div className="bg-gray-50 p-4 rounded-md">
+              <div className="bg-gray-200 p-4 rounded-md">
                 <p>{vitalRecord.notes}</p>
               </div>
             </div>
           )}
 
-          <div className="mt-8 flex space-x-4">
+          <div className="mt-8 flex justify-end space-x-4">
             <button
               onClick={() => navigate(`/nursing/update/${id}`)}
               className="bg-primary-color text-white px-4 py-2 rounded-md "
@@ -164,7 +164,7 @@ const NursingDetail = () => {
             </button>
             <button
               onClick={() => navigate("/nursing/vitals")}
-              className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700"
+              className="bg-red-color text-white px-4 py-2 rounded-md "
             >
               Back to List
             </button>

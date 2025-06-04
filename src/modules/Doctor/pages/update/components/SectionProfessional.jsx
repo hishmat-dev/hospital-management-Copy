@@ -2,11 +2,11 @@
 
 export default function SectionProfessional({ formData, handleInputChange, errors }) {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Professional Information</h3>
+    <div className="bg-white rounded-lg shadow p-3">
+      <h3 className="font-semibold text-gray-900 mb-4">Professional Information</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Specialization *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Specialization *</label>
           <select
             name="specialization"
             value={formData.specialization || ""}
@@ -25,11 +25,11 @@ export default function SectionProfessional({ formData, handleInputChange, error
             <option value="Dermatology">Dermatology</option>
             <option value="Psychiatry">Psychiatry</option>
           </select>
-          {errors.specialization && <p className="text-red-500 text-xs mt-1">{errors.specialization}</p>}
+          {errors.specialization && <p className="text-red-500  mt-1">{errors.specialization}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Department *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Department *</label>
           <select
             name="department"
             value={formData.department || ""}
@@ -48,11 +48,11 @@ export default function SectionProfessional({ formData, handleInputChange, error
             <option value="Orthopedics">Orthopedics</option>
             <option value="General Medicine">General Medicine</option>
           </select>
-          {errors.department && <p className="text-red-500 text-xs mt-1">{errors.department}</p>}
+          {errors.department && <p className="text-red-500  mt-1">{errors.department}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">License Number *</label>
+          <label className="block  font-medium text-gray-700 mb-1">License Number *</label>
           <input
             type="text"
             name="licenseNumber"
@@ -63,11 +63,11 @@ export default function SectionProfessional({ formData, handleInputChange, error
             }`}
             placeholder="Enter medical license number"
           />
-          {errors.licenseNumber && <p className="text-red-500 text-xs mt-1">{errors.licenseNumber}</p>}
+          {errors.licenseNumber && <p className="text-red-500  mt-1">{errors.licenseNumber}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Years of Experience *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Years of Experience *</label>
           <input
             type="number"
             name="experience"
@@ -80,11 +80,11 @@ export default function SectionProfessional({ formData, handleInputChange, error
             }`}
             placeholder="Years of experience"
           />
-          {errors.experience && <p className="text-red-500 text-xs mt-1">{errors.experience}</p>}
+          {errors.experience && <p className="text-red-500  mt-1">{errors.experience}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Consultation Fee *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Consultation Fee *</label>
           <input
             type="number"
             name="consultationFee"
@@ -97,11 +97,11 @@ export default function SectionProfessional({ formData, handleInputChange, error
             }`}
             placeholder="Consultation fee in USD"
           />
-          {errors.consultationFee && <p className="text-red-500 text-xs mt-1">{errors.consultationFee}</p>}
+          {errors.consultationFee && <p className="text-red-500  mt-1">{errors.consultationFee}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Status *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Status *</label>
           <select
             name="status"
             value={formData.status || ""}
@@ -115,11 +115,11 @@ export default function SectionProfessional({ formData, handleInputChange, error
             <option value="Inactive">Inactive</option>
             <option value="On Leave">On Leave</option>
           </select>
-          {errors.status && <p className="text-red-500 text-xs mt-1">{errors.status}</p>}
+          {errors.status && <p className="text-red-500  mt-1">{errors.status}</p>}
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Qualifications *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Qualifications *</label>
           <textarea
             name="qualifications"
             value={formData.qualifications || ""}
@@ -130,7 +130,7 @@ export default function SectionProfessional({ formData, handleInputChange, error
             }`}
             placeholder="Enter medical qualifications and certifications"
           />
-          {errors.qualifications && <p className="text-red-500 text-xs mt-1">{errors.qualifications}</p>}
+          {errors.qualifications && <p className="text-red-500  mt-1">{errors.qualifications}</p>}
         </div>
       </div>
     </div>

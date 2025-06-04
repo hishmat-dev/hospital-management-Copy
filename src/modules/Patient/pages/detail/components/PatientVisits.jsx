@@ -2,7 +2,7 @@ const PatientVisits = ({ patient }) => {
     // console.log("Patient Visits", patient);
     return (
         <div className="p-4 rounded-lg shadow-md bg-white text-[12px]">
-            <h2 className="font-semibold text-gray-800 mb-4">Patient Visits</h2>
+            <h3 className="font-semibold text-gray-800 mb-4">Patient Visits</h3>
             {patient.visits.map((visit, index) => (
                 <div
                     key={index}

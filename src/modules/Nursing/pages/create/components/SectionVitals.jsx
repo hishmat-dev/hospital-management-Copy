@@ -3,11 +3,11 @@
 export default function SectionVitals({ formData, handleChange, errors, patients = [] }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Vital Signs Recording</h3>
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Vital Signs Recording</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Select Patient *</label>
+          <label className="block font-medium text-gray-700 mb-1">Select Patient *</label>
           <select
             name="patientId"
             required
@@ -28,7 +28,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Recording Time *</label>
+          <label className="block font-medium text-gray-700 mb-1">Recording Time *</label>
           <input
             type="datetime-local"
             name="recordedAt"
@@ -43,7 +43,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Blood Pressure *</label>
+          <label className="block font-medium text-gray-700 mb-1">Blood Pressure *</label>
           <input
             type="text"
             name="bloodPressure"
@@ -59,7 +59,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Heart Rate (bpm) *</label>
+          <label className="block font-medium text-gray-700 mb-1">Heart Rate (bpm) *</label>
           <input
             type="number"
             name="heartRate"
@@ -77,7 +77,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Temperature (°F) *</label>
+          <label className="block font-medium text-gray-700 mb-1">Temperature (°F) *</label>
           <input
             type="number"
             name="temperature"
@@ -96,7 +96,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Respiratory Rate (/min) *</label>
+          <label className="block font-medium text-gray-700 mb-1">Respiratory Rate (/min) *</label>
           <input
             type="number"
             name="respiratoryRate"
@@ -114,7 +114,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Oxygen Saturation (%) *</label>
+          <label className="block font-medium text-gray-700 mb-1">Oxygen Saturation (%) *</label>
           <input
             type="number"
             name="oxygenSaturation"
@@ -132,7 +132,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Pain Scale (0-10)</label>
+          <label className="block font-medium text-gray-700 mb-1">Pain Scale (0-10)</label>
           <select
             name="painScale"
             value={formData.painScale}
@@ -155,7 +155,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Weight (kg)</label>
+          <label className="block font-medium text-gray-700 mb-1">Weight (kg)</label>
           <input
             type="number"
             name="weight"
@@ -170,7 +170,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Height (cm)</label>
+          <label className="block font-medium text-gray-700 mb-1">Height (cm)</label>
           <input
             type="number"
             name="height"
@@ -184,7 +184,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Blood Glucose (mg/dL)</label>
+          <label className="block font-medium text-gray-700 mb-1">Blood Glucose (mg/dL)</label>
           <input
             type="number"
             name="bloodGlucose"
@@ -198,7 +198,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Recorded By *</label>
+          <label className="block font-medium text-gray-700 mb-1">Recorded By *</label>
           <input
             type="text"
             name="recordedBy"
@@ -214,7 +214,7 @@ export default function SectionVitals({ formData, handleChange, errors, patients
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+          <label className="block font-medium text-gray-700 mb-1">Notes</label>
           <textarea
             name="notes"
             rows={3}

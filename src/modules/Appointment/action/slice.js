@@ -1,8 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { appointmentService } from "../services/appointmentService"
 
-export const fetchAppointments = createAsyncThunk("appointments/fetchAppointments", async (params) => {
-  return await appointmentService.getAll(params)
+export const fetchAppointments = createAsyncThunk("appointments/fetchAppointments", async ({ page, limit, ...filters }) => {
+  const response = await appointmentService.getAll({ page, limit, ...filters })
+  // Mock pagination if service doesn't handle it
+  const allAppointments = response.data || initialState.appointments
+  const start = (page - 1) * limit
+  const end = start + limit
+  const paginatedData = allAppointments.slice(start, end)
+  return {
+    data: paginatedData,
+    total: allAppointments.length,
+  }
 })
 
 export const createAppointment = createAsyncThunk("appointments/createAppointment", async (appointmentData) => {
@@ -24,11 +33,12 @@ const initialState = {
       id: "A-001",
       patientId: "P-1001",
       patientName: "John Smith",
-      patientPhone: "+1-555-0123",
+      patientPhone: "+92-345-0010123",
       doctorId: "D-001",
       doctorName: "Dr. Sarah Wilson",
-      date: "2024-01-20",
-      time: "10:00 AM",
+      specility: "ortho",
+      date: "2025-06-04",
+      time: "7:00 PM",
       department: "Cardiology",
       type: "Consultation",
       status: "Scheduled",
@@ -41,7 +51,7 @@ const initialState = {
       id: "A-002",
       patientId: "P-1002",
       patientName: "Emma Johnson",
-      patientPhone: "+1-555-0124",
+      patientPhone: "+92-345-0010124",
       doctorId: "D-002",
       doctorName: "Dr. Michael Brown",
       date: "2024-01-20",
@@ -58,7 +68,7 @@ const initialState = {
       id: "A-003",
       patientId: "P-1003",
       patientName: "Michael Davis",
-      patientPhone: "+1-555-0126",
+      patientPhone: "+92-345-0010126",
       doctorId: "D-003",
       doctorName: "Dr. Lisa Anderson",
       date: "2024-01-21",
@@ -75,7 +85,7 @@ const initialState = {
       id: "A-004",
       patientId: "P-1004",
       patientName: "Sarah Wilson",
-      patientPhone: "+1-555-0128",
+      patientPhone: "+92-345-0010128",
       doctorId: "D-004",
       doctorName: "Dr. James Miller",
       date: "2024-01-22",
@@ -130,8 +140,8 @@ export const appointmentSlice = createSlice({
       })
       .addCase(fetchAppointments.fulfilled, (state, action) => {
         state.loading = false
-        state.appointments = action.payload.data || state.appointments
-        state.pagination.total = action.payload.total || state.appointments.length
+        state.appointments = action.payload.data
+        state.pagination.total = action.payload.total
       })
       .addCase(fetchAppointments.rejected, (state, action) => {
         state.loading = false
@@ -139,6 +149,7 @@ export const appointmentSlice = createSlice({
       })
       .addCase(createAppointment.fulfilled, (state, action) => {
         state.appointments.push(action.payload)
+        state.pagination.total += 1
       })
       .addCase(updateAppointment.fulfilled, (state, action) => {
         const index = state.appointments.findIndex((a) => a.id === action.payload.id)
@@ -148,6 +159,7 @@ export const appointmentSlice = createSlice({
       })
       .addCase(deleteAppointment.fulfilled, (state, action) => {
         state.appointments = state.appointments.filter((a) => a.id !== action.payload)
+        state.pagination.total -= 1
       })
   },
 })

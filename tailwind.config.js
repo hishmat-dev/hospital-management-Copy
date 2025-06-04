@@ -21,6 +21,7 @@ module.exports = {
         "vivid-cerise": "#DA1D81",
         "bright-sun": "#FED33C",
         "primary-color":"#526bb1",
+        "red-color" : "#e34d4d",
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -9,7 +9,7 @@ export default function DoctorUpdateForm({ doctorId }) {
   const { formData, errors, loading, handleInputChange, handleSubmit } = useUpdateHooks(doctorId)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <SectionPersonal formData={formData} handleInputChange={handleInputChange} errors={errors} />
 
       <SectionProfessional formData={formData} handleInputChange={handleInputChange} errors={errors} />

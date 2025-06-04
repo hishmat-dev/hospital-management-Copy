@@ -30,7 +30,7 @@ const BedDetail = () => {
   if (!bed) {
     return (
       <div className="text-center py-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Bed Not Found</h2>
+        <h2 className="font-bold text-gray-900 mb-4">Bed Not Found</h2>
         <button
           onClick={() => navigate("/beds/list")}
           className="bg-primary-color text-white px-4 py-2 rounded-md "
@@ -42,10 +42,10 @@ const BedDetail = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="p-6 text-[12px]">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-primary-color text-white px-6 py-4">
-          <h1 className="text-2xl font-bold">Bed Details - {bed.bedNumber}</h1>
+          <h1 className="text-sm font-bold">Bed Details - {bed.bedNumber}</h1>
         </div>
 
         <div className="p-6">
@@ -123,7 +123,7 @@ const BedDetail = () => {
             </div>
           </div>
 
-          <div className="mt-8 flex space-x-4">
+          <div className="mt-8 flex justify-end space-x-4">
             <button
               onClick={() => navigate(`/beds/update/${id}`)}
               className="bg-primary-color text-white px-4 py-2 rounded-md "
@@ -132,7 +132,7 @@ const BedDetail = () => {
             </button>
             <button
               onClick={() => navigate("/beds/list")}
-              className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700"
+              className="bg-red-color text-white px-4 py-2 rounded-md "
             >
               Back to List
             </button>

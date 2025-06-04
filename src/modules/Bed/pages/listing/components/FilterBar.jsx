@@ -15,28 +15,28 @@ export default function FilterBar({
   return (
     <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold text-gray-900 flex items-center space-x-2">
+        <h2 className="font-semibold text-gray-900 flex items-center space-x-2">
           <Filter size={20} />
           <span>Bed Filters</span>
         </h2>
         <div className="flex space-x-2">
-          <button
+          {/* <button
             onClick={onAssignBed}
             className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center space-x-2"
           >
             <Bed size={16} />
             <span>Assign Bed</span>
-          </button>
+          </button> */}
           <button
             onClick={onExport}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 flex items-center space-x-2"
+            className="bg-red-color text-white px-4 py-2 rounded-lg flex items-center space-x-2"
           >
             <Download size={16} />
             <span>Export</span>
           </button>
           <button
             onClick={onAddNew}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2"
+            className="bg-primary-color text-white px-4 py-2 rounded-lg  flex items-center space-x-2"
           >
             <Plus size={16} />
             <span>Add Bed</span>

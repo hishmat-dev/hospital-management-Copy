@@ -10,21 +10,21 @@ export default function ActionButtons({ doctorId }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         <button
           onClick={() => navigate(`/doctors/update/${doctorId}`)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          className="bg-primary-color text-white px-4 py-2 rounded-md  transition-colors"
         >
           Edit Profile
         </button>
         <button
           onClick={() => navigate(`/appointments/create?doctorId=${doctorId}`)}
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+          className=" px-4 py-2 border  rounded-md hover:bg-primary-color hover:text-white transition-colors"
         >
           View Appointments
         </button>
         <button
-          onClick={() => navigate(`/doctors/schedule/${doctorId}`)}
-          className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
+          onClick={() => navigate(`/laboratory/add`)}
+          className=" px-4 py-2 border rounded-md hover:bg-primary-color hover:text-white transition-colors"
         >
-          Manage Schedule
+          Order Lab Test
         </button>
       </div>
     </div>

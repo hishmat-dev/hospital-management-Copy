@@ -53,7 +53,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Patient Name</label>
+          <label className="block  font-medium text-gray-700 mb-2">Patient Name</label>
           <input
             type="text"
             name="patientName"
@@ -65,7 +65,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Patient Phone</label>
+          <label className="block  font-medium text-gray-700 mb-2">Patient Phone</label>
           <input
             type="tel"
             name="patientPhone"
@@ -77,7 +77,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Patient Email</label>
+          <label className="block  font-medium text-gray-700 mb-2">Patient Email</label>
           <input
             type="email"
             name="patientEmail"
@@ -89,7 +89,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Doctor Name</label>
+          <label className="block  font-medium text-gray-700 mb-2">Doctor Name</label>
           <input
             type="text"
             name="doctorName"
@@ -101,7 +101,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
+          <label className="block  font-medium text-gray-700 mb-2">Date</label>
           <input
             type="date"
             name="date"
@@ -113,7 +113,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Time</label>
+          <label className="block  font-medium text-gray-700 mb-2">Time</label>
           <input
             type="time"
             name="time"
@@ -125,7 +125,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+          <label className="block  font-medium text-gray-700 mb-2">Status</label>
           <select
             name="status"
             value={formData.status}
@@ -140,7 +140,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+          <label className="block  font-medium text-gray-700 mb-2">Type</label>
           <select
             name="type"
             value={formData.type}
@@ -156,7 +156,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Reason for Visit</label>
+        <label className="block  font-medium text-gray-700 mb-2">Reason for Visit</label>
         <textarea
           name="reason"
           value={formData.reason}
@@ -168,7 +168,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+        <label className="block  font-medium text-gray-700 mb-2">Notes</label>
         <textarea
           name="notes"
           value={formData.notes}
@@ -188,7 +188,7 @@ const AppointmentUpdateForm = ({ initialData, isUpdate = false }) => {
         <button
           type="button"
           onClick={() => navigate("/appointments/list")}
-          className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          className="bg-red-color text-white px-6 py-2 rounded-md focus:outline-none  "
         >
           Cancel
         </button>

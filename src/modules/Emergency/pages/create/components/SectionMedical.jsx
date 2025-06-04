@@ -3,11 +3,11 @@
 export default function SectionMedical({ formData, handleChange, errors }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Medical Assessment</h3>
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Medical Assessment</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Chief Complaint *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Chief Complaint *</label>
           <textarea
             name="complaint"
             required
@@ -19,11 +19,11 @@ export default function SectionMedical({ formData, handleChange, errors }) {
             }`}
             placeholder="Describe the main reason for emergency visit"
           />
-          {errors.complaint && <p className="text-red-500 text-xs mt-1">{errors.complaint}</p>}
+          {errors.complaint && <p className="text-red-500  mt-1">{errors.complaint}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Severity Level *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Severity Level *</label>
           <select
             name="severity"
             required
@@ -39,11 +39,11 @@ export default function SectionMedical({ formData, handleChange, errors }) {
             <option value="Medium">Medium - Prompt Care</option>
             <option value="Low">Low - Non-Urgent</option>
           </select>
-          {errors.severity && <p className="text-red-500 text-xs mt-1">{errors.severity}</p>}
+          {errors.severity && <p className="text-red-500  mt-1">{errors.severity}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Triage Level *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Triage Level *</label>
           <select
             name="triageLevel"
             required
@@ -60,11 +60,11 @@ export default function SectionMedical({ formData, handleChange, errors }) {
             <option value="Level 4">Level 4 - Less Urgent (60 min)</option>
             <option value="Level 5">Level 5 - Non-Urgent (120 min)</option>
           </select>
-          {errors.triageLevel && <p className="text-red-500 text-xs mt-1">{errors.triageLevel}</p>}
+          {errors.triageLevel && <p className="text-red-500  mt-1">{errors.triageLevel}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Mode of Arrival</label>
+          <label className="block  font-medium text-gray-700 mb-1">Mode of Arrival</label>
           <select
             name="modeOfArrival"
             value={formData.modeOfArrival}
@@ -82,7 +82,7 @@ export default function SectionMedical({ formData, handleChange, errors }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Referring Facility</label>
+          <label className="block  font-medium text-gray-700 mb-1">Referring Facility</label>
           <input
             type="text"
             name="referringFacility"
@@ -94,7 +94,7 @@ export default function SectionMedical({ formData, handleChange, errors }) {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Current Medications</label>
+          <label className="block  font-medium text-gray-700 mb-1">Current Medications</label>
           <textarea
             name="currentMedications"
             rows={2}
@@ -106,7 +106,7 @@ export default function SectionMedical({ formData, handleChange, errors }) {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Medical History</label>
+          <label className="block  font-medium text-gray-700 mb-1">Medical History</label>
           <textarea
             name="medicalHistory"
             rows={2}
@@ -118,7 +118,7 @@ export default function SectionMedical({ formData, handleChange, errors }) {
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Initial Assessment Notes</label>
+          <label className="block  font-medium text-gray-700 mb-1">Initial Assessment Notes</label>
           <textarea
             name="initialAssessment"
             rows={3}

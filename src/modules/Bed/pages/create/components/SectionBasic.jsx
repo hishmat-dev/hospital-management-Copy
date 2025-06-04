@@ -2,12 +2,12 @@
 
 export default function SectionBasic({ formData, handleChange, errors }) {
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Basic Information</h3>
+    <div className="space-y-2 text-[12px]">
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Basic Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Room Number *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Room Number *</label>
           <input
             type="text"
             name="roomNumber"
@@ -19,11 +19,11 @@ export default function SectionBasic({ formData, handleChange, errors }) {
             }`}
             placeholder="101"
           />
-          {errors.roomNumber && <p className="text-red-500 text-xs mt-1">{errors.roomNumber}</p>}
+          {errors.roomNumber && <p className="text-red-500  mt-1">{errors.roomNumber}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bed Number *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Bed Number *</label>
           <input
             type="text"
             name="bedNumber"
@@ -35,11 +35,11 @@ export default function SectionBasic({ formData, handleChange, errors }) {
             }`}
             placeholder="A"
           />
-          {errors.bedNumber && <p className="text-red-500 text-xs mt-1">{errors.bedNumber}</p>}
+          {errors.bedNumber && <p className="text-red-500  mt-1">{errors.bedNumber}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Floor *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Floor *</label>
           <select
             name="floor"
             required
@@ -57,11 +57,11 @@ export default function SectionBasic({ formData, handleChange, errors }) {
             <option value="4th Floor">4th Floor</option>
             <option value="5th Floor">5th Floor</option>
           </select>
-          {errors.floor && <p className="text-red-500 text-xs mt-1">{errors.floor}</p>}
+          {errors.floor && <p className="text-red-500  mt-1">{errors.floor}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Department *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Department *</label>
           <select
             name="department"
             required
@@ -81,11 +81,11 @@ export default function SectionBasic({ formData, handleChange, errors }) {
             <option value="Emergency">Emergency</option>
             <option value="Surgery">Surgery</option>
           </select>
-          {errors.department && <p className="text-red-500 text-xs mt-1">{errors.department}</p>}
+          {errors.department && <p className="text-red-500  mt-1">{errors.department}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bed Type *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Bed Type *</label>
           <select
             name="type"
             required
@@ -104,11 +104,11 @@ export default function SectionBasic({ formData, handleChange, errors }) {
             <option value="Isolation">Isolation</option>
             <option value="Emergency">Emergency</option>
           </select>
-          {errors.type && <p className="text-red-500 text-xs mt-1">{errors.type}</p>}
+          {errors.type && <p className="text-red-500  mt-1">{errors.type}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+          <label className="block  font-medium text-gray-700 mb-1">Status</label>
           <select
             name="status"
             value={formData.status}

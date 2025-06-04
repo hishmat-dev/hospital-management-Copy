@@ -7,12 +7,12 @@ export default function DoctorUpdate() {
   const navigate = useNavigate()
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 text-[12px]">
       {/* Header */}
-      <div className="bg-white shadow rounded-lg p-6">
+      <div className="bg-white shadow rounded-lg p-3">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Update Doctor Profile</h1>
+            <h1 className=" font-bold text-gray-900">Update Doctor Profile</h1>
             <p className="text-gray-600">Modify doctor information</p>
           </div>
           <button

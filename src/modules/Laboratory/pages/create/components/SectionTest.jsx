@@ -1,15 +1,67 @@
+// components/SectionTest.jsx
+import { useState } from "react";
+import { createConfig } from "../create.config"; // Import createConfig for testTypes
 
+export default function SectionTest({ formData, handleChange, errors, doctors = [], testCategories = [] }) {
+  const [doctorSuggestions, setDoctorSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-export default function SectionTest({ formData, handleChange, errors, doctors = [], testCategories = {} }) {
-  const selectedCategory = testCategories[formData.testType] || []
+  // Handle doctor name input and filter suggestions
+  const handleDoctorInput = (e) => {
+    const value = e.target.value;
+    handleChange({ target: { name: "orderingDoctor", value } });
+
+    // Filter doctors based on input
+    if (value.length > 0) {
+      const filteredDoctors = doctors.filter((doctor) =>
+        doctor.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setDoctorSuggestions(filteredDoctors);
+      setShowSuggestions(true);
+    } else {
+      setDoctorSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  // Handle suggestion selection
+  const handleSelectDoctor = (doctor) => {
+    handleChange({ target: { name: "orderingDoctor", value: doctor.name } });
+    setDoctorSuggestions([]);
+    setShowSuggestions(false);
+  };
+
+  // Get test types for the selected category
+  const selectedTestTypes = createConfig.testTypes[formData.testCategory] || [];
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Test Information</h3>
+      <h3 className="font-semibold text-gray-900 border-b pb-2">Test Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Test Category *</label>
+          <label className="block font-medium text-gray-700 mb-1">Test Category *</label>
+          <select
+            name="testCategory"
+            required
+            value={formData.testCategory}
+            onChange={handleChange}
+            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              errors.testCategory ? "border-red-500" : "border-gray-300"
+            }`}
+          >
+            <option value="">Select Test Category</option>
+            {testCategories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+          {errors.testCategory && <p className="text-red-500 mt-1">{errors.testCategory}</p>}
+        </div>
+
+        <div>
+          <label className="block font-medium text-gray-700 mb-1">Specific Test *</label>
           <select
             name="testType"
             required
@@ -19,79 +71,68 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
               errors.testType ? "border-red-500" : "border-gray-300"
             }`}
           >
-            <option value="">Select Test Category</option>
-            <option value="Blood Test">Blood Test</option>
-            <option value="Radiology">Radiology</option>
-            <option value="Pathology">Pathology</option>
-            <option value="Microbiology">Microbiology</option>
-            <option value="Cardiology">Cardiology</option>
-            <option value="Biochemistry">Biochemistry</option>
-            <option value="Hematology">Hematology</option>
-            <option value="Immunology">Immunology</option>
-          </select>
-          {errors.testType && <p className="text-red-500 text-xs mt-1">{errors.testType}</p>}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Specific Test *</label>
-          <select
-            name="testName"
-            required
-            value={formData.testName}
-            onChange={handleChange}
-            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              errors.testName ? "border-red-500" : "border-gray-300"
-            }`}
-          >
             <option value="">Select Test</option>
-            {selectedCategory.map((test) => (
+            {selectedTestTypes.map((test) => (
               <option key={test} value={test}>
                 {test}
               </option>
             ))}
             <option value="Custom">Custom Test</option>
           </select>
-          {errors.testName && <p className="text-red-500 text-xs mt-1">{errors.testName}</p>}
+          {errors.testType && <p className="text-red-500 mt-1">{errors.testType}</p>}
         </div>
 
-        {formData.testName === "Custom" && (
+        {formData.testType === "Custom" && (
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Custom Test Name *</label>
+            <label className="block font-medium text-gray-700 mb-1">Custom Test Name *</label>
             <input
               type="text"
               name="customTestName"
               required
               placeholder="Enter custom test name"
-              value={formData.customTestName}
+              value={formData.customTestName || ""}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
+            {errors.customTestName && <p className="text-red-500 mt-1">{errors.customTestName}</p>}
           </div>
         )}
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Ordered By *</label>
-          <select
-            name="orderedBy"
-            required
-            value={formData.orderedBy}
-            onChange={handleChange}
+        <div className="relative">
+          <label className="block font-medium text-gray-700 mb-1">Ordered By *</label>
+          <input
+            type="text"
+            name="orderingDoctor"
+            value={formData.orderingDoctor}
+            onChange={handleDoctorInput}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              errors.orderedBy ? "border-red-500" : "border-gray-300"
+              errors.orderingDoctor ? "border-red-500" : "border-gray-300"
             }`}
-          >
-            <option value="">Select Doctor</option>
-            {doctors.map((doctor) => (
-              <option key={doctor.id} value={doctor.name}>
-                {doctor.name} - {doctor.specialty}
-              </option>
-            ))}
-          </select>
-          {errors.orderedBy && <p className="text-red-500 text-xs mt-1">{errors.orderedBy}</p>}
+            placeholder="Start typing doctor name..."
+            required
+          />
+          {errors.orderingDoctor && (
+            <p className="text-red-500 mt-1">{errors.orderingDoctor}</p>
+          )}
+          {showSuggestions && doctorSuggestions.length > 0 && (
+            <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-auto">
+              {doctorSuggestions.map((doctor) => (
+                <li
+                  key={doctor.id}
+                  onClick={() => handleSelectDoctor(doctor)}
+                  className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                >
+                  {doctor.name} - {doctor.specialty}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Priority *</label>
+          <label className="block font-medium text-gray-700 mb-1">Priority *</label>
           <select
             name="priority"
             required
@@ -101,16 +142,17 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
               errors.priority ? "border-red-500" : "border-gray-300"
             }`}
           >
-            <option value="Normal">Normal</option>
-            <option value="Urgent">Urgent</option>
-            <option value="STAT">STAT (Immediate)</option>
-            <option value="Routine">Routine</option>
+            {createConfig.priorities.map((priority) => (
+              <option key={priority} value={priority}>
+                {priority}
+              </option>
+            ))}
           </select>
-          {errors.priority && <p className="text-red-500 text-xs mt-1">{errors.priority}</p>}
+          {errors.priority && <p className="text-red-500 mt-1">{errors.priority}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Sample Type</label>
+          <label className="block font-medium text-gray-700 mb-1">Sample Type</label>
           <select
             name="sampleType"
             value={formData.sampleType}
@@ -118,21 +160,20 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="">Select Sample Type</option>
-            <option value="Blood">Blood</option>
-            <option value="Urine">Urine</option>
-            <option value="Stool">Stool</option>
-            <option value="Saliva">Saliva</option>
-            <option value="Tissue">Tissue</option>
-            <option value="Swab">Swab</option>
+            {createConfig.sampleTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
             <option value="Other">Other</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Expected Duration</label>
+          <label className="block font-medium text-gray-700 mb-1">Expected Duration</label>
           <select
             name="expectedDuration"
-            value={formData.expectedDuration}
+            value={formData.expectedDuration || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
@@ -147,11 +188,11 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Clinical Information</label>
+          <label className="block font-medium text-gray-700 mb-1">Clinical Information</label>
           <textarea
             name="clinicalInfo"
             rows={3}
-            value={formData.clinicalInfo}
+            value={formData.clinicalInfo || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="Relevant clinical history, symptoms, or diagnosis"
@@ -159,11 +200,11 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         </div>
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Special Instructions</label>
+          <label className="block font-medium text-gray-700 mb-1">Special Instructions</label>
           <textarea
-            name="instructions"
+            name="specialInstructions"
             rows={2}
-            value={formData.instructions}
+            value={formData.specialInstructions || ""}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="Any special instructions for sample collection or processing"
@@ -171,5 +212,5 @@ export default function SectionTest({ formData, handleChange, errors, doctors = 
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -33,9 +33,9 @@ export default function BedList() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 text-[12px]">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Bed Management</h1>
+        <h1 className=" font-bold text-gray-900">Bed Management</h1>
       </div>
 
       <StatsCards occupancyStats={occupancyStats} />

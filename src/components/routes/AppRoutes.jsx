@@ -5,10 +5,11 @@ import Dashboard from "../pages/Dashboard"
 import { PatientCreate, PatientListing, PatientDetail, PatientUpdate } from "../../modules/Patient"
 import { DoctorCreate, DoctorListing, DoctorDetail, DoctorUpdate } from "../../modules/Doctor"
 import { AppointmentCreate, AppointmentListing, AppointmentDetail, AppointmentUpdate } from "../../modules/Appointment"
-import { BedCreate, BedListing, BedDetail, BedUpdate } from "../../modules/Bed"
+import { BedCreate, BedListing, BedDetail, BedUpdate, BedAssign } from "../../modules/Bed"
 import { LaboratoryCreate, LaboratoryListing, LaboratoryDetail, LaboratoryUpdate } from "../../modules/Laboratory"
 import { EmergencyCreate, EmergencyListing, EmergencyDetail, EmergencyUpdate } from "../../modules/Emergency"
 import { NursingCreate, NursingListing, NursingDetail, NursingUpdate } from "../../modules/Nursing"
+import CBC from "../../modules/Laboratory/pages/update/Templetes/CBC"
 
 export default function AppRoutes() {
   return (
@@ -40,7 +41,7 @@ export default function AppRoutes() {
       {/* Bed Management - Modular */}
       <Route path="/beds/list" element={<BedListing />} />
       <Route path="/beds/add" element={<BedCreate />} />
-      <Route path="/beds/assign" element={<BedCreate />} />
+      <Route path="/beds/assign/:id" element={<BedAssign/>} />
       <Route path="/beds/detail/:id" element={<BedDetail />} />
       <Route path="/beds/update/:id" element={<BedUpdate />} />
 
@@ -49,6 +50,7 @@ export default function AppRoutes() {
       <Route path="/laboratory/add" element={<LaboratoryCreate />} />
       <Route path="/laboratory/detail/:id" element={<LaboratoryDetail />} />
       <Route path="/laboratory/update/:id" element={<LaboratoryUpdate />} />
+      <Route path="/laboratory/templete/CBC" element={<CBC/>} />
 
       {/* Emergency - Modular */}
       <Route path="/emergency/queue" element={<EmergencyListing />} />

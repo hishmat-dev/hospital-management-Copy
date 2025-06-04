@@ -1,5 +1,3 @@
-
-
 import { useState, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -12,6 +10,7 @@ export const useAppointmentCreate = () => {
   const navigate = useNavigate()
   const { patients } = useSelector((state) => state.patients)
   const { doctors } = useSelector((state) => state.doctors)
+  const { appointments } = useSelector((state) => state.appointments)
 
   const [formData, setFormData] = useState(createConfig.initialFormData)
   const [errors, setErrors] = useState({})
@@ -52,6 +51,24 @@ export const useAppointmentCreate = () => {
       e.preventDefault()
 
       const { errors: validationErrors, isValid } = validateAppointmentForm(formData)
+      
+      // Check for appointment clash
+      const hasClash = appointments.some(
+        (appointment) =>
+          appointment.doctorId === formData.doctorId &&
+          appointment.date === formData.date &&
+          appointment.time === formData.time &&
+          appointment.status !== "Cancelled"
+      )
+
+      if (hasClash) {
+        setErrors((prev) => ({
+          ...prev,
+          time: "This time slot is already booked for the selected doctor.",
+        }))
+        return
+      }
+
       setErrors(validationErrors)
 
       if (!isValid) return
@@ -70,6 +87,8 @@ export const useAppointmentCreate = () => {
           createdAt: new Date().toISOString(),
         }
 
+        // console.log(appointmentData)
+        alert("Appoinment created")
         await dispatch(createAppointment(appointmentData)).unwrap()
         navigate("/appointments/list")
       } catch (error) {
@@ -78,7 +97,7 @@ export const useAppointmentCreate = () => {
         setLoading(false)
       }
     },
-    [formData, dispatch, navigate, patients, doctors],
+    [formData, dispatch, navigate, patients, doctors, appointments],
   )
 
   const handleCancel = useCallback(() => {

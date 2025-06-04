@@ -1,90 +1,107 @@
-
-
-import { useState, useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { createLabTest } from "../../action/slice"
-import { validateLabTestForm, validateField } from "./create.validation"
-import { createConfig } from "./create.config"
+// create.hooks.js
+import { useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createLabTest } from "../../action/slice";
+import { validateLabTestForm, validateField } from "./create.validation";
+import { createConfig } from "./create.config";
 
 export const useLaboratoryCreate = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { patients } = useSelector((state) => state.patients)
-  const { doctors } = useSelector((state) => state.doctors)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { patients } = useSelector((state) => state.patients);
+  const { doctors } = useSelector((state) => state.doctors);
 
-  const [formData, setFormData] = useState(createConfig.initialFormData)
-  const [errors, setErrors] = useState({})
-  const [loading, setLoading] = useState(false)
+  const [formData, setFormData] = useState({
+    ...createConfig.initialFormData,
+    customTestName: "",
+    clinicalInfo: "",
+    expectedDuration: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = useCallback(
     (e) => {
-      const { name, value } = e.target
+      const { name, value } = e.target;
 
-      // Auto-populate patient details when patient is selected
-      if (name === "patientId") {
-        const selectedPatient = patients.find((p) => p.id === value)
-        setFormData((prev) => ({
-          ...prev,
-          [name]: value,
-          patientName: selectedPatient?.name || "",
-          patientAge: selectedPatient?.age || "",
-          patientGender: selectedPatient?.gender || "",
-        }))
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: value,
-        }))
-      }
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
 
       // Real-time validation
-      const fieldError = validateField(name, value, formData)
+      const fieldError = validateField(name, value, formData);
       setErrors((prev) => ({
         ...prev,
         [name]: fieldError,
-      }))
+      }));
     },
-    [formData, patients],
-  )
+    [formData]
+  );
 
   const handleSubmit = useCallback(
     async (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      const { errors: validationErrors, isValid } = validateLabTestForm(formData)
-      setErrors(validationErrors)
+      // Validate patientName by checking if it matches a valid patient
+      const selectedPatient = patients.find((p) => p.name === formData.patientName);
+      if (!selectedPatient) {
+        setErrors((prev) => ({
+          ...prev,
+          patientName: "Please select a valid patient from the suggestions",
+        }));
+        return;
+      }
 
-      if (!isValid) return
+      // Validate orderingDoctor
+      const selectedDoctor = doctors.find((d) => d.name === formData.orderingDoctor);
+      if (!selectedDoctor) {
+        setErrors((prev) => ({
+          ...prev,
+          orderingDoctor: "Please select a valid doctor from the suggestions",
+        }));
+        return;
+      }
 
-      setLoading(true)
+      const updatedFormData = {
+        ...formData,
+        patientId: selectedPatient.id, // Ensure patientId is set
+      };
+
+      const { errors: validationErrors, isValid } = validateLabTestForm(updatedFormData);
+      setErrors(validationErrors);
+
+      if (!isValid) return;
+
+      setLoading(true);
       try {
         const labTestData = {
-          ...formData,
+          ...updatedFormData,
           id: `L-${Date.now()}`,
           status: "Pending",
           results: null,
           reportDate: null,
           technician: null,
           createdAt: new Date().toISOString(),
-        }
+        };
 
-        await dispatch(createLabTest(labTestData)).unwrap()
-        navigate("/laboratory/list")
+        await dispatch(createLabTest(labTestData)).unwrap();
+        navigate("/laboratory/list");
       } catch (error) {
-        console.error("Error creating lab test:", error)
+        console.error("Error creating lab test:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     },
-    [formData, dispatch, navigate],
-  )
+    [formData, dispatch, navigate, patients, doctors]
+  );
 
   const handleCancel = useCallback(() => {
-    navigate("/laboratory/list")
-  }, [navigate])
+    navigate("/laboratory/list");
+  }, [navigate]);
 
-  const { isValid } = validateLabTestForm(formData)
+  const { isValid } = validateLabTestForm(formData);
 
   return {
     formData,
@@ -92,9 +109,10 @@ export const useLaboratoryCreate = () => {
     loading,
     patients,
     doctors,
-    isValid,
+    testCategories: createConfig.testCategories,
     handleChange,
     handleSubmit,
     handleCancel,
-  }
-}
+    isValid,
+  };
+};

@@ -5,7 +5,7 @@ export default function FilterBar({ filters, onFilterChange, onExport, onAddNew,
   return (
     <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold text-gray-900 flex items-center space-x-2">
+        <h2 className=" font-semibold text-gray-900 flex items-center space-x-2">
           <Filter size={20} />
           <span>Appointment Filters</span>
         </h2>
@@ -19,7 +19,7 @@ export default function FilterBar({ filters, onFilterChange, onExport, onAddNew,
           </button>
           <button
             onClick={onAddNew}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2"
+            className="bg-primary-color text-white px-4 py-2 rounded-lg  flex items-center space-x-2"
           >
             <Plus size={16} />
             <span>Book Appointment</span>

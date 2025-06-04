@@ -2,11 +2,11 @@
 
 export default function SectionPersonal({ formData, handleInputChange, errors }) {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+    <div className="bg-white rounded-lg shadow p-3">
+      <h3 className=" font-semibold text-gray-900 mb-4">Personal Information</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Full Name *</label>
           <input
             type="text"
             name="name"
@@ -17,11 +17,11 @@ export default function SectionPersonal({ formData, handleInputChange, errors })
             }`}
             placeholder="Enter full name"
           />
-          {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+          {errors.name && <p className="text-red-500  mt-1">{errors.name}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Date of Birth *</label>
           <input
             type="date"
             name="dateOfBirth"
@@ -31,11 +31,11 @@ export default function SectionPersonal({ formData, handleInputChange, errors })
               errors.dateOfBirth ? "border-red-500" : "border-gray-300"
             }`}
           />
-          {errors.dateOfBirth && <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth}</p>}
+          {errors.dateOfBirth && <p className="text-red-500  mt-1">{errors.dateOfBirth}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Gender *</label>
           <select
             name="gender"
             value={formData.gender || ""}
@@ -49,7 +49,7 @@ export default function SectionPersonal({ formData, handleInputChange, errors })
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
-          {errors.gender && <p className="text-red-500 text-xs mt-1">{errors.gender}</p>}
+          {errors.gender && <p className="text-red-500  mt-1">{errors.gender}</p>}
         </div>
       </div>
     </div>

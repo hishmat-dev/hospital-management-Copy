@@ -1,8 +1,8 @@
-
-import SectionPatient from "./components/SectionPatient"
-import SectionTest from "./components/SectionTest"
-import Btn from "./components/Btn"
-import { useLaboratoryCreate } from "./create.hooks"
+// LaboratoryCreateForm.jsx
+import SectionPatient from "./components/SectionPatient";
+import SectionTest from "./components/SectionTest";
+import Btn from "./components/Btn";
+import { useLaboratoryCreate } from "./create.hooks";
 
 export default function LaboratoryCreateForm() {
   const {
@@ -16,15 +16,20 @@ export default function LaboratoryCreateForm() {
     handleSubmit,
     handleCancel,
     isValid,
-  } = useLaboratoryCreate()
+  } = useLaboratoryCreate();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 text-[12px]">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Order New Lab Test</h1>
+        <h1 className="font-bold text-gray-900 mb-6">Order New Lab Test</h1>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          <SectionPatient formData={formData} handleChange={handleChange} errors={errors} patients={patients} />
+          <SectionPatient
+            formData={formData}
+            handleChange={handleChange}
+            errors={errors}
+            patients={patients}
+          />
 
           <SectionTest
             formData={formData}
@@ -38,5 +43,5 @@ export default function LaboratoryCreateForm() {
         </form>
       </div>
     </div>
-  )
+  );
 }
