@@ -61,18 +61,6 @@ const initialState = {
           prescription: "Diabetes management.",
         },
         {
-          patientId: "P-2002",
-          patientName: "Areeba Tariq",
-          visitDate: "2025-01-23",
-          visitTime: "3:00 PM",
-          consultingDoctor: "Dr. Elina Akhtar",
-          department: "Cardiology",
-          feePaid: 0,
-          paymentStatus: "Unpaid",
-          appointmentStatus: "Waiting",
-          prescription: "Hypertension.",
-        },
-        {
           patientId: "P-2003",
           patientName: "Bilal Ahmed",
           visitDate: "2025-01-24",

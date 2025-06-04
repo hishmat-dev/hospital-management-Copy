@@ -1,7 +1,8 @@
 import FilterBar from "./components/FilterBar"
-import ListItem from "./components/ListItem"
+import ReusableTable from "../../../../components/ui/SharedTable"
 import { usePatientListing } from "./listing.hooks"
 import { listingConfig } from "./listing.config"
+import { User, Calendar, Phone, Mail } from "lucide-react"
 
 export default function PatientList() {
   const {
@@ -16,8 +17,71 @@ export default function PatientList() {
     handleExport,
     handleAddNew,
     getStatusColor,
-  handleResetFilters,
+    handleResetFilters,
   } = usePatientListing()
+
+  const headers = [
+    { key: "patient", label: "Patient" },
+    { key: "age", label: "Age" },
+    { key: "gender", label: "Gender" },
+    { key: "department", label: "Department" },
+    { key: "contact", label: "Contact" },
+    { key: "admission", label: "Admission" },
+    { key: "status", label: "Status" },
+    { key: "actions", label: "Actions" },
+  ]
+
+  const renderCell = (key, patient) => {
+    switch (key) {
+      case "patient":
+        return (
+          <div className="flex items-center">
+            <div className="flex-shrink-0 h-10 w-10">
+              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                <User className="h-5 w-5 text-blue-600" />
+              </div>
+            </div>
+            <div className="ml-4">
+              <div className="font-medium text-gray-900">{patient.name}</div>
+              <div className="text-gray-500">{patient.id}</div>
+            </div>
+          </div>
+        )
+      case "age":
+        return <span className="text-gray-900">{patient.age} years</span>
+      case "department":
+        return (
+          <>
+            <div className="text-gray-900">{patient.department}</div>
+            <div className="text-gray-500">{patient.doctor}</div>
+          </>
+        )
+      case "contact":
+        return (
+          <>
+            <div className="flex items-center text-gray-500">
+              <Phone className="h-4 w-4 mr-1" />
+              {patient.phone}
+            </div>
+            {patient.email && (
+              <div className="flex items-center text-gray-500 mt-1">
+                <Mail className="h-4 w-4 mr-1" />
+                {patient.email}
+              </div>
+            )}
+          </>
+        )
+      case "admission":
+        return (
+          <div className="flex items-center text-gray-500">
+            <Calendar className="h-4 w-4 mr-1" />
+            {patient.admissionDate}
+          </div>
+        )
+      default:
+        return null
+    }
+  }
 
   if (loading) {
     return (
@@ -42,78 +106,23 @@ export default function PatientList() {
         onResetFilters={handleResetFilters}
       />
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 text-[12px]">
-            <thead className="bg-primary-color">
-              <tr>
-                <th className="px-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Patient
-                </th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">Age</th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Gender
-                </th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Department
-                </th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Contact
-                </th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Admission
-                </th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-3 py-3 text-left  font-medium text-white uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200 text-[12px] ">
-              {patients.map((patient) => (
-                <ListItem
-                  key={patient.id}
-                  patient={patient}
-                  onView={handleView}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                  getStatusColor={getStatusColor}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {patients.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-gray-400 text-lg mb-2">No patients found</div>
-          <div className="text-white">Try adjusting your search criteria</div>
-        </div>
-      )}
-
-      {/* Pagination */}
-      {pagination.total > pagination.limit && (
-        <div className="flex justify-between items-center bg-white px-3 py-3 rounded-lg shadow-md">
-          <div className="text-sm text-gray-700">
-            Showing {(pagination.page - 1) * pagination.limit + 1} to{" "}
-            {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} results
-          </div>
-          <div className="flex space-x-2">
-            <button disabled={pagination.page === 1} className="px-3 py-1 border rounded disabled:opacity-50">
-              Previous
-            </button>
-            <button
-              disabled={pagination.page * pagination.limit >= pagination.total}
-              className="px-3 py-1 border rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
+      <ReusableTable
+        headers={headers}
+        data={patients}
+        onView={handleView}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        getStatusColor={getStatusColor}
+        renderCell={renderCell}
+        keyField="id"
+        pagination={{
+          page: pagination.page,
+          limit: pagination.limit,
+          total: pagination.total,
+          onPageChange: (page) => pagination.onChange?.(page),
+          onLimitChange: (limit) => pagination.onChange?.(pagination.page, limit),
+        }}
+      />
     </div>
   )
 }

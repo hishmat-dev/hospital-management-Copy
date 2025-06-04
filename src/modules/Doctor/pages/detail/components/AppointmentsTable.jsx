@@ -39,12 +39,12 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
     const updatedAppointments = appointments.map((appointment) =>
       appointment.key === key ? { ...appointment, appointmentStatus: value } : appointment
     );
-    console.log(`Status changed for appointment ${key}: ${value}`);
+    // console.log(`Status changed for appointment ${key}: ${value}`);
     setAppointments(updatedAppointments);
     onStatusChange?.(key, value, doctor?.id);
   };
 
-  console.log("AppointmentsTable rendered with appointments:", appointments);
+  // console.log("AppointmentsTable rendered with appointments:", appointments);
   const columns = [
     {
       title: "#",
@@ -158,7 +158,7 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
             <EyeOutlined />
           </button>
           <button
-            onClick={() => console.log(`Delete appointment ${record.key}`)}
+            // onClick={() => console.log(`Delete appointment ${record.key}`)}
             className="text-red-600 hover:text-red-800"
           >
             <DeleteOutlined />

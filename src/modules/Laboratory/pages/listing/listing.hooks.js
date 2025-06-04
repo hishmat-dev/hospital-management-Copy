@@ -88,7 +88,7 @@ export const useLaboratoryListing = () => {
   }, [labTests])
 
   const handleAddNew = useCallback(() => {
-    navigate("/laboratory/order")
+    navigate("/laboratory/add")
   }, [navigate])
 
   const getStatusColor = useCallback((status) => {

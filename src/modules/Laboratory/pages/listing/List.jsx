@@ -1,9 +1,12 @@
-import { Table, Button, Select, Space } from 'antd'
-import { Eye, Edit, Trash2, Download, Calendar, Clock, User, Stethoscope, AlertCircle } from 'lucide-react'
-import FilterBar from './components/FilterBar'
-import StatsCards from './components/StatsCards'
-import { useLaboratoryListing } from './listing.hooks'
-import { listingConfig } from './listing.config'
+import FilterBar from "./components/FilterBar"
+import StatsCards from "./components/StatsCards"
+import ReusableTable from "../../../../components/ui/SharedTable"
+import { useLaboratoryListing } from "./listing.hooks"
+import { listingConfig } from "./listing.config"
+import { Eye, Edit, Trash2, Download, Calendar, Clock, User, Stethoscope, AlertCircle } from "lucide-react"
+import { Select } from "antd"
+
+const { Option } = Select
 
 export default function LaboratoryList() {
   const {
@@ -21,146 +24,131 @@ export default function LaboratoryList() {
     handleExport,
     handleAddNew,
     getStatusColor,
-    // getTypeColor,
     getPriorityColor,
   } = useLaboratoryListing()
 
-  const columns = [
-    
-    {
-      title: 'Patient',
-      key: 'patient',
-      width: 100,
-      render: (_, record) => (
-        <div className="flex items-center">
-          
-          <div className="">
-            <div className="text-sm text-gray-900">{record.patientName}</div>
-            <div className="text-xs text-gray-500">{record.patientId}</div>
+  const headers = [
+    { key: "patient", label: "Patient" },
+    { key: "testDetails", label: "Test Details" },
+    { key: "orderedBy", label: "Ordered By" },
+    { key: "dates", label: "Dates" },
+    { key: "priority", label: "Priority" },
+    { key: "status", label: "Status" },
+    { key: "actions", label: "Actions" },
+  ]
+
+  const renderCell = (key, record) => {
+    switch (key) {
+      case "patient":
+        return (
+          <div className="flex items-center">
+            <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+              <User className="h-5 w-5 text-blue-600" />
+            </div>
+            <div className="ml-4">
+              <div className=" text-gray-900">{record.patientName}</div>
+              <div className="text-xs text-gray-500">{record.patientId}</div>
+            </div>
           </div>
-        </div>
-      ),
-    },
-    {
-      title: 'Test Details',
-      key: 'testDetails',
-      width: 120,
-      render: (_, record) => (
-        <div>
-          <div className="text-sm text-gray-900">{record.testName}</div>
-          <div className="flex items-center space-x-1 mt-1">
-            <span className={`px-2 py-1 rounded-full text-xs ${record.testType}`}>
-              {record.testType}
+        )
+      case "testDetails":
+        return (
+          <div>
+            <div className=" text-gray-900">{record.testName}</div>
+            <div className="flex items-center space-x-1 mt-1">
+              <span className={`px-2 py-1 rounded-full text-xs ${record.testType}`}>
+                {record.testType}
+              </span>
+            </div>
+          </div>
+        )
+      case "orderedBy":
+        return (
+          <div className="flex items-center">
+            <Stethoscope className="h-4 w-4 text-gray-400 mr-2" />
+            <div className=" text-gray-900">{record.orderedBy}</div>
+          </div>
+        )
+      case "dates":
+        return (
+          <div>
+            <div className="flex items-center  text-gray-900">
+              <Calendar className="h-4 w-4 mr-1" />
+              {record.orderDate}
+            </div>
+            {record.reportDate && (
+              <div className="flex items-center text-xs text-gray-500 mt-1">
+                <Clock className="h-4 w-4 mr-1" />
+                Report: {record.reportDate}
+              </div>
+            )}
+          </div>
+        )
+      case "priority":
+        return (
+          <div className="flex items-center space-x-1">
+            <AlertCircle className="h-4 w-4 text-gray-400" />
+            <span className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(record.priority)}`}>
+              {record.priority}
             </span>
           </div>
-        </div>
-      ),
-    },
-    {
-      title: 'Ordered By',
-      key: 'orderedBy',
-      width: 150,
-      render: (_, record) => (
-        <div className="flex items-center">
-          <Stethoscope className="h-4 w-4 text-gray-400 mr-2" />
-          <div className="text-sm text-gray-900">{record.orderedBy}</div>
-        </div>
-      ),
-    },
-    {
-      title: 'Dates',
-      key: 'dates',
-      width: 120,
-      render: (_, record) => (
-        <div>
-          <div className="flex items-center text-sm text-gray-900">
-            <Calendar className="h-4 w-4 mr-1" />
-            {record.orderDate}
+        )
+      case "status":
+        return (
+          <Select
+            value={record.status}
+            onChange={(value) => handleStatusChange(record.id, value)}
+            className={`w-full max-w-[120px]  ${getStatusColor(record.status)}`}
+            popupClassName="text-xs"
+            bordered={false}
+            getPopupContainer={(trigger) => trigger.parentNode}
+          >
+            {["Pending", "Sample Collected", "In Progress", "Completed", "Cancelled"].map((status) => (
+              <Option key={status} value={status}>
+                {status}
+              </Option>
+            ))}
+          </Select>
+        )
+      case "actions":
+        return (
+          <div className="flex gap-1">
+            <button
+              onClick={() => handleView(record)}
+              className="text-blue-600 hover:text-blue-900"
+              title="View Details"
+            >
+              <Eye size={12} />
+            </button>
+            <button
+              onClick={() => handleEdit(record)}
+              className="text-green-600 hover:text-green-900"
+              title="Edit Test"
+            >
+              <Edit size={12} />
+            </button>
+            {record.status === "Completed" && (
+              <button
+                onClick={() => handleDownloadReport(record.id)}
+                className="text-purple-600 hover:text-purple-900"
+                title="Download Report"
+              >
+                <Download size={12} />
+              </button>
+            )}
+            <button
+              onClick={() => handleDelete(record.id)}
+              className="text-red-600 hover:text-red-900"
+              title="Cancel Test"
+            >
+              <Trash2 size={12} />
+            </button>
           </div>
-          {record.reportDate && (
-            <div className="flex items-center text-xs text-gray-500 mt-1">
-              <Clock className="h-4 w-4 mr-1" />
-              Report: {record.reportDate}
-            </div>
-          )}
-        </div>
-      ),
-    },
-    {
-      title: 'Priority',
-      key: 'priority',
-      width: 100,
-      render: (_, record) => (
-        <div className="flex items-center space-x-1">
-          <AlertCircle className="h-4 w-4 text-gray-400" />
-          <span className={`px-2 py-1 rounded-full text-xs ${getPriorityColor(record.priority)}`}>
-            {record.priority}
-          </span>
-        </div>
-      ),
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      width: 120,
-      render: (status, record) => (
-        <Select
-          value={status}
-          onChange={(value) => handleStatusChange(record.id, value)}
-          className="w-full max-w-[120px]"
-          popupClassName="text-xs"
-          options={[
-            { value: 'Pending', label: 'Pending' },
-            { value: 'Sample Collected', label: 'Sample Collected' },
-            { value: 'In Progress', label: 'In Progress' },
-            { value: 'Completed', label: 'Completed' },
-            { value: 'Cancelled', label: 'Cancelled' },
-          ]}
-          getPopupContainer={(trigger) => trigger.parentNode}
-        />
-      ),
-    },
-    {
-      title: 'Actions',
-      key: 'actions',
-      width: 120,
-      render: (_, record) => (
-        <Space size="middle" className="flex gap-1 ">
-          <Button
-            type="text"
-            icon={<Eye size={12} />}
-            onClick={() => handleView(record)}
-            className="text-blue-600 hover:text-blue-900 "
-            title="View Details"
-          />
-          <Button
-            type="text"
-            icon={<Edit size={12} />}
-            onClick={() => handleEdit(record)}
-            className="text-green-600 hover:text-green-900"
-            title="Edit Test"
-          />
-          {record.status === 'Completed' && (
-            <Button
-              type="text"
-              icon={<Download size={12} />}
-              onClick={() => handleDownloadReport(record.id)}
-              className="text-purple-600 hover:text-purple-900"
-              title="Download Report"
-            />
-          )}
-          <Button
-            type="text"
-            icon={<Trash2 size={12} />}
-            onClick={() => handleDelete(record.id)}
-            className="text-red-600 hover:text-red-900"
-            title="Cancel Test"
-          />
-        </Space>
-      ),
-    },
-  ]
+        )
+      default:
+        return null
+    }
+  }
 
   if (loading) {
     return (
@@ -188,24 +176,23 @@ export default function LaboratoryList() {
         priorities={listingConfig.priorities}
       />
 
-      <div className="bg-white rounded-lg shadow-md">
-        <Table
-          columns={columns}
-          dataSource={labTests}
-          rowKey="id"
-          pagination={pagination}
-          className="text-sm"
-          scroll={{  y: 'calc(100vh - 300px)' }}
-          responsive
-        />
-      </div>
-
-      {labTests.length === 0 && (
-        <div className="text-center py-10">
-          <div className="text-gray-400 text-base mb-2">No lab tests found</div>
-          <div className="text-gray-500 text-sm">Try adjusting your search criteria</div>
-        </div>
-      )}
+      <ReusableTable
+        headers={headers}
+        data={labTests}
+        onView={handleView}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        getStatusColor={getStatusColor}
+        renderCell={renderCell}
+        keyField="id"
+        pagination={{
+          page: pagination.page,
+          limit: pagination.limit,
+          total: pagination.total,
+          onPageChange: (page) => pagination.onChange?.(page),
+          onLimitChange: (limit) => pagination.onChange?.(pagination.page, limit),
+        }}
+      />
     </div>
   )
 }

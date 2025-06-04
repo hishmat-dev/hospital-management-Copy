@@ -21,10 +21,10 @@ export default function ActionButtons({ doctorId }) {
           View Appointments
         </button>
         <button
-          onClick={() => navigate(`/doctors/schedule/${doctorId}`)}
+          onClick={() => navigate(`/laboratory/add`)}
           className=" px-4 py-2 border rounded-md hover:bg-primary-color hover:text-white transition-colors"
         >
-          Manage Schedule
+          Order Lab Test
         </button>
       </div>
     </div>

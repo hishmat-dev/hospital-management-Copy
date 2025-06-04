@@ -1,4 +1,3 @@
-"use client"
 import { Activity, Clock, User, AlertTriangle, Heart, Thermometer, Eye, Edit } from "lucide-react"
 
 export default function VitalsCard({ vital, onView, onEdit, getAlertColor }) {

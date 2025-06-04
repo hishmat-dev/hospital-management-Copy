@@ -1,5 +1,3 @@
-
-
 import { useEffect, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -9,6 +7,7 @@ import {
   updateAppointment,
   setSelectedAppointment,
   setFilters,
+  setPagination,
 } from "../../action/slice"
 import { listingHelper } from "./listing.helper"
 
@@ -19,12 +18,13 @@ export const useAppointmentListing = () => {
   const { appointments, loading, filters, pagination } = useSelector((state) => state.appointments)
 
   useEffect(() => {
-    dispatch(fetchAppointments({ ...filters, ...pagination }))
-  }, [dispatch, filters, pagination])
+    dispatch(fetchAppointments({ ...filters, page: pagination.page, limit: pagination.limit }))
+  }, [dispatch, filters, pagination.page, pagination.limit])
 
   const handleFilterChange = useCallback(
     (key, value) => {
       dispatch(setFilters({ [key]: value }))
+      dispatch(setPagination({ page: 1 }))
     },
     [dispatch],
   )
@@ -70,8 +70,13 @@ export const useAppointmentListing = () => {
   )
 
   const handleExport = useCallback(() => {
-    listingHelper.exportToCSV(appointments)
-  }, [appointments])
+    // Fetch all appointments for export
+    dispatch(fetchAppointments({ ...filters, page: 1, limit: pagination.total })).then((action) => {
+      if (action.meta.requestStatus === "fulfilled") {
+        listingHelper.exportToCSV(action.payload.data)
+      }
+    })
+  }, [dispatch, filters, pagination.total])
 
   const handleAddNew = useCallback(() => {
     navigate("/appointments/book")
@@ -89,7 +94,12 @@ export const useAppointmentListing = () => {
     appointments,
     filters,
     loading,
-    pagination,
+    pagination: {
+      ...pagination,
+      onChange: (page, limit) => {
+        dispatch(setPagination({ page, limit: limit !== undefined ? limit : pagination.limit }))
+      },
+    },
     handleFilterChange,
     handleView,
     handleEdit,
