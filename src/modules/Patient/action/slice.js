@@ -44,6 +44,7 @@ const initialState = {
     emergencyContact: "Amina Shaikh - +92-301-7654321",
     insurance: "State Life Insurance",
     allergies: ["Penicillin", "Shellfish"],
+    recentVisit:"2025-01-22",
     visits: [
       {
         visitDate: "2025-01-22",
@@ -86,6 +87,7 @@ const initialState = {
     emergencyContact: "Tariq Mehmood - +92-334-5556789",
     insurance: "EFU HealthCare",
     allergies: ["None"],
+    recentVisit:"2025-01-22",
     visits: [
       {
         visitDate: "2025-01-12",
@@ -126,6 +128,7 @@ const initialState = {
     emergencyContact: "Hina Ahmed - +92-300-9988776",
     insurance: "Jubilee Life",
     allergies: ["Dust", "Pollen"],
+    recentVisit:"2025-01-25",
     visits: [
       {
         visitDate: "2025-01-25",
@@ -166,6 +169,7 @@ const initialState = {
     emergencyContact: "Iqbal Baloch - +92-312-3344556",
     insurance: "Adamjee Health",
     allergies: ["Latex"],
+    recentVisit:"2025-01-20",
     visits: [
       {
         visitDate: "2025-01-20",

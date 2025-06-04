@@ -12,7 +12,7 @@ export default function FilterBar({ filters, onFilterChange, onExport, onAddNew,
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 space-y-4 text-[12px]">
+    <div className="bg-white rounded-lg shadow-md p-3 space-y-4 text-[12px]">
       <div className="flex justify-between items-center">
         <h2 className="text-sm font-semibold text-gray-900">Patient Filters</h2>
         <div className="flex space-x-2">
