@@ -4,11 +4,10 @@ import {
   UserCheck,
   Calendar,
   Bed,
-  Stethoscope,
   FlaskRoundIcon as Flask,
-  FileText,
   AlertTriangle,
   Activity,
+  Settings,
 } from "lucide-react"
 
 export const menu = [
@@ -74,5 +73,10 @@ export const menu = [
       { title: "Add Vitals", path: "/nursing/add" },
       { title: "Vitals Tracking", path: "/nursing/vitals" },
     ],
+  },
+  {
+    title: "Administrative",
+    icon: <Settings size={18} />,
+    children: [{ title: "Lab Report Template", path: "/admin/lab-templates" }],
   },
 ]
