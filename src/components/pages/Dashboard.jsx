@@ -7,9 +7,9 @@ import { useBedListing } from "../../modules/Bed/pages/listing/listing.hooks";
 import StatsCards from "../../modules/Bed/pages/listing/components/StatsCards"
 import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
-  
+
   const navigate = useNavigate();
-  const { stats , specialties , recentPatients  } = useSelector((state) => state.dashboard || {});
+  const { stats, specialties, recentPatients } = useSelector((state) => state.dashboard || {});
 
   // Dispatch thunks when the component mounts
 
@@ -85,10 +85,10 @@ export default function Dashboard() {
       ),
     },
   ];
-  const {occupancyStats} = useBedListing()
-  
+  const { occupancyStats } = useBedListing()
+
   const handleAppointmentList = () => {
-    navigate("/appointments/list") 
+    navigate("/appointments/list")
   }
   return (
 
@@ -102,12 +102,12 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-        <StatCard icon={<Users />} title="Total Patients" value={stats.totalPatients}  />
-        <StatCard icon={<Calendar />} title="Today's Appointments" value={stats.todaysAppointments}  onClick={handleAppointmentList} />
-        <StatCard icon={<Bed />} title="Available Beds" value={stats.availableBeds}  />
-        <StatCard icon={<UserCheck />} title="Doctors On Duty" value={stats.doctorsOnDuty}  />
-        <StatCard icon={<AlertTriangle />} title="Emergency Cases" value={stats.emergencyCases}  />
-        <StatCard icon={<Activity />} title="Surgeries Today" value={stats.surgeriesToday}  />
+        <StatCard icon={<Users />} title="Total Patients" value={stats.totalPatients} />
+        <StatCard icon={<Calendar />} title="Today's Appointments" value={stats.todaysAppointments} onClick={handleAppointmentList} />
+        <StatCard icon={<Bed />} title="Available Beds" value={stats.availableBeds} />
+        <StatCard icon={<UserCheck />} title="Doctors On Duty" value={stats.doctorsOnDuty} />
+        <StatCard icon={<AlertTriangle />} title="Emergency Cases" value={stats.emergencyCases} />
+        <StatCard icon={<Activity />} title="Surgeries Today" value={stats.surgeriesToday} />
       </div>
 
       <StatsCards occupancyStats={occupancyStats} />
@@ -126,17 +126,21 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Patients */}
-        <div className="bg-white rounded-lg shadow-md p-3">
-          <h2 className="font-bold text-gray-900 mb-4">Recent Patients</h2>
-          <Table
-            columns={patientColumns}
-            dataSource={recentPatients}
-            rowKey={(record, index) => index} // Use index as key since no unique key is provided
-            pagination={false}
-            className="ant-table-custom"
-          />
+        <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 md:p-6">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Recent Patients</h2>
+          <div className="overflow-x-auto">
+            <Table
+              columns={patientColumns}
+              dataSource={recentPatients}
+              rowKey={(record, index) => index}
+              pagination={false}
+              className="ant-table-custom"
+              scroll={{ x: "max-content" }} // Enable horizontal scrolling on small screens
+            />
+          </div>
         </div>
+
       </div>
-    </div>
+    </div >
   );
 }

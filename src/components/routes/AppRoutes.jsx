@@ -88,7 +88,7 @@ export default function AppRoutes() {
       <Route path="/beds/list" element={<BedList />} />
       <Route path="/beds/detail/:id" element={<BedDetail />} />
       <Route path="/beds/update/:id" element={<BedUpdate />} />
-      <Route path="/beds/assign" element={<BedAssign />} />
+      <Route path="/beds/assign/:id" element={<BedAssign />} />
 
       {/* Laboratory Management Routes */}
       <Route path="/laboratory/add" element={<LaboratoryCreate />} />
