@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
@@ -32,7 +32,7 @@ export default function ViewTemplate() {
     return (
       <div className="text-center py-12">
         <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-        <h3 className="text-lg font-medium text-gray-900 mb-2">Template not found</h3>
+        <h3 className=" font-medium text-gray-900 mb-2">Template not found</h3>
         <button
           onClick={() => navigate("/admin/lab-templates")}
           className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
@@ -66,21 +66,21 @@ export default function ViewTemplate() {
         {/* Template Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
+            <h3 className=" font-semibold text-gray-900 mb-4">Basic Information</h3>
             <div className="space-y-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Template Name</label>
+                <label className="block  font-medium text-gray-700">Template Name</label>
                 <p className="text-gray-900">{template.name}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Category</label>
-                <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
+                <label className="block  font-medium text-gray-700">Category</label>
+                <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800  rounded-full">
                   {template.category}
                 </span>
               </div>
               {template.description && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Description</label>
+                  <label className="block  font-medium text-gray-700">Description</label>
                   <p className="text-gray-900">{template.description}</p>
                 </div>
               )}
@@ -88,19 +88,19 @@ export default function ViewTemplate() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Template Statistics</h3>
+            <h3 className=" font-semibold text-gray-900 mb-4">Template Statistics</h3>
             <div className="space-y-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Total Parameters</label>
+                <label className="block  font-medium text-gray-700">Total Parameters</label>
                 <p className="text-gray-900">{template.parameters?.length || 0}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Created Date</label>
+                <label className="block  font-medium text-gray-700">Created Date</label>
                 <p className="text-gray-900">{new Date(template.createdAt).toLocaleDateString()}</p>
               </div>
               {template.updatedAt && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Last Updated</label>
+                  <label className="block  font-medium text-gray-700">Last Updated</label>
                   <p className="text-gray-900">{new Date(template.updatedAt).toLocaleDateString()}</p>
                 </div>
               )}
@@ -110,18 +110,18 @@ export default function ViewTemplate() {
 
         {/* Parameters Table */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Test Parameters</h3>
+          <h3 className=" font-semibold text-gray-900 mb-4">Test Parameters</h3>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
                     Parameter Name
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
                     Unit
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
                     Normal Range
                   </th>
                 </tr>
@@ -129,9 +129,9 @@ export default function ViewTemplate() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {template.parameters?.map((parameter, index) => (
                   <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{parameter.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{parameter.unit}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{parameter.normalRange}</td>
+                    <td className="px-6 py-4 whitespace-nowrap  font-medium text-gray-900">{parameter.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap  text-gray-500">{parameter.unit}</td>
+                    <td className="px-6 py-4 whitespace-nowrap  text-gray-500">{parameter.normalRange}</td>
                   </tr>
                 ))}
               </tbody>

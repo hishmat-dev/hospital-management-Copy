@@ -1,20 +1,21 @@
-"use client"
+
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { fetchLabTemplates, deleteLabTemplate } from "../../../action/slice"
+import { fetchLabTemplates, fetchLabCategories, deleteLabTemplate } from "../../../action/slice"
 import { Plus, Eye, Edit, Trash2, FileText } from "lucide-react"
 
 export default function TemplateList() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { labTemplates, loading } = useSelector((state) => state.administrative)
+  const { labTemplates, labCategories, loading } = useSelector((state) => state.administrative)
   const [searchTerm, setSearchTerm] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
 
   useEffect(() => {
     dispatch(fetchLabTemplates())
+    dispatch(fetchLabCategories())
   }, [dispatch])
 
   const handleDelete = async (id) => {
@@ -25,11 +26,14 @@ export default function TemplateList() {
 
   const filteredTemplates = labTemplates.filter((template) => {
     const matchesSearch = template.name.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = !categoryFilter || template.category === categoryFilter
+    const matchesCategory = !categoryFilter || template.categoryId === categoryFilter
     return matchesSearch && matchesCategory
   })
 
-  const categories = [...new Set(labTemplates.map((t) => t.category))].filter(Boolean)
+  const getCategoryName = (categoryId) => {
+    const category = labCategories.find((cat) => cat.id === categoryId)
+    return category ? category.name : labTemplates.find((t) => t.categoryId === categoryId)?.category || "Unknown"
+  }
 
   if (loading) {
     return (
@@ -46,7 +50,7 @@ export default function TemplateList() {
           <h1 className="text-xl font-bold text-gray-900">Lab Report Templates</h1>
           <button
             onClick={() => navigate("/admin/lab-templates/create")}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md  transition-colors"
           >
             <Plus size={16} />
             Create Template
@@ -74,11 +78,13 @@ export default function TemplateList() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">All Categories</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
+              {labCategories
+                .filter((cat) => cat.isActive)
+                .map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
             </select>
           </div>
         </div>
@@ -96,7 +102,7 @@ export default function TemplateList() {
             {!searchTerm && !categoryFilter && (
               <button
                 onClick={() => navigate("/admin/lab-templates/create")}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md  transition-colors"
               >
                 <Plus size={16} />
                 Create Template
@@ -105,57 +111,65 @@ export default function TemplateList() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredTemplates.map((template) => (
-              <div
-                key={template.id}
-                className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{template.name}</h3>
-                    <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                      {template.category}
-                    </span>
-                  </div>
-                </div>
+            {filteredTemplates.map((template) => {
+              const categoryName = getCategoryName(template.categoryId)
+              const category = labCategories.find((cat) => cat.id === template.categoryId)
 
-                {template.description && (
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{template.description}</p>
-                )}
-
-                <div className="text-sm text-gray-500 mb-4">
-                  <span className="font-medium">{template.parameters?.length || 0}</span> parameters
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => navigate(`/admin/lab-templates/view/${template.id}`)}
-                      className="text-blue-600 hover:text-blue-800"
-                      title="View Template"
-                    >
-                      <Eye size={16} />
-                    </button>
-                    <button
-                      onClick={() => navigate(`/admin/lab-templates/edit/${template.id}`)}
-                      className="text-green-600 hover:text-green-800"
-                      title="Edit Template"
-                    >
-                      <Edit size={16} />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(template.id)}
-                      className="text-red-600 hover:text-red-800"
-                      title="Delete Template"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+              return (
+                <div
+                  key={template.id}
+                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-1">{template.name}</h3>
+                      <span
+                        className="inline-block px-2 py-1 text-xs rounded-full text-white"
+                        style={{ backgroundColor: category?.color || "#3B82F6" }}
+                      >
+                        {categoryName}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="text-xs text-gray-400">{new Date(template.createdAt).toLocaleDateString()}</div>
+                  {template.description && (
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">{template.description}</p>
+                  )}
+
+                  <div className="text-sm text-gray-500 mb-4">
+                    <span className="font-medium">{template.parameters?.length || 0}</span> parameters
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => navigate(`/admin/lab-templates/view/${template.id}`)}
+                        className="text-blue-600 hover:text-blue-800"
+                        title="View Template"
+                      >
+                        <Eye size={16} />
+                      </button>
+                      <button
+                        onClick={() => navigate(`/admin/lab-templates/edit/${template.id}`)}
+                        className="text-green-600 hover:text-green-800"
+                        title="Edit Template"
+                      >
+                        <Edit size={16} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(template.id)}
+                        className="text-red-600 hover:text-red-800"
+                        title="Delete Template"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+
+                    <div className="text-xs text-gray-400">{new Date(template.createdAt).toLocaleDateString()}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </div>

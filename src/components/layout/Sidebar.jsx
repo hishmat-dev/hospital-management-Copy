@@ -1,21 +1,21 @@
-"use client"
 
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react"
 import { menu } from "./menu"
-import { fetchLabTemplates } from "../../modules/Administrative/action/slice"
+import { fetchLabTemplates, fetchLabCategories } from "../../modules/Administrative/action/slice"
 
 export default function Sidebar() {
   const [openMenus, setOpenMenus] = useState({})
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const location = useLocation()
   const dispatch = useDispatch()
-  const { labTemplates } = useSelector((state) => state.administrative)
+  const { labTemplates, labCategories } = useSelector((state) => state.administrative)
 
   useEffect(() => {
     dispatch(fetchLabTemplates())
+    dispatch(fetchLabCategories())
   }, [dispatch])
 
   const toggleMenu = (title) => {
@@ -33,19 +33,39 @@ export default function Sidebar() {
     return children?.some((child) => location.pathname === child.path)
   }
 
-  // Enhanced menu with dynamic lab templates
+  // Enhanced menu with dynamic lab templates grouped by categories
   const enhancedMenu = menu.map((item) => {
     if (item.title === "Administrative") {
-      return {
-        ...item,
-        children: [
-          ...item.children,
-          ...labTemplates.map((template) => ({
+      const templatesByCategory = {}
+
+      // Group templates by category
+      labTemplates.forEach((template) => {
+        const category = labCategories.find((cat) => cat.id === template.categoryId)
+        const categoryName = category ? category.name : template.category || "Uncategorized"
+
+        if (!templatesByCategory[categoryName]) {
+          templatesByCategory[categoryName] = []
+        }
+        templatesByCategory[categoryName].push(template)
+      })
+
+      const enhancedChildren = [
+        ...item.children,
+        // Add category groups with their templates
+        ...Object.entries(templatesByCategory).map(([categoryName, templates]) => ({
+          title: `${categoryName} Templates`,
+          isCategory: true,
+          children: templates.map((template) => ({
             title: template.name,
             path: `/admin/lab-templates/view/${template.id}`,
             isTemplate: true,
           })),
-        ],
+        })),
+      ]
+
+      return {
+        ...item,
+        children: enhancedChildren,
       }
     }
     return item
@@ -95,24 +115,55 @@ export default function Sidebar() {
                   {openMenus[item.title] && (
                     <div className="ml-6 mt-1 space-y-1">
                       {item.children.map((child, childIndex) => (
-                        <Link
-                          key={childIndex}
-                          to={child.path}
-                          onClick={() => setIsMobileOpen(false)}
-                          className={`
-                            block p-1 rounded transition-colors duration-200 ${
-                              child.isTemplate ? "pl-4 text-xs text-blue-600" : ""
-                            }
-                            ${
-                              isActive(child.path)
-                                ? "bg-gray-300 text-gray-900 font-medium"
-                                : "text-gray-900 hover:bg-gray-300"
-                            }
-                          `}
-                        >
-                          {child.isTemplate && "📋 "}
-                          {child.title}
-                        </Link>
+                        <div key={childIndex}>
+                          {child.isCategory ? (
+                            <div>
+                              <button
+                                onClick={() => toggleMenu(child.title)}
+                                className="w-full flex items-center justify-between p-1 text-left rounded transition-colors duration-200 text-purple-600 hover:bg-purple-50"
+                              >
+                                <span className="text-xs font-medium">📁 {child.title}</span>
+                                {openMenus[child.title] ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+                              </button>
+                              {openMenus[child.title] && (
+                                <div className="ml-4 mt-1 space-y-1">
+                                  {child.children.map((template, templateIndex) => (
+                                    <Link
+                                      key={templateIndex}
+                                      to={template.path}
+                                      onClick={() => setIsMobileOpen(false)}
+                                      className={`
+                                        block p-1 pl-4 rounded transition-colors duration-200 text-xs text-blue-600
+                                        ${
+                                          isActive(template.path)
+                                            ? "bg-blue-100 text-blue-900 font-medium"
+                                            : "hover:bg-blue-50"
+                                        }
+                                      `}
+                                    >
+                                      📋 {template.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <Link
+                              to={child.path}
+                              onClick={() => setIsMobileOpen(false)}
+                              className={`
+                                block p-1 rounded transition-colors duration-200
+                                ${
+                                  isActive(child.path)
+                                    ? "bg-gray-300 text-gray-900 font-medium"
+                                    : "text-gray-900 hover:bg-gray-300"
+                                }
+                              `}
+                            >
+                              {child.title}
+                            </Link>
+                          )}
+                        </div>
                       ))}
                     </div>
                   )}

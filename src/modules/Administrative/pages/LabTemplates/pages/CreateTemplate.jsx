@@ -1,29 +1,34 @@
-"use client"
 
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { createLabTemplate } from "../../../action/slice"
+import { createLabTemplate, fetchLabCategories } from "../../../action/slice"
 import { Plus, Trash2, Save, X } from "lucide-react"
 
 export default function CreateLabTemplate() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { labCategories } = useSelector((state) => state.administrative)
   const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    category: "",
+    categoryId: "",
     parameters: [
       {
         name: "",
         unit: "",
         normalRange: "",
-        observedValue: "", // This will be empty initially
+        observedValue: "",
       },
     ],
   })
+
+  useEffect(() => {
+    dispatch(fetchLabCategories())
+  }, [dispatch])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -72,7 +77,14 @@ export default function CreateLabTemplate() {
     setLoading(true)
 
     try {
-      await dispatch(createLabTemplate(formData)).unwrap()
+      // Get category name for the template
+      const selectedCategory = labCategories.find((cat) => cat.id === formData.categoryId)
+      const templateData = {
+        ...formData,
+        category: selectedCategory?.name || "",
+      }
+
+      await dispatch(createLabTemplate(templateData)).unwrap()
       navigate("/admin/lab-templates")
     } catch (error) {
       console.error("Error creating template:", error)
@@ -111,23 +123,33 @@ export default function CreateLabTemplate() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
               <select
-                name="category"
-                value={formData.category}
+                name="categoryId"
+                value={formData.categoryId}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select Category</option>
-                <option value="Hematology">Hematology</option>
-                <option value="Biochemistry">Biochemistry</option>
-                <option value="Microbiology">Microbiology</option>
-                <option value="Immunology">Immunology</option>
-                <option value="Pathology">Pathology</option>
-                <option value="Radiology">Radiology</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Endocrinology">Endocrinology</option>
+                {labCategories
+                  .filter((cat) => cat.isActive)
+                  .map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name} ({category.code})
+                    </option>
+                  ))}
               </select>
+              {labCategories.length === 0 && (
+                <p className="text-sm text-gray-500 mt-1">
+                  No categories available.{" "}
+                  <button
+                    type="button"
+                    onClick={() => navigate("/admin/lab-categories/create")}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
+                    Create one first
+                  </button>
+                </p>
+              )}
             </div>
           </div>
 
@@ -227,8 +249,8 @@ export default function CreateLabTemplate() {
             </button>
             <button
               type="submit"
-              disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md  transition-colors disabled:opacity-50"
+              disabled={loading || labCategories.length === 0}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
               <Save size={16} />
               {loading ? "Creating..." : "Create Template"}

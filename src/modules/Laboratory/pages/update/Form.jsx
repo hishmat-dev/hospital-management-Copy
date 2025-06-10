@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -159,11 +159,11 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
 
         {[
           // ["Test Type", "testType", ["Blood Test", "Urine Test", "X-Ray", "CT Scan", "MRI", "ECG", "Ultrasound"]],
-          [
-            "Category",
-            "category",
-            ["Hematology", "Biochemistry", "Microbiology", "Radiology", "Cardiology", "Pathology"],
-          ],
+          // [
+          //   "Category",
+          //   "category",
+          //   ["Hematology", "Biochemistry", "Microbiology", "Radiology", "Cardiology", "Pathology"],
+          // ],
           ["Priority", "priority", ["low", "normal", "high", "urgent"]],
           ["Status", "status", ["pending", "in-progress", "completed", "cancelled"]],
         ].map(([label, name, options]) => (

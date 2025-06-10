@@ -1,16 +1,14 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchLabTemplates, updateLabTemplate } from "../../../action/slice"
+import { fetchLabTemplates, updateLabTemplate, fetchLabCategories } from "../../../action/slice"
 import { Plus, Trash2, Save, X, ArrowLeft } from "lucide-react"
 
 export default function EditTemplate() {
   const { id } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { labTemplates, loading } = useSelector((state) => state.administrative)
+  const { labTemplates, labCategories, loading } = useSelector((state) => state.administrative)
   const [formLoading, setFormLoading] = useState(false)
 
   const template = labTemplates.find((t) => t.id === id)
@@ -33,7 +31,10 @@ export default function EditTemplate() {
     if (!labTemplates.length) {
       dispatch(fetchLabTemplates())
     }
-  }, [dispatch, labTemplates.length])
+    if (!labCategories.length) {
+      dispatch(fetchLabCategories())
+    }
+  }, [dispatch, labTemplates.length, labCategories.length])
 
   useEffect(() => {
     if (template) {
@@ -174,11 +175,11 @@ export default function EditTemplate() {
                 required
               >
                 <option value="">Select Category</option>
-                <option value="Hematology">Hematology</option>
-                <option value="Biochemistry">Biochemistry</option>
-                <option value="Microbiology">Microbiology</option>
-                <option value="Immunology">Immunology</option>
-                <option value="Pathology">Pathology</option>
+                {labCategories.map((category) => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

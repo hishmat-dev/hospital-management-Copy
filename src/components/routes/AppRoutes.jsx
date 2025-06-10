@@ -44,7 +44,13 @@ import NursingList from "../../modules/Nursing/pages/listing"
 import NursingDetail from "../../modules/Nursing/pages/detail"
 import NursingUpdate from "../../modules/Nursing/pages/update"
 
-// Administrative Management
+// Administrative Management - Lab Categories
+import CategoryList from "../../modules/Administrative/pages/LabCategories/CategoryList"
+import CreateCategory from "../../modules/Administrative/pages/LabCategories/CreateCategory"
+import ViewCategory from "../../modules/Administrative/pages/LabCategories/ViewCategory"
+import EditCategory from "../../modules/Administrative/pages/LabCategories/EditCategory"
+
+// Administrative Management - Lab Templates
 import TemplateList from "../../modules/Administrative/pages/LabTemplates/pages/TemplateList"
 import CreateTemplate from "../../modules/Administrative/pages/LabTemplates/pages/CreateTemplate"
 import ViewTemplate from "../../modules/Administrative/pages/LabTemplates/pages/ViewTemplate"
@@ -102,7 +108,13 @@ export default function AppRoutes() {
       <Route path="/nursing/detail/:id" element={<NursingDetail />} />
       <Route path="/nursing/update/:id" element={<NursingUpdate />} />
 
-      {/* Administrative Routes */}
+      {/* Administrative Routes - Lab Categories */}
+      <Route path="/admin/lab-categories" element={<CategoryList />} />
+      <Route path="/admin/lab-categories/create" element={<CreateCategory />} />
+      <Route path="/admin/lab-categories/view/:id" element={<ViewCategory />} />
+      <Route path="/admin/lab-categories/edit/:id" element={<EditCategory />} />
+
+      {/* Administrative Routes - Lab Templates */}
       <Route path="/admin/lab-templates" element={<TemplateList />} />
       <Route path="/admin/lab-templates/create" element={<CreateTemplate />} />
       <Route path="/admin/lab-templates/view/:id" element={<ViewTemplate />} />

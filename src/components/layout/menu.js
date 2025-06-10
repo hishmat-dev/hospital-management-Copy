@@ -46,7 +46,6 @@ export const menu = [
     children: [
       { title: "Add Bed", path: "/beds/add" },
       { title: "Bed List", path: "/beds/list" },
-      // { title: "Assign Bed", path: "/beds/assign" },
     ],
   },
   {
@@ -55,7 +54,6 @@ export const menu = [
     children: [
       { title: "Add Lab Test", path: "/laboratory/add" },
       { title: "Lab Reports", path: "/laboratory/reports" },
-      // { title: "CBC Templete", path: "/laboratory/templete/CBC" },
     ],
   },
   {
@@ -77,6 +75,9 @@ export const menu = [
   {
     title: "Administrative",
     icon: <Settings size={18} />,
-    children: [{ title: "Lab Report Template", path: "/admin/lab-templates" }],
+    children: [
+      { title: "Lab Categories", path: "/admin/lab-categories" },
+      { title: "Lab Templates", path: "/admin/lab-templates" },
+    ],
   },
 ]

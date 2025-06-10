@@ -1,8 +1,61 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-// Mock API calls - replace with actual API endpoints
+// Lab Categories API calls
+export const fetchLabCategories = createAsyncThunk("administrative/fetchLabCategories", async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const categories = JSON.parse(localStorage.getItem("labCategories") || "[]")
+      resolve(categories)
+    }, 500)
+  })
+})
+
+export const createLabCategory = createAsyncThunk("administrative/createLabCategory", async (categoryData) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const categories = JSON.parse(localStorage.getItem("labCategories") || "[]")
+      const newCategory = {
+        ...categoryData,
+        id: Date.now().toString(),
+        createdAt: new Date().toISOString(),
+      }
+      categories.push(newCategory)
+      localStorage.setItem("labCategories", JSON.stringify(categories))
+      resolve(newCategory)
+    }, 500)
+  })
+})
+
+export const updateLabCategory = createAsyncThunk(
+  "administrative/updateLabCategory",
+  async ({ id, ...categoryData }) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const categories = JSON.parse(localStorage.getItem("labCategories") || "[]")
+        const index = categories.findIndex((c) => c.id === id)
+        if (index !== -1) {
+          categories[index] = { ...categories[index], ...categoryData, updatedAt: new Date().toISOString() }
+          localStorage.setItem("labCategories", JSON.stringify(categories))
+          resolve(categories[index])
+        }
+      }, 500)
+    })
+  },
+)
+
+export const deleteLabCategory = createAsyncThunk("administrative/deleteLabCategory", async (id) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const categories = JSON.parse(localStorage.getItem("labCategories") || "[]")
+      const filteredCategories = categories.filter((c) => c.id !== id)
+      localStorage.setItem("labCategories", JSON.stringify(filteredCategories))
+      resolve(id)
+    }, 500)
+  })
+})
+
+// Lab Templates API calls
 export const fetchLabTemplates = createAsyncThunk("administrative/fetchLabTemplates", async () => {
-  // Simulate API call
   return new Promise((resolve) => {
     setTimeout(() => {
       const templates = JSON.parse(localStorage.getItem("labTemplates") || "[]")
@@ -58,6 +111,7 @@ export const deleteLabTemplate = createAsyncThunk("administrative/deleteLabTempl
 const administrativeSlice = createSlice({
   name: "administrative",
   initialState: {
+    labCategories: [],
     labTemplates: [],
     loading: false,
     error: null,
@@ -69,7 +123,55 @@ const administrativeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch templates
+      // Lab Categories
+      .addCase(fetchLabCategories.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(fetchLabCategories.fulfilled, (state, action) => {
+        state.loading = false
+        state.labCategories = action.payload
+      })
+      .addCase(fetchLabCategories.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+      })
+      .addCase(createLabCategory.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(createLabCategory.fulfilled, (state, action) => {
+        state.loading = false
+        state.labCategories.push(action.payload)
+      })
+      .addCase(createLabCategory.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+      })
+      .addCase(updateLabCategory.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(updateLabCategory.fulfilled, (state, action) => {
+        state.loading = false
+        const index = state.labCategories.findIndex((c) => c.id === action.payload.id)
+        if (index !== -1) {
+          state.labCategories[index] = action.payload
+        }
+      })
+      .addCase(updateLabCategory.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+      })
+      .addCase(deleteLabCategory.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(deleteLabCategory.fulfilled, (state, action) => {
+        state.loading = false
+        state.labCategories = state.labCategories.filter((c) => c.id !== action.payload)
+      })
+      .addCase(deleteLabCategory.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+      })
+      // Lab Templates
       .addCase(fetchLabTemplates.pending, (state) => {
         state.loading = true
       })
@@ -81,7 +183,6 @@ const administrativeSlice = createSlice({
         state.loading = false
         state.error = action.error.message
       })
-      // Create template
       .addCase(createLabTemplate.pending, (state) => {
         state.loading = true
       })
@@ -93,7 +194,6 @@ const administrativeSlice = createSlice({
         state.loading = false
         state.error = action.error.message
       })
-      // Update template
       .addCase(updateLabTemplate.pending, (state) => {
         state.loading = true
       })
@@ -108,7 +208,6 @@ const administrativeSlice = createSlice({
         state.loading = false
         state.error = action.error.message
       })
-      // Delete template
       .addCase(deleteLabTemplate.pending, (state) => {
         state.loading = true
       })
