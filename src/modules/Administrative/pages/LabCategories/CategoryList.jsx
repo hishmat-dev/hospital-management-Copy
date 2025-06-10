@@ -37,7 +37,7 @@ export default function CategoryList() {
     <div className="space-y-6 text-[12px]">
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-xl font-bold text-gray-900">Lab Categories</h1>
+          <h1 className=" font-bold text-gray-900">Lab Categories</h1>
           <button
             onClick={() => navigate("/admin/lab-categories/create")}
             className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
@@ -87,7 +87,7 @@ export default function CategoryList() {
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
-                    <span className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                    <span className="inline-block px-2 py-1 bg-green-100 text-green-800  rounded-full">
                       {category.code}
                     </span>
                   </div>
@@ -122,7 +122,7 @@ export default function CategoryList() {
                     </button>
                   </div>
 
-                  <div className="text-xs text-gray-400">{new Date(category.createdAt).toLocaleDateString()}</div>
+                  <div className=" text-gray-400">{new Date(category.createdAt).toLocaleDateString()}</div>
                 </div>
               </div>
             ))}
