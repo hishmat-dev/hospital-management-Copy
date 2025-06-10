@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchLabTemplates } from "../../action/slice"
+import { fetchLabTemplates } from "../../../action/slice"
 import { ArrowLeft, Edit, FileText } from "lucide-react"
 
 export default function ViewTemplate() {

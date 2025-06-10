@@ -155,7 +155,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
         ))}
 
         {[
-          ["Test Type", "testType", ["Blood Test", "Urine Test", "X-Ray", "CT Scan", "MRI", "ECG", "Ultrasound"]],
+          // ["Test Type", "testType", ["Blood Test", "Urine Test", "X-Ray", "CT Scan", "MRI", "ECG", "Ultrasound"]],
           [
             "Category",
             "category",
@@ -187,7 +187,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
       {/* Template Selection */}
       {formData.testType && availableTemplates.length > 0 && (
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Select Template *</label>
+          <label className="block font-medium text-gray-700 mb-2">Test Type *</label>
           <select
             name="selectedTemplate"
             value={formData.selectedTemplate}

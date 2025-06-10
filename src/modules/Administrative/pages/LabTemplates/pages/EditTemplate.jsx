@@ -1,15 +1,19 @@
 "use client"
 
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { createLabTemplate } from "../../action/slice"
-import { Plus, Trash2, Save, X } from "lucide-react"
+import { useState, useEffect } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchLabTemplates, updateLabTemplate } from "../../../action/slice"
+import { Plus, Trash2, Save, X, ArrowLeft } from "lucide-react"
 
-export default function CreateLabTemplate() {
+export default function EditTemplate() {
+  const { id } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
+  const { labTemplates, loading } = useSelector((state) => state.administrative)
+  const [formLoading, setFormLoading] = useState(false)
+
+  const template = labTemplates.find((t) => t.id === id)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,10 +24,34 @@ export default function CreateLabTemplate() {
         name: "",
         unit: "",
         normalRange: "",
-        observedValue: "", // This will be empty initially
+        observedValue: "",
       },
     ],
   })
+
+  useEffect(() => {
+    if (!labTemplates.length) {
+      dispatch(fetchLabTemplates())
+    }
+  }, [dispatch, labTemplates.length])
+
+  useEffect(() => {
+    if (template) {
+      setFormData({
+        name: template.name || "",
+        description: template.description || "",
+        category: template.category || "",
+        parameters: template.parameters || [
+          {
+            name: "",
+            unit: "",
+            normalRange: "",
+            observedValue: "",
+          },
+        ],
+      })
+    }
+  }, [template])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -69,15 +97,15 @@ export default function CreateLabTemplate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
+    setFormLoading(true)
 
     try {
-      await dispatch(createLabTemplate(formData)).unwrap()
+      await dispatch(updateLabTemplate({ id, ...formData })).unwrap()
       navigate("/admin/lab-templates")
     } catch (error) {
-      console.error("Error creating template:", error)
+      console.error("Error updating template:", error)
     } finally {
-      setLoading(false)
+      setFormLoading(false)
     }
   }
 
@@ -85,11 +113,39 @@ export default function CreateLabTemplate() {
     navigate("/admin/lab-templates")
   }
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+      </div>
+    )
+  }
+
+  if (!template) {
+    return (
+      <div className="text-center py-12">
+        <h3 className="text-lg font-medium text-gray-900 mb-2">Template not found</h3>
+        <button
+          onClick={() => navigate("/admin/lab-templates")}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+        >
+          <ArrowLeft size={16} />
+          Back to Templates
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6 text-[12px]">
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-xl font-bold text-gray-900">Create Lab Report Template</h1>
+          <div className="flex items-center gap-4">
+            <button onClick={() => navigate("/admin/lab-templates")} className="text-gray-600 hover:text-gray-800">
+              <ArrowLeft size={20} />
+            </button>
+            <h1 className="text-xl font-bold text-gray-900">Edit Lab Report Template</h1>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -223,11 +279,11 @@ export default function CreateLabTemplate() {
             </button>
             <button
               type="submit"
-              disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md  transition-colors disabled:opacity-50"
+              disabled={formLoading}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
               <Save size={16} />
-              {loading ? "Creating..." : "Create Template"}
+              {formLoading ? "Updating..." : "Update Template"}
             </button>
           </div>
         </form>

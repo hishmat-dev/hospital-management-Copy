@@ -45,10 +45,10 @@ import NursingDetail from "../../modules/Nursing/pages/detail"
 import NursingUpdate from "../../modules/Nursing/pages/update"
 
 // Administrative Management
-import TemplateList from "../../modules/Administrative/pages/LabTemplates/TemplateList"
-import CreateTemplate from "../../modules/Administrative/pages/LabTemplates/CreateTemplate"
-import ViewTemplate from "../../modules/Administrative/pages/LabTemplates/ViewTemplate"
-import EditTemplate from "../../modules/Administrative/pages/LabTemplates/EditTemplate"
+import TemplateList from "../../modules/Administrative/pages/LabTemplates/pages/TemplateList"
+import CreateTemplate from "../../modules/Administrative/pages/LabTemplates/pages/CreateTemplate"
+import ViewTemplate from "../../modules/Administrative/pages/LabTemplates/pages/ViewTemplate"
+import EditTemplate from "../../modules/Administrative/pages/LabTemplates/pages/EditTemplate"
 
 export default function AppRoutes() {
   return (
