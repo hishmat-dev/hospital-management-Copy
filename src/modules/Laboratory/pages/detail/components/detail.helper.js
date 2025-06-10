@@ -36,20 +36,22 @@ export const detailHelper = {
             if (labInfo.logoUrl && labInfo.logoUrl.startsWith("data:image")) {
                 console.log("Adding logo to PDF with data URL:", labInfo.logoUrl.substring(0, 50) + "...");
                 doc.addImage(labInfo.logoUrl, 'PNG', currentX, leftStartY, 30, 25); // Logo
-                currentX += 35; // Move past logo (30 width + 5 margin)
+                currentX += 28; // Move past logo (30 width + 5 margin)
             } else {
                 console.warn("No valid logo data URL available, skipping logo addition. Logo URL:", labInfo.logoUrl);
             }
             doc.setFontSize(20);
-            doc.text(labInfo.name, currentX, leftStartY + 5, { align: "left" }); // Name beside logo, vertically centered
-            
+            doc.text(labInfo.name, currentX, leftStartY + 13, { align: "left" }); // Name beside logo, vertically centered
+
             doc.setFontSize(10);
-            doc.text(labInfo.accreditation, currentX, leftStartY + 10, { align: "left" }); // Accreditation beside name, vertically adjusted
+            doc.text(labInfo.accreditation, currentX, leftStartY + 17, { align: "left" }); // Accreditation beside name, vertically adjusted
 
             // Add www.lab.com on the right side
-            const rightStartX = 550; // Near right edge of A4 (595 points wide)
+            const rightStartX = 190; // Near right edge of A4 (595 points wide)
             doc.setFontSize(10);
             doc.text("www.lab.com", rightStartX, leftStartY + 10, { align: "right" }); // Aligned with accreditation height
+            doc.setFontSize(10);
+            doc.text("0354-6565952", rightStartX, leftStartY + 14, { align: "right" }); // Aligned with accreditation height
 
             // Report title and line
             doc.setFontSize(16);
@@ -124,6 +126,12 @@ export const detailHelper = {
             doc.text("Thanks for Reference", 14, (test.notes ? doc.lastAutoTable.finalY + 26 : doc.lastAutoTable.finalY + 10));
             doc.text("END OF REPORT", 14, (test.notes ? doc.lastAutoTable.finalY + 32 : doc.lastAutoTable.finalY + 16));
 
+
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            doc.setFontSize(9);
+            doc.text("By workwise", pageWidth - 15, pageHeight - 10, { align: "right" });
+            
             // Save PDF
             doc.save(`lab-test-report-${test.id || ''}-${new Date().toLocaleString("en-PK", { timeZone: "Asia/Karachi" }).replace(/,/g, "").split(" ")[0]}.pdf`);
         }).catch((err) => {

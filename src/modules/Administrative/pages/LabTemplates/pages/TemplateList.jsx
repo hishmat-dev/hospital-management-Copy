@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { fetchLabTemplates, fetchLabCategories, deleteLabTemplate } from "../../../action/slice"
 import { Plus, Eye, Edit, Trash2, FileText } from "lucide-react"
+import LoadingComponent from "../../../../../components/ui/LoadingComponent"
 
 export default function TemplateList() {
   const dispatch = useDispatch()
@@ -37,9 +38,7 @@ export default function TemplateList() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

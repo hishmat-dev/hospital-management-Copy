@@ -5,6 +5,7 @@ import { useLaboratoryListing } from "./listing.hooks"
 import { listingConfig } from "./listing.config"
 import { Eye, Edit, Trash2, Download, Calendar, Clock, User, Stethoscope, AlertCircle } from "lucide-react"
 import { Select } from "antd"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const { Option } = Select
 
@@ -143,9 +144,7 @@ export default function LaboratoryList() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 
