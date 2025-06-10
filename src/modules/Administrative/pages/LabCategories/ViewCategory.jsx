@@ -35,7 +35,7 @@ export default function ViewCategory() {
         <h3 className="text-lg font-medium text-gray-900 mb-2">Category not found</h3>
         <button
           onClick={() => navigate("/admin/lab-categories")}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
         >
           <ArrowLeft size={16} />
           Back to Categories
@@ -52,11 +52,11 @@ export default function ViewCategory() {
             <button onClick={() => navigate("/admin/lab-categories")} className="text-gray-600 hover:text-gray-800">
               <ArrowLeft size={20} />
             </button>
-            <h1 className="text-xl font-bold text-gray-900">Category Details</h1>
+            <h1 className=" font-bold text-gray-900">Category Details</h1>
           </div>
           <button
             onClick={() => navigate(`/admin/lab-categories/edit/${category.id}`)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
           >
             <Edit size={16} />
             Edit Category
@@ -67,19 +67,19 @@ export default function ViewCategory() {
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Category Name</label>
-                <p className="text-gray-900 text-lg">{category.name}</p>
+              <div className="space-y-2" >
+                <label className="block  font-medium text-gray-600">Category Name</label>
+                <p className="text-gray-900 ">{category.name}</p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Category Code</label>
-                <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full font-mono">
+              <div className="space-y-2" >
+                <label className="block  font-medium text-gray-600">Category Code</label>
+                <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800  rounded-full font-mono">
                   {category.code}
                 </span>
               </div>
               {category.description && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Description</label>
+                <div className="space-y-2">
+                  <label className="block  font-medium text-gray-600">Description</label>
                   <p className="text-gray-900">{category.description}</p>
                 </div>
               )}
@@ -90,7 +90,7 @@ export default function ViewCategory() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Category Settings</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Color</label>
+                <label className="block  font-medium text-gray-700">Color</label>
                 <div className="flex items-center gap-2">
                   <div
                     className="w-6 h-6 rounded border border-gray-300"
@@ -100,9 +100,9 @@ export default function ViewCategory() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Status</label>
+                <label className="block  font-medium text-gray-700">Status</label>
                 <span
-                  className={`inline-block px-2 py-1 text-xs rounded-full ${
+                  className={`inline-block px-2 py-1  rounded-full ${
                     category.isActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
                   }`}
                 >
@@ -110,12 +110,12 @@ export default function ViewCategory() {
                 </span>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Created Date</label>
+                <label className="block  font-medium text-gray-700">Created Date</label>
                 <p className="text-gray-900">{new Date(category.createdAt).toLocaleDateString()}</p>
               </div>
               {category.updatedAt && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Last Updated</label>
+                  <label className="block  font-medium text-gray-700">Last Updated</label>
                   <p className="text-gray-900">{new Date(category.updatedAt).toLocaleDateString()}</p>
                 </div>
               )}

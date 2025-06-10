@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchLabCategories, updateLabCategory } from "../../action/slice"
 import { Save, X, ArrowLeft } from "lucide-react"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 export default function EditCategory() {
   const { id } = useParams()
@@ -19,7 +20,6 @@ export default function EditCategory() {
     name: "",
     code: "",
     description: "",
-    color: "#3B82F6",
     isActive: true,
   })
 
@@ -35,7 +35,6 @@ export default function EditCategory() {
         name: category.name || "",
         code: category.code || "",
         description: category.description || "",
-        color: category.color || "#3B82F6",
         isActive: category.isActive !== undefined ? category.isActive : true,
       })
     }
@@ -69,9 +68,10 @@ export default function EditCategory() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-      </div>
+      // <div className="flex justify-center items-center h-64">
+      //   <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+      // </div>
+      <LoadingComponent/>
     )
   }
 
@@ -144,16 +144,6 @@ export default function EditCategory() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
-              <input
-                type="color"
-                name="color"
-                value={formData.color}
-                onChange={handleChange}
-                className="w-full h-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
 
             <div className="flex items-center">
               <input
@@ -161,7 +151,7 @@ export default function EditCategory() {
                 name="isActive"
                 checked={formData.isActive}
                 onChange={handleChange}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-4 w-4 text-primary-color focus:ring-blue-500 border-gray-300 rounded"
               />
               <label className="ml-2 block text-sm text-gray-900">Active Category</label>
             </div>
@@ -180,7 +170,7 @@ export default function EditCategory() {
             <button
               type="submit"
               disabled={formLoading}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md  transition-colors disabled:opacity-50"
             >
               <Save size={16} />
               {formLoading ? "Updating..." : "Update Category"}

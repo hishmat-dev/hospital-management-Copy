@@ -15,7 +15,6 @@ export default function CreateCategory() {
     name: "",
     code: "",
     description: "",
-    color: "#3B82F6",
     isActive: true,
   })
 
@@ -49,13 +48,13 @@ export default function CreateCategory() {
     <div className="space-y-6 text-[12px]">
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-xl font-bold text-gray-900">Create Lab Category</h1>
+          <h1 className=" font-bold text-gray-900">Create Lab Category</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Category Name *</label>
+              <label className="block  font-medium text-gray-700 mb-2">Category Name *</label>
               <input
                 type="text"
                 name="name"
@@ -68,7 +67,7 @@ export default function CreateCategory() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Category Code *</label>
+              <label className="block  font-medium text-gray-700 mb-2">Category Code *</label>
               <input
                 type="text"
                 name="code"
@@ -82,7 +81,7 @@ export default function CreateCategory() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <label className="block  font-medium text-gray-700 mb-2">Description</label>
             <textarea
               name="description"
               value={formData.description}
@@ -94,16 +93,7 @@ export default function CreateCategory() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
-              <input
-                type="color"
-                name="color"
-                value={formData.color}
-                onChange={handleChange}
-                className="w-full h-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            
 
             <div className="flex items-center">
               <input
@@ -113,7 +103,7 @@ export default function CreateCategory() {
                 onChange={handleChange}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <label className="ml-2 block text-sm text-gray-900">Active Category</label>
+              <label className="ml-2 block  text-gray-900">Active Category</label>
             </div>
           </div>
 
@@ -130,7 +120,7 @@ export default function CreateCategory() {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md  transition-colors disabled:opacity-50"
             >
               <Save size={16} />
               {loading ? "Creating..." : "Create Category"}

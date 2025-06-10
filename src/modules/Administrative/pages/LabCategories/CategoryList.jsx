@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { fetchLabCategories, deleteLabCategory } from "../../action/slice"
 import { Plus, Eye, Edit, Trash2, Tag } from "lucide-react"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 export default function CategoryList() {
   const dispatch = useDispatch()
@@ -28,9 +29,7 @@ export default function CategoryList() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-      </div>
+     <LoadingComponent/>
     )
   }
 
@@ -41,7 +40,7 @@ export default function CategoryList() {
           <h1 className="text-xl font-bold text-gray-900">Lab Categories</h1>
           <button
             onClick={() => navigate("/admin/lab-categories/create")}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
           >
             <Plus size={16} />
             Create Category
@@ -71,7 +70,7 @@ export default function CategoryList() {
             {!searchTerm && (
               <button
                 onClick={() => navigate("/admin/lab-categories/create")}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
               >
                 <Plus size={16} />
                 Create Category
