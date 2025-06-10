@@ -112,9 +112,9 @@ export default function Dashboard() {
 
       <StatsCards occupancyStats={occupancyStats} />
       {/* Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-[12px]">
         {/* Available Specialties */}
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-3">
           <h2 className="font-bold text-gray-900 mb-4">Available Specialties</h2>
           <Table
             columns={specialtyColumns}
@@ -126,7 +126,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Patients */}
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-3">
           <h2 className="font-bold text-gray-900 mb-4">Recent Patients</h2>
           <Table
             columns={patientColumns}

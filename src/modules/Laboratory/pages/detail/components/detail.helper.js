@@ -1,186 +1,133 @@
-export const detailHelper = {
-    // isResultAbnormal: (key, value, referenceRange) => {
-    //     if (!referenceRange || !referenceRange[key]) return false;
-    //     const range = referenceRange[key];
-    //     // Handle qualitative results (e.g., radiology)
-    //     if (!range.match(/[0-9]/)) {
-    //         return value !== range;
-    //     }
-    //     // Handle numeric ranges (e.g., "13.5-17.5 g/dL")
-    //     if (range.includes("-")) {
-    //         const [min, max] = range.split("-").map((v) => parseFloat(v.replace(/[^0-9.]/g, "")));
-    //         const resultValue = parseFloat(value.replace(/[^0-9.]/g, ""));
-    //         return isNaN(resultValue) || resultValue < min || resultValue > max;
-    //     }
-    //     // Handle less-than/greater-than ranges (e.g., "<200 mg/dL")
-    //     if (range.startsWith("<")) {
-    //         const max = parseFloat(range.replace(/[^0-9.]/g, ""));
-    //         const resultValue = parseFloat(value.replace(/[^0-9.]/g, ""));
-    //         return isNaN(resultValue) || resultValue >= max;
-    //     }
-    //     if (range.startsWith(">")) {
-    //         const min = parseFloat(range.replace(/[^0-9.]/g, ""));
-    //         const resultValue = parseFloat(value.replace(/[^0-9.]/g, ""));
-    //         return isNaN(resultValue) || resultValue <= min;
-    //     }
-    //     return false;
-    // },
+import logo from "../../../../../shared/workwise.png";
+console.log("Imported logo path:", logo); // Debug the resolved path
 
+export const detailHelper = {
     isResultAbnormal: (abnormalFlag) => {
         return abnormalFlag && abnormalFlag.toLowerCase() !== 'normal';
     },
-    downloadPDF: (test, labInfo = { name: "Acme Labs", accreditation: "CLIA Certified" }) => {
+    downloadPDF: (test, labInfo = { name: "DRLOGY PATHOLOGY LAB", accreditation: "Accurate | Caring | Instant" }) => {
+        // Ensure logoUrl is set to the imported logo if not provided
+        labInfo.logoUrl = labInfo.logoUrl || logo;
+
         const loadScript = (src) =>
             new Promise((resolve, reject) => {
                 const script = document.createElement("script");
                 script.src = src;
-                script.onload = resolve;
-                script.onerror = reject;
+                script.async = true;
+                script.onload = () => resolve();
+                script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
                 document.body.appendChild(script);
             });
 
         Promise.all([
             loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"),
-            loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"),
-        ]).then(() => {
+            loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js")
+        ]).then(([_, __]) => {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            if (!jsPDF) throw new Error("jsPDF is not defined");
+            const doc = new jsPDF({ orientation: 'p', format: 'a4' }); // Match reference A4 portrait
 
-            // Header
+            if (!doc.autoTable) throw new Error("jsPDF autoTable plugin is not loaded");
+
+            // Add logo, name, and accreditation on the left side in the same row
+            const leftStartX = 15;
+            const leftStartY = 15;
+            let currentX = leftStartX;
+            if (labInfo.logoUrl && labInfo.logoUrl.startsWith("data:image")) {
+                console.log("Adding logo to PDF with data URL:", labInfo.logoUrl.substring(0, 50) + "...");
+                doc.addImage(labInfo.logoUrl, 'PNG', currentX, leftStartY, 30, 25); // Logo
+                currentX += 35; // Move past logo (30 width + 5 margin)
+            } else {
+                console.warn("No valid logo data URL available, skipping logo addition. Logo URL:", labInfo.logoUrl);
+            }
             doc.setFontSize(20);
-            doc.text(labInfo.name, 105, 20, { align: "center" });
+            doc.text(labInfo.name, currentX, leftStartY + 5, { align: "left" }); // Name beside logo, vertically centered
+            
             doc.setFontSize(10);
-            doc.text(`Accreditation: ${labInfo.accreditation}`, 105, 28, { align: "center" });
+            doc.text(labInfo.accreditation, currentX, leftStartY + 10, { align: "left" }); // Accreditation beside name, vertically adjusted
+
+            // Add www.lab.com on the right side
+            const rightStartX = 550; // Near right edge of A4 (595 points wide)
+            doc.setFontSize(10);
+            doc.text("www.lab.com", rightStartX, leftStartY + 10, { align: "right" }); // Aligned with accreditation height
+
+            // Report title and line
             doc.setFontSize(16);
-            doc.text("Laboratory Test Report", 105, 36, { align: "center" });
+            doc.text("Laboratory Test Report", 105, 50, { align: "center" });
             doc.setLineWidth(0.5);
-            doc.line(80, 38, 130, 38);
+            doc.line(80, 52, 130, 52);
 
-            // Defining table styles
-            const tableStyles = {
+            // Patient Information
+            doc.autoTable({
+                startY: 70,
+                theme: 'plain',
+                body: [
+                    [{ content: `Name: ${test.patientName || ''}`, styles: { halign: 'left' } }, { content: `Sample Collected At: ${test.sampleLocation || ''}`, styles: { halign: 'left' } }, { content: `Registered on: ${test.orderedDate || ''}`, styles: { halign: 'left' } }],
+                    [{ content: `Age: ${test.patientAge || ''}`, styles: { halign: 'left' } }, { content: `Ref. By: ${test.doctorName || ''}`, styles: { halign: 'left' } }, { content: `Collected on: ${test.sampleDate || ''}`, styles: { halign: 'left' } }],
+                    [{ content: `Sex: ${test.patientGender || ''}`, styles: { halign: 'left' } }, { content: `Reported on: ${test.reportDate || ''}`, styles: { halign: 'left' } }],
+                    [{ content: `PID: ${test.patientId || ''}`, styles: { halign: 'left' } }]
+                ],
+                columnStyles: {
+                    0: { cellWidth: 50 },
+                    1: { cellWidth: 80 },
+                    2: { cellWidth: 60 }
+                },
+                didDrawCell: (data) => {
+                    if (data.row.index === 0 && data.column.index === 0) {
+                        doc.addImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==', 'PNG', data.cell.x + 50, data.cell.y, 10, 10); // Placeholder QR code
+                    }
+                }
+            });
+
+            // Test Results Label
+            doc.setFontSize(16);
+            doc.text("Test Results", 105, doc.lastAutoTable.finalY + 10, { align: "center" });
+
+            // Test Results Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 14,
                 theme: 'grid',
-                headStyles: { fillColor: [243, 243, 243], textColor: [55, 65, 81], fontStyle: 'bold' },
+                headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255], fontStyle: 'bold' },
                 bodyStyles: { textColor: [31, 41, 55] },
-                alternateRowStyles: { fillColor: [249, 250, 251] },
-                margin: { top: 50 },
-                styles: { fontSize: 10 }
-            };
-
-            // Patient and Test Information
-            doc.autoTable({
-                ...tableStyles,
-                startY: 50,
-                body: [
-                    [
-                        { content: 'Patient Information', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center' } },
-                        { content: 'Test Information', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center' } }
-                    ],
-                    [
-                        `Patient: ${test.patientName}`,
-                        `Patient ID: ${test.patientId}`,
-                        `Test Name: ${test.testName}`,
-                        `Test Type: ${test.testType}`
-                    ],
-                    [
-                        `Age: ${test.patientAge}`,
-                        `Gender: ${test.patientGender}`,
-                        `Category: ${test.category}`,
-                        `Test Code: ${test.testCode}`
-                    ],
-                    [
-                        '',
-                        '',
-                        `Priority: ${test.priority}`,
-                        `Status: ${test.status}`
-                    ],
-                    [
-                        '',
-                        '',
-                        `Cost: ${test.cost}`,
-                        ''
-                    ]
-                ]
+                alternateRowStyles: { fillColor: [230, 230, 230] },
+                head: [['Investigation', 'Result', 'Reference Value', 'Unit']],
+                body: test.results?.map(result => {
+                    const isAbnormal = detailHelper.isResultAbnormal(result.abnormalFlag);
+                    return [
+                        result.name || '',
+                        { content: result.value || '', styles: { textColor: isAbnormal ? [255, 0, 0] : [0, 0, 0] } },
+                        result.referenceRange || '',
+                        result.unit || ''
+                    ];
+                }) || [],
+                didDrawCell: (data) => {
+                    if (data.section === 'body' && data.column.index === 1 && data.cell.raw[1]) {
+                        const isAbnormal = detailHelper.isResultAbnormal(data.cell.raw[1].styles?.textColor?.[0] === 255 ? 'High' : 'Normal');
+                        if (isAbnormal) {
+                            doc.setFillColor(230, 230, 230);
+                            doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'F');
+                            doc.text('High', data.cell.x + data.cell.width - 15, data.cell.y + data.cell.height / 2 + 2, { align: 'right' });
+                        }
+                    }
+                }
             });
 
-            // Dates and Doctor Information
-            doc.autoTable({
-                ...tableStyles,
-                startY: doc.lastAutoTable.finalY + 10,
-                body: [
-                    [
-                        { content: 'Dates & Times', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center' } },
-                        { content: 'Doctor Information', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center' } }
-                    ],
-                    [
-                        `Ordered Date: ${test.orderedDate}`,
-                        `Sample Date: ${test.sampleDate || 'N/A'}`,
-                        `Ordering Doctor: ${test.doctorName}`,
-                        `Technician: ${test.technician}`
-                    ],
-                    [
-                        `Expected Date: ${test.expectedDate || 'N/A'}`,
-                        `Report Date: ${test.reportDate || 'N/A'}`,
-                        '',
-                        ''
-                    ]
-                ]
-            });
-
-            // Test Results
-            if (test.results?.length > 0) {
-                doc.setFontSize(12);
-                doc.setTextColor(55, 65, 81);
-                doc.text('Test Results', 14, doc.lastAutoTable.finalY + 10);
-                doc.autoTable({
-                    startY: doc.lastAutoTable.finalY + 14,
-                    theme: 'grid',
-                    styles: { fontSize: 10 },
-                    headStyles: { fillColor: [200, 200, 200], textColor: [0, 0, 0], fontStyle: 'bold' },
-                    columnStyles: {
-                        0: { cellWidth: 40 },
-                        1: { cellWidth: 40 },
-                        2: { cellWidth: 60 },
-                        3: { cellWidth: 25 },
-                    },
-                    head: [['Parameter', 'Result', 'Normal Range', 'Status']],
-                    body: test.results.map(result => {
-                        const isAbnormal = detailHelper.isResultAbnormal(result.abnormalFlag);
-                        return [
-                            result.name.replace(/([A-Z])/g, ' $1').trim(),
-                            { content: result.value, styles: { textColor: isAbnormal ? [255, 0, 0] : [0, 0, 0] } },
-                            result.referenceRange || 'N/A',
-                            isAbnormal ? 'High' : 'Normal'
-                        ];
-                    })
-                });
-            }
-
-            // Notes
+            // Test Notes
             if (test.notes) {
-                doc.text("Notes", 14, doc.lastAutoTable.finalY + 10);
                 doc.setFontSize(10);
-                doc.text(test.notes, 14, doc.lastAutoTable.finalY + 14, { maxWidth: 180 });
+                doc.text("Test Notes", 14, doc.lastAutoTable.finalY + 10);
+                doc.text(test.notes, 14, doc.lastAutoTable.finalY + 16, { maxWidth: 180 });
             }
 
-            // Footer
-            const finalY = test.notes
-                ? doc.lastAutoTable.finalY + 20 + doc.getTextDimensions(test.notes, { maxWidth: 180 }).h
-                : doc.lastAutoTable.finalY + 20;
-
+            // Closing Notes
             doc.setFontSize(10);
-            doc.text(
-                `Generated on: ${new Date().toLocaleString("en-PK", { timeZone: "Asia/Karachi" }).replace(/,/g, "")}`,
-                105,
-                finalY,
-                { align: "center" }
-            );
-            doc.text(`Test ID: ${test.id}`, 105, finalY + 6, { align: "center" });
+            doc.text("Thanks for Reference", 14, (test.notes ? doc.lastAutoTable.finalY + 26 : doc.lastAutoTable.finalY + 10));
+            doc.text("END OF REPORT", 14, (test.notes ? doc.lastAutoTable.finalY + 32 : doc.lastAutoTable.finalY + 16));
 
             // Save PDF
-            doc.save(`lab-test-report-${test.id}-${new Date().toISOString().split("T")[0]}.pdf`);
+            doc.save(`lab-test-report-${test.id || ''}-${new Date().toLocaleString("en-PK", { timeZone: "Asia/Karachi" }).replace(/,/g, "").split(" ")[0]}.pdf`);
         }).catch((err) => {
-            console.error("Failed to load jsPDF or AutoTable:", err);
+            console.error("Failed to load jsPDF, AutoTable, or logo image:", err);
         });
     }
-
 };

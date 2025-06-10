@@ -11,7 +11,7 @@ const LaboratoryDetail = () => {
   const dispatch = useDispatch()
 
   const { labTests, loading } = useSelector((state) => state.laboratory)
-  console.log("Laboratory Detail - Tests:", labTests)
+  // console.log("Laboratory Detail - Tests:", labTests)
   const test = labTests.find((t) => t.id === id)
 
   useEffect(() => {

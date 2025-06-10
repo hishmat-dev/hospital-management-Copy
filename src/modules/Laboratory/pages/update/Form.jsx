@@ -21,6 +21,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
     category: initialData?.category || "",
     priority: initialData?.priority || "normal",
     status: initialData?.status || "pending",
+    payment: initialData?.payment || "00",
     doctorName: initialData?.doctorName || "",
     department: initialData?.department || "",
     orderedDate: initialData?.orderedDate || "",
@@ -137,6 +138,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
           ["Patient Gender", "patientGender", "text"],
           ["Doctor Name", "doctorName", "text"],
           ["Department", "department", "text"],
+          ["Payment", "payment", "number"],
           ["Ordered Date", "orderedDate", "date"],
           ["Sample Date", "sampleDate", "date"],
           ["Expected Date", "expectedDate", "date"],
@@ -150,6 +152,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               required={["patientName", "patientId", "doctorName"].includes(name)}
+              {...(name === "payment" && { min: "0", step: "1" })}
             />
           </div>
         ))}
@@ -212,7 +215,7 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
           <div className="space-y-4">
             <div className="bg-blue-50 p-4 rounded-lg">
               <h4 className="font-medium text-blue-900 mb-2">
-                Template: {labTemplates.find((t) => t.id === formData.selectedTemplate)?.name}
+                Test: {labTemplates.find((t) => t.id === formData.selectedTemplate)?.name}
               </h4>
               <p className=" text-blue-700">
                 Fill in the observed values for each parameter. Normal ranges are provided for reference.
@@ -223,16 +226,16 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left  font-medium text-gray-800 uppercase tracking-wider">
                       Parameter
                     </th>
-                    <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left  font-medium text-gray-800 uppercase tracking-wider">
                       Observed Value
                     </th>
-                    <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left  font-medium text-gray-800 uppercase tracking-wider">
                       Unit
                     </th>
-                    <th className="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left  font-medium text-gray-800 uppercase tracking-wider">
                       Normal Range
                     </th>
                   </tr>
@@ -246,12 +249,12 @@ const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
                           type="text"
                           value={result.value}
                           onChange={(e) => handleResultChange(index, "value", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border border-gray-500 rounded-md focus:outline-none"
                           placeholder="Enter value"
                         />
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap  text-gray-500">{result.unit}</td>
-                      <td className="px-6 py-4 whitespace-nowrap  text-gray-500">{result.normalRange}</td>
+                      <td className="px-6 py-4 whitespace-nowrap  text-gray-700">{result.unit}</td>
+                      <td className="px-6 py-4 whitespace-nowrap  text-gray-700">{result.normalRange}</td>
                     </tr>
                   ))}
                 </tbody>

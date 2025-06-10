@@ -2,17 +2,30 @@ import InfoItem from "./InfoItem";
 import Section from "./Section";
 import { listingHelper } from "../../listing/listing.helper";
 import { detailHelper } from "./detail.helper";
+import logo from "../../../../../shared/workwise.svg"
 
-const LabTestDetail = ({ test, labInfo = { name: "Acme Labs", accreditation: "CLIA Certified" } }) => {
-  console.log("test", test);
+const LabTestDetail = ({ test, labInfo = { name: "WorkW Labs", accreditation: "CLIA Certified" } }) => {
+  // console.log("test", test);
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 text-[12px]">
       {/* Header */}
-      <div className="border-b pb-4 mb-6 text-center">
-        <h2 className="font-bold text-xl text-gray-900">Lab Test Report</h2>
-        <p className="text-gray-600">{labInfo.name}</p>
-        <p className="text-gray-600">Accreditation: {labInfo.accreditation}</p>
+      <div className="border-b pb-4 mb-6">
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex-shrink-0">
+            <img
+              src={labInfo.logoUrl || logo}
+              alt="Lab Logo"
+              className="h-24 w-auto"
+              aria-label="Lab Logo"
+            />
+          </div>
+          <div className="flex-1 text-center">
+            <h2 className="font-bold text-xl text-gray-900">Lab Test Report</h2>
+            <p className="text-gray-600">{labInfo.name}</p>
+            <p className="text-gray-600">Accreditation: {labInfo.accreditation}</p>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -88,9 +101,8 @@ const LabTestDetail = ({ test, labInfo = { name: "Acme Labs", accreditation: "CL
                     <tr key={index}>
                       <td className="px-4 py-2">{result.name}</td>
                       <td
-                        className={`px-4 py-2 ${
-                          result.abnormalFlag !== "normal" ? "text-red-600 font-medium" : ""
-                        }`}
+                        className={`px-4 py-2 ${result.abnormalFlag !== "normal" ? "text-red-600 font-medium" : ""
+                          }`}
                       >
                         {result.value}
                       </td>
