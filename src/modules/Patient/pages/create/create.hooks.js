@@ -54,7 +54,7 @@ export const usePatientCreate = () => {
 
         // console.log("Creating patient with data:", patientData)
         await dispatch(createPatient(patientData)).unwrap()
-        navigate("hospital/patients/list")
+        navigate("/hospital/patients/list")
       } catch (error) {
         console.error("Error creating patient:", error)
       } finally {
@@ -65,7 +65,7 @@ export const usePatientCreate = () => {
   )
 
   const handleCancel = useCallback(() => {
-    navigate("hospital/patients/list")
+    navigate("/hospital/patients/list")
   }, [navigate])
 
   const { isValid } = validatePatientForm(formData)

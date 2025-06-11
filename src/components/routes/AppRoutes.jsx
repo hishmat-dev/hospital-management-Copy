@@ -60,14 +60,14 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* Default redirect */}
-      <Route path="/" element={<Navigate to="hospital/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/hospital/dashboard" replace />} />
 
       {/* Dashboard */}
-      <Route path="hospital/dashboard" element={<Dashboard />} />
+      <Route path="/hospital/dashboard" element={<Dashboard />} />
 
       {/* Patient Management Routes */}
-      <Route path="hospital/patients/add" element={<PatientCreate />} />
-      <Route path="hospital/patients/list" element={<PatientList />} />
+      <Route path="/hospital/patients/add" element={<PatientCreate />} />
+      <Route path="/hospital/patients/list" element={<PatientList />} />
       <Route path="/patients/detail/:id" element={<PatientDetail />} />
       <Route path="/patients/update/:id" element={<PatientUpdate />} />
 

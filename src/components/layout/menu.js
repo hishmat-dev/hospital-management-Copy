@@ -14,14 +14,14 @@ export const menu = [
   {
     title: "Dashboard",
     icon: <Home size={18} />,
-    path: "hospital/dashboard",
+    path: "/hospital/dashboard",
   },
   {
     title: "Patient Management",
     icon: <Users size={18} />,
     children: [
-      { title: "Add Patient", path: "hospital/patients/add" },
-      { title: "All Patients", path: "hospital/patients/list" },
+      { title: "Add Patient", path: "/hospital/patients/add" },
+      { title: "All Patients", path: "/hospital/patients/list" },
     ],
   },
   {

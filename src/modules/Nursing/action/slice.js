@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 const initialState = {
   vitals : [
   {
-    id: 1,
+    id: "P-2001",
     patientName: "Ahmed Shaikh",
     room: "201",
     bed: "A",
@@ -25,7 +25,7 @@ const initialState = {
     createdAt: "2025-05-28T09:15:00Z",
   },
   {
-    id: 2,
+    id: "P-2002",
     patientName: "Areeba Tariq",
     room: "305",
     bed: "B",
@@ -47,7 +47,7 @@ const initialState = {
     createdAt: "2025-05-27T18:40:00Z",
   },
   {
-    id: 3,
+    id: "P-2003",
     patientName: "Bilal Ahmed",
     room: "Emergency-2",
     bed: "C",
@@ -69,7 +69,7 @@ const initialState = {
     createdAt: "2025-05-28T02:30:00Z",
   },
   {
-    id: 4,
+    id: "P-2004",
     patientName: "Sana Baloch",
     room: "410",
     bed: "A",

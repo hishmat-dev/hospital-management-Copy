@@ -1,3 +1,4 @@
+import { Phone } from 'lucide-react';
 export default function PersonalInfo({ patient, profile, navigate }) {
 
   return (
@@ -36,11 +37,17 @@ export default function PersonalInfo({ patient, profile, navigate }) {
               <span className="font-semibold">Blood Type:</span> {patient?.bloodType || "N/A"}
             </p>
           </div>
+          <div className="">
+            <p className="text-gray-500">
+              <span className="font-semibold">Phone Number:</span> {patient?.phone || "N/A"}
+            </p>
+            
+          </div>
         </div>
 
         <div className="lg:ml-auto">
           <button
-            onClick={() => navigate("hospital/patients/list")}
+            onClick={() => navigate("/hospital/patients/list")}
             className="bg-primary-color font-montserrat text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
           >
             Back to Patients

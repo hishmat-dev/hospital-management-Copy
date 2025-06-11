@@ -14,14 +14,14 @@ export default function ActionButtons({ patientId, patientName }) {
         >
           Edit Patient
         </button>
-        <button
+        {/* <button
           onClick={() => navigate(`/appointments/create?patientId=${patientId}`)}
           className="bg-white border  px-4 py-2 rounded-md hover:bg-primary-color hover:text-white transition-colors"
         >
           Book Appointment
-        </button>
+        </button> */}
         <button
-          onClick={() => navigate(`/laboratory/create?patientId=${patientId}`)}
+          onClick={() => navigate(`/laboratory/add?patientId=${patientId}`)}
            className="bg-white border  px-4 py-2 rounded-md hover:bg-primary-color hover:text-white transition-colors"
         >
           Order Lab Test
@@ -30,7 +30,7 @@ export default function ActionButtons({ patientId, patientName }) {
           onClick={() => navigate(`/nursing/detail/${patientName}`)}
            className="bg-white border  px-4 py-2 rounded-md hover:bg-primary-color hover:text-white transition-colors"
         >
-          Record Vitals
+          Show Vitals
         </button>
       </div>
     </div>

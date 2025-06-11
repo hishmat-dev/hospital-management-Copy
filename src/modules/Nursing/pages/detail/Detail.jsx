@@ -162,10 +162,10 @@ const NursingDetail = () => {
               Update Record
             </button>
             <button
-              onClick={() => navigate("/nursing/vitals")}
+              onClick={() => navigate(`/patients/detail/${vitalRecord.id}`)}
               className="bg-red-color text-white px-4 py-2 rounded-md "
             >
-              Back to List
+              Back to Patient
             </button>
           </div>
         </div>

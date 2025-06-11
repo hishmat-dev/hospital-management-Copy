@@ -15,6 +15,7 @@ export default function PatientDetail() {
   const navigate = useNavigate()
   const { patient, loading, error } = useDetailHooks(id)
   console.log("error:",error)
+  
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -38,7 +39,7 @@ export default function PatientDetail() {
 
       {/* Patient Information */}
       <div className="space-y-6 ">
-        <ContactInfo patient={patient} />
+        {/* <ContactInfo patient={patient} /> */}
         <PatientVisits patient={patient} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <DoctorVisits patient={patient} />

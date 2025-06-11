@@ -46,14 +46,14 @@ const AppointmentDetail = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-3 text-[12px]">
+    <div className="p-3 text-[12px]">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-primary-color text-white px-6 py-4">
           <h1 className="font-bold">Appointment Details</h1>
         </div>
 
         <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
               <h3 className="font-semibold mb-4">Patient Information</h3>
               <div className="space-y-2">

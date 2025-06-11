@@ -1,4 +1,3 @@
-// create.hooks.js
 import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +13,11 @@ export const useLaboratoryCreate = () => {
 
   const [formData, setFormData] = useState({
     ...createConfig.initialFormData,
-    customTestName: "",
-    clinicalInfo: "",
-    expectedDuration: "",
+    patientId: "",
+    patientName: "",
+    patientAge: "",
+    patientGender: "",
+    department: "",
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -25,26 +26,41 @@ export const useLaboratoryCreate = () => {
     (e) => {
       const { name, value } = e.target;
 
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      if (name === "batchUpdate") {
+        setFormData((prev) => ({
+          ...prev,
+          ...value,
+        }));
+        // Validate all fields in batch update
+        Object.entries(value).forEach(([fieldName, fieldValue]) => {
+          const fieldError = validateField(fieldName, fieldValue, { ...formData, ...value });
+          setErrors((prev) => ({
+            ...prev,
+            [fieldName]: fieldError,
+          }));
+        });
+      } else {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
 
-      // Real-time validation
-      const fieldError = validateField(name, value, formData);
-      setErrors((prev) => ({
-        ...prev,
-        [name]: fieldError,
-      }));
+        // Real-time validation for patient fields
+        const fieldError = validateField(name, value, formData);
+        setErrors((prev) => ({
+          ...prev,
+          [name]: fieldError,
+        }));
+      }
     },
     [formData]
   );
 
   const handleSubmit = useCallback(
-    async (e) => {
+    async (e, tests = []) => {
       e.preventDefault();
-
-      // Validate patientName by checking if it matches a valid patient
+      console.log("Submitting form with data:", formData, "Tests:", tests);
+      // Validate patientName
       const selectedPatient = patients.find((p) => p.name === formData.patientName);
       if (!selectedPatient) {
         setErrors((prev) => ({
@@ -54,42 +70,58 @@ export const useLaboratoryCreate = () => {
         return;
       }
 
-      // Validate orderingDoctor
-      const selectedDoctor = doctors.find((d) => d.name === formData.orderingDoctor);
-      if (!selectedDoctor) {
-        setErrors((prev) => ({
-          ...prev,
-          orderingDoctor: "Please select a valid doctor from the suggestions",
-        }));
-        return;
-      }
+      // Validate each test
+      const testErrors = {};
+      const validatedTests = tests.map((test, index) => {
+        const selectedDoctor = doctors.find((d) => d.name === test.orderingDoctor);
+        if (!selectedDoctor) {
+          testErrors[`test_${index}_orderingDoctor`] = "Please select a valid doctor";
+        }
 
-      const updatedFormData = {
-        ...formData,
-        patientId: selectedPatient.id, // Ensure patientId is set
-      };
+        const { errors: testValidationErrors, isValid } = validateLabTestForm(test);
+        if (!isValid) {
+          Object.keys(testValidationErrors).forEach((key) => {
+            testErrors[`test_${index}_${key}`] = testValidationErrors[key];
+          });
+        }
 
-      const { errors: validationErrors, isValid } = validateLabTestForm(updatedFormData);
-      setErrors(validationErrors);
-
-      if (!isValid) return;
-
-      setLoading(true);
-      try {
-        const labTestData = {
-          ...updatedFormData,
-          id: `L-${Date.now()}`,
+        return {
+          ...test,
+          id: `L-${Date.now() + index}`,
           status: "Pending",
           results: null,
           reportDate: null,
           technician: null,
           createdAt: new Date().toISOString(),
         };
+      });
 
-        await dispatch(createLabTest(labTestData)).unwrap();
+      if (Object.keys(testErrors).length > 0) {
+        setErrors(testErrors);
+        return;
+      }
+
+      console.log("Test data: ", formData)
+
+      setLoading(true);
+      try {
+        // Create a lab test for each test in the tests array
+        for (const test of validatedTests) {
+          const labTestData = {
+            ...test,
+            patientId: selectedPatient.id,
+            patientName: selectedPatient.name,
+            patientAge: formData.patientAge,
+            patientGender: formData.patientGender,
+            department: formData.department,
+          };
+          await dispatch(createLabTest(labTestData)).unwrap();
+        }
+        console.log("Lab tests created successfully", formData);
         navigate("/laboratory/list");
       } catch (error) {
-        console.error("Error creating lab test:", error);
+        console.error("Error creating lab tests:", error);
+        setErrors({ submit: "Failed to create lab tests" });
       } finally {
         setLoading(false);
       }
@@ -101,7 +133,11 @@ export const useLaboratoryCreate = () => {
     navigate("/laboratory/list");
   }, [navigate]);
 
-  const { isValid } = validateLabTestForm(formData);
+  // Validate patient fields
+  const { isValid: isPatientValid } = validateLabTestForm({
+    patientName: formData.patientName,
+    patientId: formData.patientId,
+  });
 
   return {
     formData,
@@ -113,6 +149,6 @@ export const useLaboratoryCreate = () => {
     handleChange,
     handleSubmit,
     handleCancel,
-    isValid,
+    isValid: isPatientValid && patients.length > 0,
   };
 };

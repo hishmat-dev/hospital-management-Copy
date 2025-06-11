@@ -14,7 +14,6 @@ export default function ReusableTable({
   keyField = "id",
   pagination, 
 }) {
-  // console.log(pagination)
   return (
     <div className="space-y-4">
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -34,7 +33,11 @@ export default function ReusableTable({
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 text-[12px]">
               {data.map((item) => (
-                <tr key={item[keyField]} className="hover:bg-gray-50 transition-colors">
+                <tr 
+                  key={item[keyField]} 
+                  className="hover:bg-gray-50 transition-colors cursor-pointer"
+                  onClick={() => onView && onView(item)}
+                >
                   {headers.map((header, index) => (
                     <td key={index} className="px-3 py-2 whitespace-nowrap">
                       {renderCell && renderCell(header.key, item) ? (
@@ -43,7 +46,10 @@ export default function ReusableTable({
                         <div className="flex space-x-2">
                           {onView && (
                             <button
-                              onClick={() => onView(item)}
+                              onClick={(e) => {
+                                e.stopPropagation(); // Prevent row click from triggering
+                                onView(item);
+                              }}
                               className="text-blue-600 hover:text-blue-900 transition-colors"
                               title="View Details"
                             >
@@ -52,7 +58,10 @@ export default function ReusableTable({
                           )}
                           {onEdit && (
                             <button
-                              onClick={() => onEdit(item)}
+                              onClick={(e) => {
+                                e.stopPropagation(); // Prevent row click from triggering
+                                onEdit(item);
+                              }}
                               className="text-green-600 hover:text-green-900 transition-colors"
                               title="Edit Item"
                             >
@@ -61,7 +70,10 @@ export default function ReusableTable({
                           )}
                           {onDelete && (
                             <button
-                              onClick={() => onDelete(item[keyField])}
+                              onClick={(e) => {
+                                e.stopPropagation(); // Prevent row click from triggering
+                                onDelete(item[keyField]);
+                              }}
                               className="text-red-600 hover:text-red-900 transition-colors"
                               title="Delete Item"
                             >

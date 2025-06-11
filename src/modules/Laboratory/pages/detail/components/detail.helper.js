@@ -64,8 +64,8 @@ export const detailHelper = {
                 startY: 50,
                 theme: 'plain',
                 body: [
-                    [{ content: `Name: ${test.patientName || ''}`, styles: { halign: 'left' } }, { content: `Sample Collected At: ${test.sampleLocation || ''}`, styles: { halign: 'left' } }, { content: `Registered on: ${test.orderedDate || ''}`, styles: { halign: 'left' } }],
-                    [{ content: `Age: ${test.patientAge || ''}`, styles: { halign: 'left' } }, { content: `Ref. By: ${test.doctorName || ''}`, styles: { halign: 'left' } }, { content: `Collected on: ${test.sampleDate || ''}`, styles: { halign: 'left' } }],
+                    [{ content: `Name: ${test.patientName || ''}`, styles: { halign: 'left' } }, { content: `Ref. By: ${test.doctorName || ''}`, styles: { halign: 'left' } } , { content: `Registered on: ${test.orderedDate || ''}`, styles: { halign: 'left' } }],
+                    [{ content: `Age: ${test.patientAge || ''}`, styles: { halign: 'left' } },{ content: `Sample Collected At: ${test.sampleLocation || ''}`, styles: { halign: 'left' } } , { content: `Collected on: ${test.sampleDate || ''}`, styles: { halign: 'left' } }],
                     [{ content: `Sex: ${test.patientGender || ''}`, styles: { halign: 'left' } }],
                     [{ content: `PID: ${test.patientId || ''}`, styles: { halign: 'left' } }]
                 ],

@@ -1,4 +1,4 @@
-import { Table, Tag, Select, Spin } from "antd";
+import { Table, Tag, Spin } from "antd";
 import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { usePatientListing } from "../../../../Patient/pages/listing/listing.hooks";
@@ -39,12 +39,10 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
     const updatedAppointments = appointments.map((appointment) =>
       appointment.key === key ? { ...appointment, appointmentStatus: value } : appointment
     );
-    // console.log(`Status changed for appointment ${key}: ${value}`);
     setAppointments(updatedAppointments);
     onStatusChange?.(key, value, doctor?.id);
   };
 
-  // console.log("AppointmentsTable rendered with appointments:", appointments);
   const columns = [
     {
       title: "#",
@@ -101,9 +99,8 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
       align: "center",
       render: (text) => (
         <span
-          className={`inline-block px-2 py-1 text-[10px] font-semibold rounded ${
-            text === "GENERAL" ? "bg-yellow-100 text-yellow-800" : "bg-blue-100 text-blue-800"
-          }`}
+          className={`inline-block px-2 py-1 text-[10px] font-semibold rounded ${text === "GENERAL" ? "bg-yellow-100 text-yellow-800" : "bg-blue-100 text-blue-800"
+            }`}
         >
           {text}
         </span>
@@ -130,19 +127,18 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
       key: "appointmentStatus",
       width: 80,
       align: "center",
-      render: (status, record) => (
-        <Select
-          value={status}
-          onChange={(value) => handleStatusChange(record.key, value)}
-          size="small"
-          className="w-24 text-[10px]"
-          options={[
-            { value: "Confirmed", label: "Confirmed" },
-            { value: "Waiting", label: "Waiting" },
-            { value: "Cancelled", label: "Cancelled" },
-          ]}
-        />
-      ),
+      render: (status) => {
+        const statusColors = {
+          Confirmed: "green",
+          Waiting: "blue",
+          Cancelled: "red",
+        };
+        return (
+          <Tag color={statusColors[status] || "default"} className="text-[10px]">
+            {status}
+          </Tag>
+        );
+      },
     },
     {
       title: "Actions",
@@ -152,13 +148,19 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
       render: (_, record) => (
         <div className="flex justify-center space-x-2">
           <button
-            onClick={() => navigate(`/patients/detail/${record.patientId}`)}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent row click from triggering
+              navigate(`/patients/detail/${record.patientId}`);
+            }}
             className="text-blue-600 hover:text-blue-800"
           >
             <EyeOutlined />
           </button>
           <button
-            // onClick={() => console.log(`Delete appointment ${record.key}`)}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent row click from triggering
+              // console.log(`Delete appointment ${record.key}`);
+            }}
             className="text-red-600 hover:text-red-800"
           >
             <DeleteOutlined />
@@ -187,8 +189,11 @@ export default function AppointmentsTable({ doctor, onStatusChange }) {
             position: ["bottomRight"],
           }}
           className="dr_appoinments_ant-table-small"
-          rowClassName="text-[12px]"
+          rowClassName="text-[12px] cursor-pointer"
           scroll={{ x: "max-content" }}
+          onRow={(record) => ({
+            onClick: () => navigate(`/patients/detail/${record.patientId}`),
+          })}
         />
       )}
     </div>

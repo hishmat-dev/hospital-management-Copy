@@ -81,21 +81,9 @@ export default function AppointmentList() {
         )
       case "status":
         return (
-          <Select
-            value={record.status}
-            onChange={(value) => handleStatusChange(record.id, value)}
-            className={`text-[12px] ${getStatusColor(record.status)}`}
-            bordered={false}
-            style={{ width: 120 }}
-          >
-            {["Scheduled", "Confirmed", "In Progress", "Completed", "Cancelled", "No Show"].map(
-              (status) => (
-                <Option key={status} value={status}>
-                  {status}
-                </Option>
-              )
-            )}
-          </Select>
+          <span className={`px-2 py-1 rounded-full ${getTypeColor(record.status)}`}>
+            {record.status}
+          </span>
         )
       default:
         return null

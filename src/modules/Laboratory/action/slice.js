@@ -29,8 +29,8 @@ const initialState = {
   labTests: [
     {
       id: "L-001",
-      patientId: "P-1001",
-      patientName: "John Smith",
+      patientId: "P-2001",
+      patientName: "Ahmed Shaikh",
       patientAge: "45",
       patientGender: "Male",
       testType: "Blood Test",
@@ -52,7 +52,7 @@ const initialState = {
           unit: "g/dL",
           referenceRange: "13.5-17.5 g/dL",
           abnormalFlag: "normal",
-          resultComments: "Within normal limits",
+          resultComments: "Within normal limits"
         },
         {
           name: "White Blood Cells",
@@ -60,7 +60,7 @@ const initialState = {
           unit: "/μL",
           referenceRange: "4,500-11,000/μL",
           abnormalFlag: "normal",
-          resultComments: "",
+          resultComments: ""
         },
         {
           name: "Platelets",
@@ -68,7 +68,7 @@ const initialState = {
           unit: "/μL",
           referenceRange: "150,000-450,000/μL",
           abnormalFlag: "normal",
-          resultComments: "",
+          resultComments: ""
         },
         {
           name: "Hematocrit",
@@ -76,17 +76,17 @@ const initialState = {
           unit: "%",
           referenceRange: "41-50%",
           abnormalFlag: "normal",
-          resultComments: "",
-        },
+          resultComments: ""
+        }
       ],
       technician: "Lab Tech John Doe",
       cost: "$45",
-      notes: "Sample processed within 24 hours. All results within normal limits.",
+      notes: "Sample processed within 24 hours. All results within normal limits."
     },
     {
       id: "L-002",
-      patientId: "P-1002",
-      patientName: "Emma Johnson",
+      patientId: "P-2002",
+      patientName: "Areeba Tariq",
       patientAge: "32",
       patientGender: "Female",
       testType: "X-Ray",
@@ -108,7 +108,7 @@ const initialState = {
           unit: "",
           referenceRange: "Clear",
           abnormalFlag: "normal",
-          resultComments: "Pending radiologist confirmation",
+          resultComments: "Pending radiologist confirmation"
         },
         {
           name: "Heart Size",
@@ -116,7 +116,7 @@ const initialState = {
           unit: "",
           referenceRange: "Normal",
           abnormalFlag: "normal",
-          resultComments: "",
+          resultComments: ""
         },
         {
           name: "Diaphragm",
@@ -124,18 +124,18 @@ const initialState = {
           unit: "",
           referenceRange: "No abnormalities",
           abnormalFlag: "normal",
-          resultComments: "",
-        },
+          resultComments: ""
+        }
       ],
       technician: "Radiology Tech Sarah Lee",
       cost: "$120",
-      notes: "Urgent review requested by physician. Preliminary results pending radiologist confirmation.",
+      notes: "Urgent review requested by physician. Preliminary results pending radiologist confirmation."
     },
     {
       id: "L-003",
-      patientId: "P-1003",
-      patientName: "Michael Davis",
-      patientAge: "60",
+      patientId: "P-2003",
+      patientName: "Bilal Ahmed",
+      patientAge: "28",
       patientGender: "Male",
       testType: "Blood Test",
       testName: "Lipid Profile",
@@ -156,7 +156,7 @@ const initialState = {
           unit: "mg/dL",
           referenceRange: "<200 mg/dL",
           abnormalFlag: "normal",
-          resultComments: "",
+          resultComments: ""
         },
         {
           name: "LDL Cholesterol",
@@ -164,7 +164,7 @@ const initialState = {
           unit: "mg/dL",
           referenceRange: "<100 mg/dL",
           abnormalFlag: "high",
-          resultComments: "Elevated, recommend follow-up",
+          resultComments: "Elevated, recommend follow-up"
         },
         {
           name: "HDL Cholesterol",
@@ -172,7 +172,7 @@ const initialState = {
           unit: "mg/dL",
           referenceRange: ">40 mg/dL",
           abnormalFlag: "normal",
-          resultComments: "",
+          resultComments: ""
         },
         {
           name: "Triglycerides",
@@ -180,18 +180,18 @@ const initialState = {
           unit: "mg/dL",
           referenceRange: "<150 mg/dL",
           abnormalFlag: "normal",
-          resultComments: "",
-        },
+          resultComments: ""
+        }
       ],
       technician: "Lab Tech Maria Garcia",
       cost: "$65",
-      notes: "LDL cholesterol elevated. Patient advised to follow up with cardiologist.",
+      notes: "LDL cholesterol elevated. Patient advised to follow up with cardiologist."
     },
     {
       id: "L-004",
-      patientId: "P-1004",
-      patientName: "Sarah Wilson",
-      patientAge: "28",
+      patientId: "P-2004",
+      patientName: "Sana Baloch",
+      patientAge: "55",
       patientGender: "Female",
       testType: "MRI",
       testName: "MRI Brain",
@@ -208,9 +208,10 @@ const initialState = {
       results: [],
       technician: "MRI Tech Robert Kim",
       cost: "$850",
-      notes: "Patient to be prepped for MRI with contrast.",
-    },
-  ],
+      notes: "Patient to be prepped for MRI with contrast."
+    }
+  ]
+  ,
   selectedTest: null,
   loading: false,
   error: null,
