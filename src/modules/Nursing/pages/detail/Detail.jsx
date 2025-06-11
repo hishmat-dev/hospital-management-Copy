@@ -5,13 +5,12 @@ import { useEffect } from "react"
 import { fetchVitals } from "../../action/slice"
 
 const NursingDetail = () => {
-  const { id, patientName } = useParams()
+  const { patientName } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { vitals, loading } = useSelector((state) => state.nursing)
-  console.log("Vitals:", vitals)
-  // console.log("Nursing Details :", id, patientName)
+  // console.log("Vitals:", vitals)
   const vitalRecord = vitals.find((v) => v.patientName === patientName)
   // console.log("Vital Record:", vitalRecord)
 
@@ -34,7 +33,7 @@ const NursingDetail = () => {
       <div className="text-center py-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Vital Record Not Found</h2>
         <button
-          onClick={() => navigate("/nursing/list")}
+          onClick={() => navigate("/nursing/vitals")}
           className="bg-primary-color text-white px-4 py-2 rounded-md "
         >
           Back to Nursing Records
@@ -74,7 +73,7 @@ const NursingDetail = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Nursing Staff</h3>
+              <h3 className=" font-semibold mb-4">Nursing Staff</h3>
               <div className="space-y-2">
                 <p>
                   <span className="font-medium">Nurse:</span> {vitalRecord.nurseName}
@@ -86,7 +85,7 @@ const NursingDetail = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Vital Signs</h3>
+              <h3 className=" font-semibold mb-4">Vital Signs</h3>
               <div className="space-y-2">
                 <p>
                   <span className="font-medium">Blood Pressure:</span> {vitalRecord.bloodPressure}
@@ -110,7 +109,7 @@ const NursingDetail = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Additional Measurements</h3>
+              <h3 className=" font-semibold mb-4">Additional Measurements</h3>
               <div className="space-y-2">
                 <p>
                   <span className="font-medium">Weight:</span> {vitalRecord.weight} lbs
@@ -148,7 +147,7 @@ const NursingDetail = () => {
 
           {vitalRecord.notes && (
             <div className="mt-6">
-              <h3 className="text-lg font-semibold mb-4">Nursing Notes</h3>
+              <h3 className=" font-semibold mb-4">Nursing Notes</h3>
               <div className="bg-gray-200 p-4 rounded-md">
                 <p>{vitalRecord.notes}</p>
               </div>
@@ -157,7 +156,7 @@ const NursingDetail = () => {
 
           <div className="mt-8 flex justify-end space-x-4">
             <button
-              onClick={() => navigate(`/nursing/update/${id}`)}
+              onClick={() => navigate(`/nursing/update/${patientName}`)}
               className="bg-primary-color text-white px-4 py-2 rounded-md "
             >
               Update Record

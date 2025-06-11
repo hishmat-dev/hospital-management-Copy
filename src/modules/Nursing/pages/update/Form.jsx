@@ -49,7 +49,7 @@ const NursingUpdateForm = ({ initialData, isUpdate = false }) => {
           }),
         ).unwrap()
       }
-      navigate("/nursing/list")
+      navigate("/nursing/vitals")
     } catch (error) {
       console.error("Error updating nursing record:", error)
     }
@@ -234,7 +234,7 @@ const NursingUpdateForm = ({ initialData, isUpdate = false }) => {
         </button>
         <button
           type="button"
-          onClick={() => navigate("/nursing/list")}
+          onClick={() => navigate("/nursing/vitals")}
           className="bg-red-color text-white px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
         >
           Cancel

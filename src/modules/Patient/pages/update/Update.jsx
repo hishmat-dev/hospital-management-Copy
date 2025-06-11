@@ -16,7 +16,7 @@ export default function PatientUpdate() {
             <p className="text-gray-600">Modify patient information</p>
           </div>
           <button
-            onClick={() => navigate("/patients/list")}
+            onClick={() => navigate("hospital/patients/list")}
             className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
           >
             Back to Patients

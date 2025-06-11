@@ -60,14 +60,14 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* Default redirect */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="hospital/dashboard" replace />} />
 
       {/* Dashboard */}
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="hospital/dashboard" element={<Dashboard />} />
 
       {/* Patient Management Routes */}
-      <Route path="/patients/add" element={<PatientCreate />} />
-      <Route path="/patients/list" element={<PatientList />} />
+      <Route path="hospital/patients/add" element={<PatientCreate />} />
+      <Route path="hospital/patients/list" element={<PatientList />} />
       <Route path="/patients/detail/:id" element={<PatientDetail />} />
       <Route path="/patients/update/:id" element={<PatientUpdate />} />
 
@@ -105,8 +105,8 @@ export default function AppRoutes() {
       {/* Nursing Management Routes */}
       <Route path="/nursing/add" element={<NursingCreate />} />
       <Route path="/nursing/vitals" element={<NursingList />} />
-      <Route path="/nursing/detail/:id" element={<NursingDetail />} />
-      <Route path="/nursing/update/:id" element={<NursingUpdate />} />
+      <Route path="/nursing/detail/:patientName" element={<NursingDetail />} />
+      <Route path="/nursing/update/:patientName" element={<NursingUpdate />} />
 
       {/* Administrative Routes - Lab Categories */}
       <Route path="/admin/lab-categories" element={<CategoryList />} />

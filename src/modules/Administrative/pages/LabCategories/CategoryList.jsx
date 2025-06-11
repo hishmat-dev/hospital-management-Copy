@@ -1,45 +1,78 @@
-
-
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { fetchLabCategories, deleteLabCategory } from "../../action/slice"
-import { Plus, Eye, Edit, Trash2, Tag } from "lucide-react"
-import LoadingComponent from "../../../../components/ui/LoadingComponent"
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Plus, Tag } from "lucide-react";
+import LoadingComponent from "../../../../components/ui/LoadingComponent";
+import ReusableTable from "../../../../components/ui/SharedTable";
+import { useEntityActions } from "../create.hook";
+import { fetchLabCategories, deleteLabCategory } from "../../action/slice";
 
 export default function CategoryList() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { labCategories, loading } = useSelector((state) => state.administrative)
-  const [searchTerm, setSearchTerm] = useState("")
+  const { labCategories, loading } = useSelector((state) => state.administrative);
+  const {
+    searchTerm,
+    setSearchTerm,
+    pagination,
+    handleView,
+    handleEdit,
+    handleDelete,
+    handleCreate,
+    handlePageChange,
+    handleLimitChange,
+    filterEntities,
+    updatePaginationTotal,
+  } = useEntityActions("lab-categories", deleteLabCategory, fetchLabCategories);
 
   useEffect(() => {
-    dispatch(fetchLabCategories())
-  }, [dispatch])
+    updatePaginationTotal(filteredCategories.length);
+  }, [labCategories, searchTerm, updatePaginationTotal]);
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this category?")) {
-      await dispatch(deleteLabCategory(id))
+  const filteredCategories = filterEntities(labCategories);
+
+  const headers = [
+    { key: "name", label: "Category Name" },
+    { key: "code", label: "Code" },
+    { key: "description", label: "Description" },
+    { key: "createdAt", label: "Created At" },
+    { key: "actions", label: "Actions" },
+  ];
+
+  const renderCell = (key, item) => {
+    if (key === "code") {
+      return (
+        <span className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+          {item.code}
+        </span>
+      );
     }
-  }
+    if (key === "description") {
+      return item.description ? (
+        <span className="line-clamp-2">{item.description}</span>
+      ) : (
+        <span className="text-gray-400">No description</span>
+      );
+    }
+    if (key === "createdAt") {
+      return <span>{new Date(item.createdAt).toLocaleDateString()}</span>;
+    }
+    return null;
+  };
 
-  const filteredCategories = labCategories.filter((category) =>
-    category.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  const paginatedCategories = filteredCategories.slice(
+    (pagination.page - 1) * pagination.limit,
+    pagination.page * pagination.limit
+  );
 
   if (loading) {
-    return (
-     <LoadingComponent/>
-    )
+    return <LoadingComponent />;
   }
 
   return (
     <div className="space-y-6 text-[12px]">
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className=" font-bold text-gray-900">Lab Categories</h1>
+          <h1 className="text-xl font-bold text-gray-900">Lab Categories</h1>
           <button
-            onClick={() => navigate("/admin/lab-categories/create")}
+            onClick={handleCreate}
             className="flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
           >
             <Plus size={16} />
@@ -47,7 +80,6 @@ export default function CategoryList() {
           </button>
         </div>
 
-        {/* Search */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">Search Categories</label>
           <input
@@ -59,7 +91,6 @@ export default function CategoryList() {
           />
         </div>
 
-        {/* Categories Grid */}
         {filteredCategories.length === 0 ? (
           <div className="text-center py-12">
             <Tag className="mx-auto h-12 w-12 text-gray-400 mb-4" />
@@ -69,7 +100,7 @@ export default function CategoryList() {
             </p>
             {!searchTerm && (
               <button
-                onClick={() => navigate("/admin/lab-categories/create")}
+                onClick={handleCreate}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary-color text-white rounded-md transition-colors"
               >
                 <Plus size={16} />
@@ -78,57 +109,22 @@ export default function CategoryList() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCategories.map((category) => (
-              <div
-                key={category.id}
-                className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
-                    <span className="inline-block px-2 py-1 bg-green-100 text-green-800  rounded-full">
-                      {category.code}
-                    </span>
-                  </div>
-                </div>
-
-                {category.description && (
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{category.description}</p>
-                )}
-
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => navigate(`/admin/lab-categories/view/${category.id}`)}
-                      className="text-blue-600 hover:text-blue-800"
-                      title="View Category"
-                    >
-                      <Eye size={16} />
-                    </button>
-                    <button
-                      onClick={() => navigate(`/admin/lab-categories/edit/${category.id}`)}
-                      className="text-green-600 hover:text-green-800"
-                      title="Edit Category"
-                    >
-                      <Edit size={16} />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(category.id)}
-                      className="text-red-600 hover:text-red-800"
-                      title="Delete Category"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-
-                  <div className=" text-gray-400">{new Date(category.createdAt).toLocaleDateString()}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReusableTable
+            headers={headers}
+            data={paginatedCategories}
+            onView={handleView}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            renderCell={renderCell}
+            keyField="id"
+            pagination={{
+              ...pagination,
+              onPageChange: handlePageChange,
+              onLimitChange: handleLimitChange,
+            }}
+          />
         )}
       </div>
     </div>
-  )
+  );
 }

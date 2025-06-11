@@ -65,7 +65,7 @@ export const useNursingCreate = () => {
         }
 
         await dispatch(createVitals(vitalsData)).unwrap()
-        navigate("/nursing/list")
+        navigate("/nursing/vitals")
       } catch (error) {
         console.error("Error creating vitals record:", error)
       } finally {
@@ -76,7 +76,7 @@ export const useNursingCreate = () => {
   )
 
   const handleCancel = useCallback(() => {
-    navigate("/nursing/list")
+    navigate("/nursing/vitals")
   }, [navigate])
 
   const { isValid } = validateVitalsForm(formData)

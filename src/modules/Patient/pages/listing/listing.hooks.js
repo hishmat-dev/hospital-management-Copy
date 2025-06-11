@@ -78,7 +78,7 @@ export const usePatientListing = () => {
   }
 
   const handleAddNew = () => {
-    navigate("/patients/add")
+    navigate("hospital/patients/add")
   }
 
   const getStatusColor = (status) => {

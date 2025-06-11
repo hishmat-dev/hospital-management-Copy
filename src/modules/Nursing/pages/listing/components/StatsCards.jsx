@@ -3,8 +3,8 @@ import { Activity, AlertTriangle, Clock, Users, TrendingUp, Heart } from "lucide
 
 export default function StatsCards({ nursingStats }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
+      <div className="bg-white rounded-lg shadow-md p-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">Total Vitals</p>
@@ -14,7 +14,7 @@ export default function StatsCards({ nursingStats }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">Critical Alerts</p>
@@ -24,7 +24,7 @@ export default function StatsCards({ nursingStats }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">Pending Meds</p>
@@ -34,7 +34,7 @@ export default function StatsCards({ nursingStats }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">Active Shifts</p>
@@ -44,7 +44,7 @@ export default function StatsCards({ nursingStats }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">Avg Response</p>
@@ -54,7 +54,7 @@ export default function StatsCards({ nursingStats }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-3">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">Patient Load</p>

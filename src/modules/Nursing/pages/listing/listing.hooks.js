@@ -31,6 +31,7 @@ export const useNursingListing = () => {
   const handleView = useCallback(
     (vital) => {
       dispatch(setSelectedVital(vital))
+      // console.log("Selected Vital:", vital)
       navigate(`/nursing/detail/${vital.patientName}`)
     },
     [dispatch, navigate],
