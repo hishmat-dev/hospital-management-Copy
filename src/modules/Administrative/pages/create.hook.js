@@ -19,12 +19,16 @@ export const useEntityActions = (basePath, deleteAction, fetchAction) => {
     }
   }, [dispatch, fetchAction]);
 
-  // Update pagination total when filtered entities change
+  // Only update pagination total if it has changed
   const updatePaginationTotal = (total) => {
-    setPagination((prev) => ({ ...prev, total }));
+    setPagination((prev) => {
+      if (prev.total !== total) {
+        return { ...prev, total };
+      }
+      return prev;
+    });
   };
 
-  // Navigation handlers
   const handleView = (item) => {
     navigate(`/admin/${basePath}/view/${item.id}`);
   };
@@ -37,14 +41,12 @@ export const useEntityActions = (basePath, deleteAction, fetchAction) => {
     navigate(`/admin/${basePath}/create`);
   };
 
-  // Delete handler with confirmation
   const handleDelete = async (id) => {
     if (window.confirm(`Are you sure you want to delete this ${basePath.slice(0, -1)}?`)) {
       await dispatch(deleteAction(id));
     }
   };
 
-  // Pagination handlers
   const handlePageChange = (page) => {
     setPagination((prev) => ({ ...prev, page }));
   };
@@ -53,7 +55,6 @@ export const useEntityActions = (basePath, deleteAction, fetchAction) => {
     setPagination((prev) => ({ ...prev, limit, page: 1 }));
   };
 
-  // Filter entities by search term
   const filterEntities = (entities, searchKey = "name") => {
     return entities.filter((entity) =>
       entity[searchKey].toLowerCase().includes(searchTerm.toLowerCase())

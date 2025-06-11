@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Plus, FileText } from "lucide-react";
 import LoadingComponent from "../../../../../components/ui/LoadingComponent";
@@ -23,14 +23,17 @@ export default function TemplateList() {
     updatePaginationTotal,
   } = useEntityActions("lab-templates", deleteLabTemplate, fetchLabTemplates);
 
-  // Fetch categories on mount
+  // Memoize filtered templates to prevent recalculation on every render
+  const filteredTemplates = useMemo(() => {
+    return filterEntities(labTemplates).filter(
+      (template) => !categoryFilter || template.categoryId === categoryFilter
+    );
+  }, [labTemplates, searchTerm, categoryFilter, filterEntities]);
+
+  // Update pagination total when filteredTemplates changes
   useEffect(() => {
     updatePaginationTotal(filteredTemplates.length);
-  }, [labTemplates, searchTerm, categoryFilter, updatePaginationTotal]);
-
-  const filteredTemplates = filterEntities(labTemplates).filter(
-    (template) => !categoryFilter || template.categoryId === categoryFilter
-  );
+  }, [filteredTemplates, updatePaginationTotal]);
 
   const getCategoryName = (categoryId) => {
     const category = labCategories.find((cat) => cat.id === categoryId);
@@ -89,7 +92,6 @@ export default function TemplateList() {
           </button>
         </div>
 
-        {/* Filters */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Search Templates</label>
@@ -121,7 +123,6 @@ export default function TemplateList() {
           </div>
         </div>
 
-        {/* Conditional Rendering: Empty State or Table */}
         {filteredTemplates.length === 0 ? (
           <div className="text-center py-12">
             <FileText className="mx-auto h-12 w-12 text-gray-400 mb-4" />

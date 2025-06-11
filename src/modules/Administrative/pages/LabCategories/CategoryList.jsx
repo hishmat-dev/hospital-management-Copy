@@ -1,10 +1,10 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Plus, Tag } from "lucide-react";
 import LoadingComponent from "../../../../components/ui/LoadingComponent";
 import ReusableTable from "../../../../components/ui/SharedTable";
 import { useEntityActions } from "../create.hook";
 import { fetchLabCategories, deleteLabCategory } from "../../action/slice";
+import { useEffect, useMemo } from "react";
 
 export default function CategoryList() {
   const { labCategories, loading } = useSelector((state) => state.administrative);
@@ -22,11 +22,15 @@ export default function CategoryList() {
     updatePaginationTotal,
   } = useEntityActions("lab-categories", deleteLabCategory, fetchLabCategories);
 
+  // Memoize filtered categories to prevent recalculation on every render
+  const filteredCategories = useMemo(() => {
+    return filterEntities(labCategories);
+  }, [labCategories, searchTerm, filterEntities]);
+
+  // Update pagination total when filteredCategories changes
   useEffect(() => {
     updatePaginationTotal(filteredCategories.length);
-  }, [labCategories, searchTerm, updatePaginationTotal]);
-
-  const filteredCategories = filterEntities(labCategories);
+  }, [filteredCategories, updatePaginationTotal]);
 
   const headers = [
     { key: "name", label: "Category Name" },

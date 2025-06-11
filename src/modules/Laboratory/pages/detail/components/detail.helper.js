@@ -1,5 +1,5 @@
 import logo from "../../../../../shared/workwise.png";
-console.log("Imported logo path:", logo); // Debug the resolved path
+// console.log("Imported logo path:", logo); // Debug the resolved path
 
 export const detailHelper = {
     isResultAbnormal: (abnormalFlag) => {
@@ -49,24 +49,24 @@ export const detailHelper = {
             // Add www.lab.com on the right side
             const rightStartX = 190; // Near right edge of A4 (595 points wide)
             doc.setFontSize(10);
-            doc.text("www.lab.com", rightStartX, leftStartY + 10, { align: "right" }); // Aligned with accreditation height
+            doc.text("www.workw@lab.com", rightStartX, leftStartY + 10, { align: "right" }); // Aligned with accreditation height
             doc.setFontSize(10);
             doc.text("0354-6565952", rightStartX, leftStartY + 14, { align: "right" }); // Aligned with accreditation height
 
             // Report title and line
             doc.setFontSize(16);
-            doc.text("Laboratory Test Report", 105, 50, { align: "center" });
+            doc.text("Laboratory Test Report", 105, 43, { align: "center" });
             doc.setLineWidth(0.5);
-            doc.line(80, 52, 130, 52);
+            doc.line(75, 45, 135, 45);
 
             // Patient Information
             doc.autoTable({
-                startY: 70,
+                startY: 50,
                 theme: 'plain',
                 body: [
                     [{ content: `Name: ${test.patientName || ''}`, styles: { halign: 'left' } }, { content: `Sample Collected At: ${test.sampleLocation || ''}`, styles: { halign: 'left' } }, { content: `Registered on: ${test.orderedDate || ''}`, styles: { halign: 'left' } }],
                     [{ content: `Age: ${test.patientAge || ''}`, styles: { halign: 'left' } }, { content: `Ref. By: ${test.doctorName || ''}`, styles: { halign: 'left' } }, { content: `Collected on: ${test.sampleDate || ''}`, styles: { halign: 'left' } }],
-                    [{ content: `Sex: ${test.patientGender || ''}`, styles: { halign: 'left' } }, { content: `Reported on: ${test.reportDate || ''}`, styles: { halign: 'left' } }],
+                    [{ content: `Sex: ${test.patientGender || ''}`, styles: { halign: 'left' } }],
                     [{ content: `PID: ${test.patientId || ''}`, styles: { halign: 'left' } }]
                 ],
                 columnStyles: {
@@ -130,7 +130,7 @@ export const detailHelper = {
             const pageHeight = doc.internal.pageSize.getHeight();
             const pageWidth = doc.internal.pageSize.getWidth();
             doc.setFontSize(9);
-            doc.text("By workwise", pageWidth - 15, pageHeight - 10, { align: "right" });
+            doc.text("Powered by Workwise", pageWidth - 15, pageHeight - 10, { align: "right" });
             
             // Save PDF
             doc.save(`lab-test-report-${test.id || ''}-${new Date().toLocaleString("en-PK", { timeZone: "Asia/Karachi" }).replace(/,/g, "").split(" ")[0]}.pdf`);
