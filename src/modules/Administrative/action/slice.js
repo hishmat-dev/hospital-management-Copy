@@ -224,3 +224,222 @@ const administrativeSlice = createSlice({
 
 export const { clearError } = administrativeSlice.actions
 export default administrativeSlice.reducer
+
+
+// import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import { administrationService } from "./administrationService";
+
+// // Lab Categories Thunks
+// export const fetchLabCategories = createAsyncThunk(
+//   "administrative/fetchLabCategories",
+//   async (params = {}, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.getAllCategories(params);
+//       return response;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const createLabCategory = createAsyncThunk(
+//   "administrative/createLabCategory",
+//   async (categoryData, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.createCategory(categoryData);
+//       return response;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const updateLabCategory = createAsyncThunk(
+//   "administrative/updateLabCategory",
+//   async ({ id, ...categoryData }, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.updateCategory(id, categoryData);
+//       return response;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const deleteLabCategory = createAsyncThunk(
+//   "administrative/deleteLabCategory",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.deleteCategory(id);
+//       return id; // Return id for state update
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// // Lab Templates Thunks
+// export const fetchLabTemplates = createAsyncThunk(
+//   "administrative/fetchLabTemplates",
+//   async (params = {}, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.getAllTemplates(params);
+//       return response;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const createLabTemplate = createAsyncThunk(
+//   "administrative/createLabTemplate",
+//   async (templateData, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.createTemplate(templateData);
+//       return response;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const updateLabTemplate = createAsyncThunk(
+//   "administrative/updateLabTemplate",
+//   async ({ id, ...templateData }, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.updateTemplate(id, templateData);
+//       return response;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// export const deleteLabTemplate = createAsyncThunk(
+//   "administrative/deleteLabTemplate",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const response = await administrationService.deleteTemplate(id);
+//       return id; // Return id for state update
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
+// const administrativeSlice = createSlice({
+//   name: "administrative",
+//   initialState: {
+//     labCategories: [],
+//     labTemplates: [],
+//     loading: false,
+//     error: null,
+//   },
+//   reducers: {
+//     clearError: (state) => {
+//       state.error = null;
+//     },
+//   },
+//   extraReducers: (builder) => {
+//     builder
+//       // Lab Categories
+//       .addCase(fetchLabCategories.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(fetchLabCategories.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.labCategories = action.payload;
+//       })
+//       .addCase(fetchLabCategories.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to fetch lab categories";
+//       })
+//       .addCase(createLabCategory.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(createLabCategory.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.labCategories.push(action.payload);
+//       })
+//       .addCase(createLabCategory.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to create lab category";
+//       })
+//       .addCase(updateLabCategory.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(updateLabCategory.fulfilled, (state, action) => {
+//         state.loading = false;
+//         const index = state.labCategories.findIndex((c) => c.id === action.payload.id);
+//         if (index !== -1) {
+//           state.labCategories[index] = action.payload;
+//         }
+//       })
+//       .addCase(updateLabCategory.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to update lab category";
+//       })
+//       .addCase(deleteLabCategory.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(deleteLabCategory.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.labCategories = state.labCategories.filter((c) => c.id !== action.payload);
+//       })
+//       .addCase(deleteLabCategory.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to delete lab category";
+//       })
+//       // Lab Templates
+//       .addCase(fetchLabTemplates.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(fetchLabTemplates.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.labTemplates = action.payload;
+//       })
+//       .addCase(fetchLabTemplates.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to fetch lab templates";
+//       })
+//       .addCase(createLabTemplate.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(createLabTemplate.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.labTemplates.push(action.payload);
+//       })
+//       .addCase(createLabTemplate.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to create lab template";
+//       })
+//       .addCase(updateLabTemplate.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(updateLabTemplate.fulfilled, (state, action) => {
+//         state.loading = false;
+//         const index = state.labTemplates.findIndex((t) => t.id === action.payload.id);
+//         if (index !== -1) {
+//           state.labTemplates[index] = action.payload;
+//         }
+//       })
+//       .addCase(updateLabTemplate.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to update lab template";
+//       })
+//       .addCase(deleteLabTemplate.pending, (state) => {
+//         state.loading = true;
+//       })
+//       .addCase(deleteLabTemplate.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.labTemplates = state.labTemplates.filter((t) => t.id !== action.payload);
+//       })
+//       .addCase(deleteLabTemplate.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || "Failed to delete lab template";
+//       });
+//   },
+// });
+
+// export const { clearError } = administrativeSlice.actions;
+// export default administrativeSlice.reducer;
