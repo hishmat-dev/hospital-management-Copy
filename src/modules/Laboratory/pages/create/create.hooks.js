@@ -60,6 +60,7 @@ export const useLaboratoryCreate = () => {
     async (e, tests = []) => {
       e.preventDefault();
       console.log("Submitting form with data:", formData, "Tests:", tests);
+      alert("Test ordered")
       // Validate patientName
       const selectedPatient = patients.find((p) => p.name === formData.patientName);
       if (!selectedPatient) {

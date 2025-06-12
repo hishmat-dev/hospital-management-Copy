@@ -3,11 +3,9 @@ import StatsCards from "./components/StatsCards"
 import ReusableTable from "../../../../components/ui/SharedTable"
 import { useLaboratoryListing } from "./listing.hooks"
 import { listingConfig } from "./listing.config"
-import { Eye, Edit, Trash2, Download, Calendar, Clock, User, Stethoscope, AlertCircle } from "lucide-react"
-import { Select } from "antd"
-import LoadingComponent from "../../../../components/ui/LoadingComponent"
+import { Eye, Edit, Trash2, Calendar, Clock, User, Stethoscope } from "lucide-react"
 
-const { Option } = Select
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 export default function LaboratoryList() {
   const {
@@ -20,8 +18,6 @@ export default function LaboratoryList() {
     handleView,
     handleEdit,
     handleDelete,
-    handleStatusChange,
-    handleDownloadReport,
     handleExport,
     handleAddNew,
     getStatusColor,
@@ -95,20 +91,11 @@ export default function LaboratoryList() {
         )
       case "status":
         return (
-          <Select
-            value={record.status}
-            onChange={(value) => handleStatusChange(record.id, value)}
-            className={`w-full max-w-[120px]  ${getStatusColor(record.status)}`}
-            popupClassName=""
-            bordered={false}
-            getPopupContainer={(trigger) => trigger.parentNode}
-          >
-            {["Pending", "Sample Collected", "In Progress", "Completed", "Cancelled"].map((status) => (
-              <Option key={status} value={status}>
-                {status}
-              </Option>
-            ))}
-          </Select>
+          <div className="flex items-center space-x-1">
+            <span className={`px-2 py-1 rounded-full  ${getPriorityColor(record.status)}`}>
+              {record.status}
+            </span>
+          </div>
         )
       case "actions":
         return (

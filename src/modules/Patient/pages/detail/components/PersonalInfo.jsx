@@ -1,4 +1,3 @@
-import { Phone } from 'lucide-react';
 export default function PersonalInfo({ patient, profile, navigate }) {
 
   return (
@@ -45,12 +44,18 @@ export default function PersonalInfo({ patient, profile, navigate }) {
           </div>
         </div>
 
-        <div className="lg:ml-auto">
+        <div className="lg:ml-auto flex flex-col gap-2">
           <button
             onClick={() => navigate("/hospital/patients/list")}
             className="bg-primary-color font-montserrat text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
           >
             Back to Patients
+          </button>
+          <button
+            onClick={() => navigate(`/doctors/createReports/${patient.id}`)}
+            className="bg-red-color font-montserrat text-white px-4 py-2 rounded-md transition-colors"
+          >
+            Create Report
           </button>
         </div>
       </div>

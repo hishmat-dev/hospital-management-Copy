@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Users, Calendar, Bed, UserCheck, AlertTriangle, Activity } from "lucide-react";
 import { Table, Tag } from "antd";
-import { Bar } from "@ant-design/plots";
+import { Pie } from "@ant-design/plots";
 import { useBedListing } from "../../modules/Bed/pages/listing/listing.hooks";
 import StatsCards from "../../modules/Bed/pages/listing/components/StatsCards";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,11 @@ import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const navigate = useNavigate();
   const { stats, specialties, recentPatients } = useSelector((state) => state.dashboard || {});
+
+  // Log specialties to debug
+  React.useEffect(() => {
+    console.log("Specialties data:", specialties);
+  }, [specialties]);
 
   // StatCard component
   const StatCard = ({ icon, title, value, onClick }) => (
@@ -74,46 +79,75 @@ export default function Dashboard() {
     navigate("/appointments/list");
   };
 
-  // Bar chart configuration for specialties
-  const barConfig = {
-    data: specialties
+  // Pie chart configuration for two-level chart
+  const pieConfig = {
+    data: specialties && specialties.length > 0
       ? [
           ...specialties.map((item) => ({
-            name: item.name,
-            value: item.patients,
-            type: "Patients",
+            type: "Outer",
+            name: item.name || "Unknown",
+            value: (item.patients || 0) + (item.doctors || 0), // Total value for label
+            patients: item.patients || 0,
+            doctors: item.doctors || 0,
+            color: ["#5AD8A6", "#FAAD14", "#5B8FF9", "#FF4D4F", "#975FE4"][specialties.indexOf(item) % 5],
           })),
           ...specialties.map((item) => ({
-            name: item.name,
-            value: item.doctors,
-            type: "Doctors",
+            type: "Inner",
+            name: item.name || "Unknown",
+            value: (item.patients || 0) + (item.doctors || 0), // Total value for label
+            patients: item.patients || 0,
+            doctors: item.doctors || 0,
+            color: ["#5AD8A6", "#FAAD14", "#5B8FF9", "#FF4D4F", "#975FE4"][specialties.indexOf(item) % 5],
           })),
         ]
       : [
-          { name: "Cardiology", value: 50, type: "Patients" },
-          { name: "Cardiology", value: 10, type: "Doctors" },
-          { name: "Neurology", value: 40, type: "Patients" },
-          { name: "Neurology", value: 8, type: "Doctors" },
-          { name: "Orthopedics", value: 30, type: "Patients" },
-          { name: "Orthopedics", value: 6, type: "Doctors" },
-          { name: "Pediatrics", value: 60, type: "Patients" },
-          { name: "Pediatrics", value: 12, type: "Doctors" },
-          { name: "General Surgery", value: 45, type: "Patients" },
-          { name: "General Surgery", value: 9, type: "Doctors" },
+          { type: "Outer", name: "Cardiology", value: 60, patients: 50, doctors: 10, color: "#5AD8A6" },
+          { type: "Outer", name: "Neurology", value: 48, patients: 40, doctors: 8, color: "#FAAD14" },
+          { type: "Outer", name: "Orthopedics", value: 36, patients: 30, doctors: 6, color: "#5B8FF9" },
+          { type: "Outer", name: "Pediatrics", value: 72, patients: 60, doctors: 12, color: "#FF4D4F" },
+          { type: "Outer", name: "General Surgery", value: 54, patients: 45, doctors: 9, color: "#975FE4" },
+          { type: "Inner", name: "Cardiology", value: 60, patients: 50, doctors: 10, color: "#5AD8A6" },
+          { type: "Inner", name: "Neurology", value: 48, patients: 40, doctors: 8, color: "#FAAD14" },
+          { type: "Inner", name: "Orthopedics", value: 36, patients: 30, doctors: 6, color: "#5B8FF9" },
+          { type: "Inner", name: "Pediatrics", value: 72, patients: 60, doctors: 12, color: "#FF4D4F" },
+          { type: "Inner", name: "General Surgery", value: 54, patients: 45, doctors: 9, color: "#975FE4" },
         ],
-    xField: "name",
-    yField: "value",
+    angleField: "value",
+    colorField: "name",
     seriesField: "type",
-    isGroup: true,
+    radius: 1,
+    innerRadius: 0.6,
     legend: { position: "bottom" },
+    label: {
+      formatter: (datum) => datum?.value ? `${datum.value}` : "0", // Show total value or "0" if null
+    },
     tooltip: {
-      showMarkers: true,
       formatter: (datum) => ({
-        name: datum.type,
-        value: datum.value !== undefined ? datum.value : "N/A", // Handle undefined values
+        name: datum.name,
+        value: "",
+        customHtml: `<div><p>${datum.type === "Outer" ? "Patients" : "Doctors"}: ${datum[datum.type === "Outer" ? "patients" : "doctors"] || 0}</p></div>`,
       }),
     },
-    color: ["#5B8FF9", "#5AD8A6"], // Blue for Patients, Green for Doctors
+    color: ({ name }) => {
+      const colorMap = {
+        Cardiology: "#5AD8A6",
+        Neurology: "#FAAD14",
+        Orthopedics: "#5B8FF9",
+        Pediatrics: "#FF4D4F",
+        "General Surgery": "#975FE4",
+      };
+      return colorMap[name] || "#ccc";
+    },
+    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    statistic: {
+      title: {
+        formatter: () => "My Chart",
+        style: { fontSize: 16, fontWeight: "bold" },
+      },
+      content: {
+        style: { fontSize: 12 },
+      },
+    },
   };
 
   return (
@@ -121,7 +155,7 @@ export default function Dashboard() {
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h1 className="text-xl font-bold text-gray-900 mb-2">Hospital Dashboard</h1>
-        <p className="text-gray-600">Welcome to TapMed Hospital Management System</p>
+        <p className="text-gray-600">Welcome to Workwise Hospital Management System</p>
       </div>
 
       {/* Stats Grid */}
@@ -143,13 +177,13 @@ export default function Dashboard() {
 
       {/* Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-[12px]">
-        {/* Available Specialties (Grouped Bar Chart) */}
+        {/* My Chart (Two-Level Pie Chart) */}
         <div className="bg-white rounded-lg shadow-md p-3">
-          <h2 className="font-bold text-gray-900 mb-4">Available Specialties</h2>
+          <h2 className="font-bold text-gray-900 mb-4">My Chart</h2>
           {specialties && specialties.length > 0 ? (
-            <Bar {...barConfig} />
+            <Pie {...pieConfig} />
           ) : (
-            <p className="text-gray-600">No specialties data available</p>
+            <p className="text-gray-600">No data available</p>
           )}
         </div>
 

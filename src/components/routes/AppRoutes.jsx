@@ -9,6 +9,7 @@ import PatientUpdate from "../../modules/Patient/pages/update"
 
 // Doctor Management
 import DoctorCreate from "../../modules/Doctor/pages/create"
+import DoctorCreateReports from "../../modules/Doctor/pages/createReports"
 import DoctorList from "../../modules/Doctor/pages/listing"
 import DoctorDetail from "../../modules/Doctor/pages/detail"
 import DoctorUpdate from "../../modules/Doctor/pages/update"
@@ -73,6 +74,7 @@ export default function AppRoutes() {
 
       {/* Doctor Management Routes */}
       <Route path="/doctors/add" element={<DoctorCreate />} />
+      <Route path="/doctors/createReports/:id" element={<DoctorCreateReports/>} />
       <Route path="/doctors/list" element={<DoctorList />} />
       <Route path="/doctors/detail/:id" element={<DoctorDetail />} />
       <Route path="/doctors/update/:id" element={<DoctorUpdate />} />

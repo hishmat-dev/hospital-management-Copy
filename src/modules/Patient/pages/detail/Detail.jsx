@@ -1,7 +1,7 @@
 
 import { useParams, useNavigate } from "react-router-dom"
 import PersonalInfo from "./components/PersonalInfo"
-import ContactInfo from "./components/ContactInfo"
+import VitalRecords from "./components/VitalRecords"
 import MedicalInfo from "./components/MedicalInfo"
 import ActionButtons from "./components/ActionButtons"
 import DoctorVisits from "./components/DoctorVisits"
@@ -24,14 +24,6 @@ export default function PatientDetail() {
     )
   }
 
-  // if (error) {
-  //   return (
-  //     <div className="bg-red-50 border border-red-200 rounded-md p-4">
-  //       <p className="text-red-800">Error loading patient details: {error}</p>
-  //     </div>
-  //   )
-  // }
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -39,7 +31,7 @@ export default function PatientDetail() {
 
       {/* Patient Information */}
       <div className="space-y-6 ">
-        {/* <ContactInfo patient={patient} /> */}
+        <VitalRecords patient={patient} />
         <PatientVisits patient={patient} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <DoctorVisits patient={patient} />

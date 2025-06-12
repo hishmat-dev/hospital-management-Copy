@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLabForm } from "./create.hook";
 import { formConfig, headersConfig } from "./create.config";
@@ -9,7 +9,6 @@ import Notes from "./ui/Notes";
 import Buttons from "./ui/Buttons";
 
 const LaboratoryUpdateForm = ({ initialData, isUpdate = false }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { formData, availableTemplates, handleChange, handleValueChange, handleSubmit } = useLabForm(initialData, isUpdate);
 

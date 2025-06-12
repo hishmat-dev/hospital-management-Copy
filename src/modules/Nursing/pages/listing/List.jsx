@@ -16,7 +16,6 @@ export default function NursingList() {
     handleExport,
     handleAddNew,
     getAlertColor,
-    formatTime,
   } = useNursingListing()
 
   // console.log("Nursing status:", stats)

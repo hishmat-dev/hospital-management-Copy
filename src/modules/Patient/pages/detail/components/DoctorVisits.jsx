@@ -1,10 +1,9 @@
-import React from 'react';
 import { Table } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { FileTextOutlined, EyeOutlined, DownloadOutlined } from '@ant-design/icons';
+// import { useNavigate } from 'react-router-dom';
+import {  EyeOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const DoctorVisits = ({ patient }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const columns = [
     {

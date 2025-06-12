@@ -12,8 +12,7 @@ export const createConfig = {
     consciousness: "",
     mobility: "",
     skinCondition: "",
-    recordedDate: "",
-    recordedTime: "",
+    recordedAt: new Date().toISOString().slice(0, 16), // Sets to YYYY-MM-DDTHH:mm (e.g., 2025-06-12T11:15)
     recordedBy: "",
     shift: "",
     notes: "",

@@ -1,4 +1,4 @@
-import { Activity, Clock, User, AlertTriangle, Heart, Thermometer, Eye, Edit } from "lucide-react"
+import { Activity, User, AlertTriangle, Heart, Thermometer, Eye, Edit } from "lucide-react"
 
 export default function VitalsCard({ vital, onView, onEdit, getAlertColor }) {
   return (

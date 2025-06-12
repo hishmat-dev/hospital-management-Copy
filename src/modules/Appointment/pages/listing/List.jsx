@@ -2,7 +2,7 @@ import FilterBar from "./components/FilterBar"
 import ReusableTable from "../../../../components/ui/SharedTable"
 import { useAppointmentListing } from "./listing.hooks"
 import { listingConfig } from "./listing.config"
-import { Eye, Edit, Trash2, Calendar, Clock, User, Stethoscope } from "lucide-react"
+import { Calendar, Clock, User, Stethoscope } from "lucide-react"
 import { Select } from "antd"
 
 const { Option } = Select
@@ -17,7 +17,6 @@ export default function AppointmentList() {
     handleView,
     handleEdit,
     handleDelete,
-    handleStatusChange,
     handleExport,
     handleAddNew,
     getStatusColor,

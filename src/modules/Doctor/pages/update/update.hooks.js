@@ -9,7 +9,7 @@ import { validateDoctorUpdate } from "./update.validation"
 export const useUpdateHooks = (doctorId) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { doctors, loading, error } = useSelector((state) => state.doctors)
+  const { doctors, loading } = useSelector((state) => state.doctors)
 
   const [formData, setFormData] = useState({})
   const [errors, setErrors] = useState({})

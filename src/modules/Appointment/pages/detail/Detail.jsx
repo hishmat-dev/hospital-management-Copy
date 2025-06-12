@@ -23,6 +23,25 @@ const AppointmentDetail = () => {
     alert("Payment confirmed for appointment ID: " + id)
   }
 
+  const handleAddVital = () => {
+    
+    navigate("/nursing/add", {
+      state: {
+        patient: {
+          id: appointment.patientId, // Assuming appointment has patientId
+          name: appointment.patientName,
+          email: appointment.patientEmail,
+          phone: appointment.patientPhone,
+        },
+      },
+    })
+  }
+
+  const handleSendToDoctor = () => {
+    // Placeholder for send to doctor logic
+    alert("Sending appointment details to doctor for ID: " + id)
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -122,6 +141,7 @@ const AppointmentDetail = () => {
               </div>
             </div>
 
+          </div>
             <div>
               <h3 className="font-semibold mb-4">Payment Information</h3>
               <div className="space-y-2">
@@ -137,18 +157,38 @@ const AppointmentDetail = () => {
                     {appointment.paymentStatus || "Pending"}
                   </span>
                 </p>
-                <button
-                  onClick={handlePaymentConfirmation}
-                  className={`px-4 py-2 rounded-md text-white ${
-                    appointment.paymentStatus === "paid" ? "bg-gray-400 cursor-not-allowed" : "bg-green-400 hover:bg-green-700"
-                  }`}
-                  disabled={appointment.paymentStatus === "paid"}
-                >
-                  {appointment.paymentStatus === "paid" ? "Payment Confirmed" : "Confirm Payment"}
-                </button>
+                <div className="flex flex-row space-x-2">
+                  <button
+                    onClick={handlePaymentConfirmation}
+                    className={`px-4 py-2 rounded-md text-white ${
+                      appointment.paymentStatus === "paid" ? "bg-gray-400 cursor-not-allowed" : "bg-green-400 hover:bg-green-700"
+                    }`}
+                    disabled={appointment.paymentStatus === "paid"}
+                  >
+                    {appointment.paymentStatus === "paid" ? "Payment Confirmed" : "Confirm Payment"}
+                  </button>
+                  {appointment.paymentStatus === "paid" && (
+                    <>
+                      <button
+                        onClick={handleAddVital}
+                        className="bg-primary-color text-white px-4 py-2 rounded-md"
+                      >
+                        Add Vital
+                      </button>
+                      <button
+                        onClick={handleSendToDoctor}
+                        className={`px-4 py-2 rounded-md text-white ${
+                        appointment.status === "Completed" ? "bg-gray-400 cursor-not-allowed" : "bg-red-color"
+                        }`}
+                        disabled={appointment.status === "Completed"}
+                      >
+                        Send to Doctor
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
           <div className="mt-8 flex justify-end space-x-4">
             <button

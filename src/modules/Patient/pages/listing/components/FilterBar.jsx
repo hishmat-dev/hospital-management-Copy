@@ -1,15 +1,15 @@
 import { Search, Download, Plus, RotateCcw } from "lucide-react"
-import { useCallback } from "react"
+// import { useCallback } from "react"
 import debounce from "lodash.debounce"
 
 export default function FilterBar({ filters, onFilterChange, onExport, onAddNew, statuses, onResetFilters  = [] }) {
   // Debounce search input to avoid excessive re-renders
   
-  const handleResetFilters = () => {
-    onFilterChange("search", "")
-    onFilterChange("status", "")
-    onFilterChange("sortBy", "name")
-  }
+  // const handleResetFilters = () => {
+  //   onFilterChange("search", "")
+  //   onFilterChange("status", "")
+  //   onFilterChange("sortBy", "name")
+  // }
 
   return (
     <div className="bg-white rounded-lg shadow-md p-3 space-y-4 text-[12px]">

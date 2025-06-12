@@ -45,6 +45,7 @@ const initialState = {
       notes: "Regular checkup for hypertension",
       duration: "30 minutes",
       fee: "$200",
+      paymentStatus: "paid",
       room: "Room 101",
     },
     {
@@ -62,6 +63,7 @@ const initialState = {
       notes: "Post-surgery checkup - healing well",
       duration: "45 minutes",
       fee: "$180",
+      paymentStatus: "paid",
       room: "Room 205",
     },
     {
@@ -79,6 +81,7 @@ const initialState = {
       notes: "Chest pain evaluation",
       duration: "60 minutes",
       fee: "$150",
+      paymentStatus: "paid",
       room: "ER-1",
     },
     {
@@ -92,7 +95,7 @@ const initialState = {
       time: "11:00 AM",
       department: "Neurology",
       type: "Consultation",
-      status: "Scheduled",
+      status: "Pending",
       notes: "Migraine assessment and treatment plan",
       duration: "40 minutes",
       fee: "$250",

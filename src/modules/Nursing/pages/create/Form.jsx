@@ -1,10 +1,12 @@
-
 import SectionVitals from "./components/SectionVitals"
 import Btn from "./components/Btn"
 import { useNursingCreate } from "./create.hooks"
+import { useLocation } from "react-router-dom"
 
 export default function NursingCreateForm() {
-  const { formData, errors, loading, patients, handleChange, handleSubmit, handleCancel, isValid } = useNursingCreate()
+  const location = useLocation()
+  const initialPatient = location.state?.patient || {}
+  const { formData, errors, loading, patients, handleChange, handleSubmit, handleCancel, isValid } = useNursingCreate({ initialPatient })
 
   return (
     <div className="space-y-3 text-[12px]">
@@ -12,10 +14,10 @@ export default function NursingCreateForm() {
         <div className="flex items-center space-x-3 mb-6">
           <div className="bg-green-100 p-2 rounded-lg">
             <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-              <span className="text-white  font-bold">+</span>
+              <span className="text-white font-bold">+</span>
             </div>
           </div>
-          <h1 className=" font-bold text-gray-900">Record Vital Signs</h1>
+          <h1 className="font-bold text-gray-900">Record Vital Signs</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">

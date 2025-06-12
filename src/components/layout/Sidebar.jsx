@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react"
 import { menu } from "./menu"
+import logo from "../../shared/workwise-black.png"
 
 export default function Sidebar() {
   const [openMenus, setOpenMenus] = useState({})
@@ -44,6 +45,14 @@ export default function Sidebar() {
           scrollbarWidth: "none" /* Hide scrollbar for Firefox */,
         }}
       >
+        
+        <div className="mt-0">
+          <img
+            src={logo} // Replace with your logo path
+            alt="Logo"
+            className="w-24 h-auto mx-auto" // Adjust width and styling as needed
+          />
+        </div>
         {/* Navigation */}
         <nav className="space-y-2 text-[12px]">
           {menu.map((item, index) => (

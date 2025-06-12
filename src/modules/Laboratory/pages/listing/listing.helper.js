@@ -1,6 +1,6 @@
-const getColorClass = (value, map, defaultClass = "bg-gray-100 text-gray-800") => {
-  return map[value] || defaultClass
-}
+// const getColorClass = (value, map, defaultClass = "bg-gray-100 text-gray-800") => {
+//   return map[value] || defaultClass
+// }
 
 export const listingHelper = {
   getStatusColor: (status) => {

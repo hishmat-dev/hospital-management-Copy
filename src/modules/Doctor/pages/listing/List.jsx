@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../../components
 import { useDoctorListing } from "./listing.hooks"
 import FilterBar from "./components/FilterBar"
 import ListItem from "./components/ListItem"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 export default function DoctorList() {
   const {
@@ -21,9 +22,7 @@ export default function DoctorList() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="loading-spinner"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 
