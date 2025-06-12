@@ -7,6 +7,8 @@ const InvoiceRecords = () => {
     { label: "", key: "checkbox" },
     { label: "Invoice No.", key: "invoiceNo" },
     { label: "Patient", key: "patient" },
+    { label: "Department", key: "department" },
+    { label: "Category", key: "category" },
     { label: "Created Date", key: "createdDate" },
     { label: "Due Date", key: "dueDate" },
     { label: "Status", key: "status" },
@@ -15,16 +17,16 @@ const InvoiceRecords = () => {
   ];
 
   const initialData = [
-    { invoiceNo: "#00001", patient: "Elisa Shah", createdDate: "20/04/2024", dueDate: "24/04/2024", status: "Paid", moneySpent: "$9830.00" },
-    { invoiceNo: "#00002", patient: "Ladonna Jones", createdDate: "12/04/2024", dueDate: "19/04/2024", status: "Pending", moneySpent: "$4567.60" },
-    { invoiceNo: "#00003", patient: "Shelly Daniel", createdDate: "11/04/2024", dueDate: "18/04/2024", status: "Paid", moneySpent: "$2980.00" },
-    { invoiceNo: "#00004", patient: "Rich Spears", createdDate: "19/04/2024", dueDate: "21/04/2024", status: "Overdue", moneySpent: "$3850.00" },
-    { invoiceNo: "#00005", patient: "Carey Russo", createdDate: "20/04/2024", dueDate: "25/04/2024", status: "Paid", moneySpent: "$8900.00" },
-    { invoiceNo: "#00006", patient: "Emmett Montes", createdDate: "19/04/2024", dueDate: "22/04/2024", status: "Pending", moneySpent: "$3452.00" },
-    { invoiceNo: "#00007", patient: "Cheri Trujillo", createdDate: "28/04/2024", dueDate: "30/04/2024", status: "Paid", moneySpent: "$6530.00" },
-    { invoiceNo: "#00008", patient: "Hans Hayes", createdDate: "12/04/2024", dueDate: "27/04/2024", status: "Pending", moneySpent: "$6750.00" },
-    { invoiceNo: "#00009", patient: "Dena Ramsey", createdDate: "13/04/2024", dueDate: "26/04/2024", status: "Pending", moneySpent: "$5490.00" },
-    { invoiceNo: "#00010", patient: "Reed Case", createdDate: "02/04/2024", dueDate: "24/04/2024", status: "Paid", moneySpent: "$3379.00" },
+    { invoiceNo: "#00001", patient: "Elisa Shah", department: "Cardiology", category: "Appointment", createdDate: "20/04/2024", dueDate: "24/04/2024", status: "Paid", moneySpent: "$9830.00" },
+    { invoiceNo: "#00002", patient: "Ladonna Jones", department: "Dentistry", category: "Lab Payment", createdDate: "12/04/2024", dueDate: "19/04/2024", status: "Pending", moneySpent: "$4567.60" },
+    { invoiceNo: "#00003", patient: "Shelly Daniel", department: "General Medicine", category: "Bed Charges", createdDate: "11/04/2024", dueDate: "18/04/2024", status: "Paid", moneySpent: "$2980.00" },
+    { invoiceNo: "#00004", patient: "Rich Spears", department: "Cardiology", category: "Appointment", createdDate: "19/04/2024", dueDate: "21/04/2024", status: "Overdue", moneySpent: "$3850.00" },
+    { invoiceNo: "#00005", patient: "Carey Russo", department: "Dentistry", category: "Lab Payment", createdDate: "20/04/2024", dueDate: "25/04/2024", status: "Paid", moneySpent: "$8900.00" },
+    { invoiceNo: "#00006", patient: "Emmett Montes", department: "General Medicine", category: "Bed Charges", createdDate: "19/04/2024", dueDate: "22/04/2024", status: "Pending", moneySpent: "$3452.00" },
+    { invoiceNo: "#00007", patient: "Cheri Trujillo", department: "Cardiology", category: "Appointment", createdDate: "28/04/2024", dueDate: "30/04/2024", status: "Paid", moneySpent: "$6530.00" },
+    { invoiceNo: "#00008", patient: "Hans Hayes", department: "Dentistry", category: "Lab Payment", createdDate: "12/04/2024", dueDate: "27/04/2024", status: "Pending", moneySpent: "$6750.00" },
+    { invoiceNo: "#00009", patient: "Dena Ramsey", department: "General Medicine", category: "Bed Charges", createdDate: "13/04/2024", dueDate: "26/04/2024", status: "Pending", moneySpent: "$5490.00" },
+    { invoiceNo: "#00010", patient: "Reed Case", department: "Cardiology", category: "Appointment", createdDate: "02/04/2024", dueDate: "24/04/2024", status: "Paid", moneySpent: "$3379.00" },
   ];
 
   const [data, setData] = useState(initialData);
@@ -58,7 +60,7 @@ const InvoiceRecords = () => {
         record.invoiceNo === item.invoiceNo ? { ...record, sentMail: true } : record
       )
     );
-    alert(`Mail sent to ${item.patient} at 06:01 PM PKT on Thursday, June 12, 2025`);
+    alert(`Mail sent to ${item.patient} at 06:19 PM PKT on Thursday, June 12, 2025`);
   };
 
   return (

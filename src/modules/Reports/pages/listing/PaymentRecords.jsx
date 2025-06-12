@@ -6,6 +6,8 @@ const PaymentRecords = () => {
   const headers = [
     { label: "Invoice No.", key: "invoiceNo" },
     { label: "Patient Name", key: "patientName" },
+    { label: "Department", key: "department" },
+    { label: "Category", key: "category" },
     { label: "Payment Type", key: "paymentType" },
     { label: "Paid Date", key: "paidDate" },
     { label: "Paid Amount", key: "paidAmount" },
@@ -14,16 +16,16 @@ const PaymentRecords = () => {
   ];
 
   const data = [
-    { invoiceNo: "#00098", patientName: "Trugex Malin", paymentType: "PayPal", paidDate: "02/05/2024", paidAmount: "$250.00", status: "Paid" },
-    { invoiceNo: "#00027", patientName: "Serge Baldwin", paymentType: "Credit Card", paidDate: "14/05/2024", paidAmount: "$340.00", status: "Paid" },
-    { invoiceNo: "#00073", patientName: "Zenaida Frank", paymentType: "Debit Card", paidDate: "22/05/2024", paidAmount: "$730.00", status: "Unpaid" },
-    { invoiceNo: "#00076", patientName: "Henrij Agas", paymentType: "Credit Card", paidDate: "22/05/2024", paidAmount: "$763.00", status: "Paid" },
-    { invoiceNo: "#00039", patientName: "Kelly James", paymentType: "Debit Card", paidDate: "26/05/2024", paidAmount: "$231.00", status: "Paid" },
-    { invoiceNo: "#00086", patientName: "Carl Jampa", paymentType: "PayPal", paidDate: "17/05/2024", paidAmount: "$452.00", status: "Paid" },
-    { invoiceNo: "#00062", patientName: "Hameed Khan", paymentType: "Credit Card", paidDate: "23/05/2024", paidAmount: "$453.00", status: "Paid" },
-    { invoiceNo: "#00045", patientName: "Paul Miller", paymentType: "Debit Card", paidDate: "28/05/2024", paidAmount: "$675.00", status: "Unpaid" },
-    { invoiceNo: "#00076", patientName: "Robert Francis", paymentType: "Credit Card", paidDate: "29/05/2024", paidAmount: "$324.00", status: "Paid" },
-    { invoiceNo: "#00067", patientName: "Edison Lee", paymentType: "Credit Card", paidDate: "14/05/2024", paidAmount: "$719.00", status: "Paid" },
+    { invoiceNo: "#00098", patientName: "Trugex Malin", department: "Cardiology", category: "Appointment", paymentType: "PayPal", paidDate: "02/05/2024", paidAmount: "$250.00", status: "Paid" },
+    { invoiceNo: "#00027", patientName: "Serge Baldwin", department: "Dentistry", category: "Lab Payment", paymentType: "Credit Card", paidDate: "14/05/2024", paidAmount: "$340.00", status: "Paid" },
+    { invoiceNo: "#00073", patientName: "Zenaida Frank", department: "General Medicine", category: "Bed Charges", paymentType: "Debit Card", paidDate: "22/05/2024", paidAmount: "$730.00", status: "Unpaid" },
+    { invoiceNo: "#00076", patientName: "Henrij Agas", department: "Cardiology", category: "Appointment", paymentType: "Credit Card", paidDate: "22/05/2024", paidAmount: "$763.00", status: "Paid" },
+    { invoiceNo: "#00039", patientName: "Kelly James", department: "Dentistry", category: "Lab Payment", paymentType: "Debit Card", paidDate: "26/05/2024", paidAmount: "$231.00", status: "Paid" },
+    { invoiceNo: "#00086", patientName: "Carl Jampa", department: "General Medicine", category: "Bed Charges", paymentType: "PayPal", paidDate: "17/05/2024", paidAmount: "$452.00", status: "Paid" },
+    { invoiceNo: "#00062", patientName: "Hameed Khan", department: "Cardiology", category: "Appointment", paymentType: "Credit Card", paidDate: "23/05/2024", paidAmount: "$453.00", status: "Paid" },
+    { invoiceNo: "#00045", patientName: "Paul Miller", department: "Dentistry", category: "Lab Payment", paymentType: "Debit Card", paidDate: "28/05/2024", paidAmount: "$675.00", status: "Unpaid" },
+    { invoiceNo: "#00076", patientName: "Robert Francis", department: "General Medicine", category: "Bed Charges", paymentType: "Credit Card", paidDate: "29/05/2024", paidAmount: "$324.00", status: "Paid" },
+    { invoiceNo: "#00067", patientName: "Edison Lee", department: "Cardiology", category: "Appointment", paymentType: "Credit Card", paidDate: "14/05/2024", paidAmount: "$719.00", status: "Paid" },
   ];
 
   const getStatusColor = (status) => {
