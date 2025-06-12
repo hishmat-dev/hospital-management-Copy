@@ -56,6 +56,8 @@ import TemplateList from "../../modules/Administrative/pages/LabTemplates/pages/
 import CreateTemplate from "../../modules/Administrative/pages/LabTemplates/pages/CreateTemplate"
 import ViewTemplate from "../../modules/Administrative/pages/LabTemplates/pages/ViewTemplate"
 import EditTemplate from "../../modules/Administrative/pages/LabTemplates/pages/EditTemplate"
+import PaymentRecords from "../../modules/Reports/pages/listing/PaymentRecords"
+import InvoiceRecords from "../../modules/Reports/pages/listing/InvoiceRecords"
 
 export default function AppRoutes() {
   return (
@@ -115,6 +117,9 @@ export default function AppRoutes() {
       <Route path="/admin/lab-categories/create" element={<CreateCategory />} />
       <Route path="/admin/lab-categories/view/:id" element={<ViewCategory />} />
       <Route path="/admin/lab-categories/edit/:id" element={<EditCategory />} />
+
+      <Route path="/reports/payment" element={<PaymentRecords/>} />
+      <Route path="/reports/invoice" element={<InvoiceRecords/>} />
 
       {/* Administrative Routes - Lab Templates */}
       <Route path="/admin/lab-templates" element={<TemplateList />} />

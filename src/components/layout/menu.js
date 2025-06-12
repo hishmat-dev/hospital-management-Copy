@@ -77,8 +77,9 @@ export const menu = [
     title: "Reports",
     icon: <Clipboard size={18} />,
     children: [
-      { title: "All Reports", path: "/" },
-      { title: "Payment Reports", path: "/" },
+      // { title: "All Reports", path: "/" },
+      { title: "Payment Reports", path: "/reports/payment" },
+      { title: "Invoice Reports", path: "/reports/invoice" },
     ],
   },
   {
