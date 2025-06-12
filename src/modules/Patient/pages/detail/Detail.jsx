@@ -14,7 +14,7 @@ export default function PatientDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { patient, loading, error } = useDetailHooks(id)
-  console.log("error:",error)
+  // console.log("error:",error)
   
   if (loading) {
     return (

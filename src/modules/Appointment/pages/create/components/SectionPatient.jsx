@@ -16,13 +16,13 @@ export default function SectionPatient({ formData, handleChange, errors, patient
   };
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Patient Information</h3>
+    <div className="space-y-4 text-[12px]">
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Patient Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Search Patient by Name */}
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Patient Name *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Patient Name *</label>
           <input
             type="text"
             name="patientSearch"
@@ -45,23 +45,23 @@ export default function SectionPatient({ formData, handleChange, errors, patient
                 filteredPatients.map((patient) => (
                   <li
                     key={patient.id}
-                    className="px-4 py-2 hover:bg-blue-100 cursor-pointer text-sm"
+                    className="px-4 py-2 hover:bg-blue-100 cursor-pointer "
                     onClick={() => handlePatientSelect(patient)}
                   >
                     {patient.name} ({patient.id}) - {patient.department}
                   </li>
                 ))
               ) : (
-                <li className="px-4 py-2 text-sm text-gray-500">No patient found</li>
+                <li className="px-4 py-2  text-gray-500">No patient found</li>
               )}
             </ul>
           )}
-          {errors.patientId && <p className="text-red-500 text-xs mt-1">{errors.patientId}</p>}
+          {errors.patientId && <p className="text-red-500  mt-1">{errors.patientId}</p>}
         </div>
 
         {/* Auto-filled contact */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Patient Contact</label>
+          <label className="block  font-medium text-gray-700 mb-1">Patient Contact</label>
           <input
             type="text"
             name="patientContact"
@@ -75,7 +75,7 @@ export default function SectionPatient({ formData, handleChange, errors, patient
 
         {/* Complaint */}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Chief Complaint</label>
+          <label className="block  font-medium text-gray-700 mb-1">Chief Complaint</label>
           <textarea
             name="chiefComplaint"
             rows={2}

@@ -78,7 +78,7 @@ export function useReportCreate() {
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel = (id) => {
     setFormData({
       patientName: "",
       patientId: "",
@@ -97,7 +97,8 @@ export function useReportCreate() {
         },
       ],
     });
-    // navigate(`/patients/detail/${patient.id}`)
+    
+    navigate(`/patients/detail/${id}`)
   };
 
   const isValid = (data) => {

@@ -1,6 +1,6 @@
 export default function VitalCard  ({ metric, value, unit, secondaryValue, secondaryUnit, icon: Icon, colorScheme })  {
-  const bgColor = `bg-${colorScheme}-50`;
-  const iconColor = `text-${colorScheme}-600`;
+  const bgColor = `bg-${colorScheme}-100`;
+  const iconColor = `text-${colorScheme}-700`;
   const titleColor = `text-${colorScheme}-900`;
   const valueColor = `text-${colorScheme}-800`;
   const secondaryColor = `text-${colorScheme}-600`;

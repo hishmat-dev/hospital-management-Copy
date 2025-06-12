@@ -6,6 +6,7 @@ import ReportForm from './Components/ReportForm';
 
 export default function ReportCreateForm() {
   const { id } = useParams();
+  console.log("report create id: ",id)
   const navigate = useNavigate();
   const { formData, errors, loading, handleChange, handleVisitChange, handleMedicineChange, handleSubmit, handleCancel, isValid } = useReportCreate();
 
@@ -35,7 +36,7 @@ export default function ReportCreateForm() {
           >
             Add Another Visit
           </button> */}
-          <Btn onSave={handleSubmit} onCancel={handleCancel} loading={loading} disabled={!isValid} />
+          <Btn onSave={handleSubmit} onCancel={()=>handleCancel(id)} loading={loading} disabled={!isValid} />
         </form>
       </div>
     </div>

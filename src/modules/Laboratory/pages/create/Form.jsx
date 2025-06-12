@@ -118,7 +118,7 @@ export default function LaboratoryCreateForm() {
               <button
                 type="button"
                 onClick={() => setShowTestForm(true)}
-                className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="flex items-center px-4 py-2 bg-primary-color text-white rounded-lg"
               >
                 <span className="mr-2">+</span> Add Test
               </button>

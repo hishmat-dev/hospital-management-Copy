@@ -7,12 +7,12 @@ export default function SectionSchedule({ formData, handleChange, errors, timeSl
   const maxDateString = maxDate.toISOString().split("T")[0]
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Schedule Information</h3>
+    <div className="space-y-4 text-[12px] ">
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Schedule Information</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Appointment Date *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Appointment Date *</label>
           <input
             type="date"
             name="date"
@@ -25,11 +25,11 @@ export default function SectionSchedule({ formData, handleChange, errors, timeSl
               errors.date ? "border-red-500" : "border-gray-300"
             }`}
           />
-          {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
+          {errors.date && <p className="text-red-500  mt-1">{errors.date}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Appointment Time *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Appointment Time *</label>
           <select
             name="time"
             required
@@ -46,11 +46,11 @@ export default function SectionSchedule({ formData, handleChange, errors, timeSl
               </option>
             ))}
           </select>
-          {errors.time && <p className="text-red-500 text-xs mt-1">{errors.time}</p>}
+          {errors.time && <p className="text-red-500  mt-1">{errors.time}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Duration (minutes)</label>
+          <label className="block  font-medium text-gray-700 mb-1">Duration (minutes)</label>
           <select
             name="duration"
             value={formData.duration}
@@ -69,7 +69,7 @@ export default function SectionSchedule({ formData, handleChange, errors, timeSl
       
 
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+          <label className="block  font-medium text-gray-700 mb-1">Notes</label>
           <textarea
             name="notes"
             rows={3}

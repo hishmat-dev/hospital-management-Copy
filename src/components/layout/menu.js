@@ -7,6 +7,7 @@ import {
   FlaskRoundIcon as Flask,
   AlertTriangle,
   Activity,
+  Clipboard,
   Settings,
 } from "lucide-react"
 
@@ -70,6 +71,14 @@ export const menu = [
     children: [
       { title: "Add Vitals", path: "/nursing/add" },
       { title: "Vitals Tracking", path: "/nursing/vitals" },
+    ],
+  },
+  {
+    title: "Reports",
+    icon: <Clipboard size={18} />,
+    children: [
+      { title: "All Reports", path: "/" },
+      { title: "Payment Reports", path: "/" },
     ],
   },
   {

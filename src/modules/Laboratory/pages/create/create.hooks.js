@@ -131,7 +131,7 @@ export const useLaboratoryCreate = () => {
   );
 
   const handleCancel = useCallback(() => {
-    navigate("/laboratory/list");
+    navigate("/laboratory/reports");
   }, [navigate]);
 
   // Validate patient fields

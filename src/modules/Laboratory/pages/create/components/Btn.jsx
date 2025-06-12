@@ -8,7 +8,7 @@ export default function Btn({ onCancel, loading, disabled }) {
         // disabled={loading || disabled}
         aria-label={loading ? "Ordering tests" : "Order lab tests"}
         // aria-disabled={loading || disabled}
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg disabled:opacity-80 disabled:cursor-not-allowed flex items-center space-x-2 justify-center hover:bg-blue-700 transition-colors"
+        className="bg-primary-color text-white px-6 py-3 rounded-lg disabled:opacity-80 disabled:cursor-not-allowed flex items-center space-x-2 justify-center  transition-colors"
       >
         {loading ? (
           <>

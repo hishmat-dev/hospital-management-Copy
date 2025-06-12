@@ -4,12 +4,12 @@ export default function SectionDoctor({ formData, handleChange, errors, doctors 
   const filteredDoctors = doctors.filter((doctor) => !formData.department || doctor.department === formData.department)
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Doctor & Department</h3>
+    <div className="space-y-4 text-[12px]">
+      <h3 className=" font-semibold text-gray-900 border-b pb-2">Doctor & Department</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Department *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Department *</label>
           <select
             name="department"
             required
@@ -28,11 +28,11 @@ export default function SectionDoctor({ formData, handleChange, errors, doctors 
             <option value="Dermatology">Dermatology</option>
             <option value="Emergency">Emergency</option>
           </select>
-          {errors.department && <p className="text-red-500 text-xs mt-1">{errors.department}</p>}
+          {errors.department && <p className="text-red-500  mt-1">{errors.department}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Select Doctor *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Select Doctor *</label>
           <select
             name="doctorId"
             required
@@ -49,11 +49,11 @@ export default function SectionDoctor({ formData, handleChange, errors, doctors 
               </option>
             ))}
           </select>
-          {errors.doctorId && <p className="text-red-500 text-xs mt-1">{errors.doctorId}</p>}
+          {errors.doctorId && <p className="text-red-500  mt-1">{errors.doctorId}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Appointment Type *</label>
+          <label className="block  font-medium text-gray-700 mb-1">Appointment Type *</label>
           <select
             name="type"
             required
@@ -70,11 +70,11 @@ export default function SectionDoctor({ formData, handleChange, errors, doctors 
             <option value="Routine Checkup">Routine Checkup</option>
             <option value="Surgery Consultation">Surgery Consultation</option>
           </select>
-          {errors.type && <p className="text-red-500 text-xs mt-1">{errors.type}</p>}
+          {errors.type && <p className="text-red-500  mt-1">{errors.type}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+          <label className="block  font-medium text-gray-700 mb-1">Priority</label>
           <select
             name="priority"
             value={formData.priority}

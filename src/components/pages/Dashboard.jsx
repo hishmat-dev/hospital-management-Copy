@@ -1,20 +1,41 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Users, Calendar, Bed, UserCheck, AlertTriangle, Activity } from "lucide-react";
-import { Table, Tag } from "antd";
-import { Pie } from "@ant-design/plots";
-import { useBedListing } from "../../modules/Bed/pages/listing/listing.hooks";
-import StatsCards from "../../modules/Bed/pages/listing/components/StatsCards";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Users, Calendar, Bed, Table as TableIcon, UserCheck, AlertTriangle, Activity } from 'lucide-react';
+import { Table, Tag } from 'antd';
+import { Line } from '@ant-design/plots';
+import { useBedListing } from '../../modules/Bed/pages/listing/listing.hooks';
+import StatsCards from '../../modules/Bed/pages/listing/components/StatsCards';
+import { useNavigate } from 'react-router-dom';
 
-export default function Dashboard() {
+function Dashboard() {
   const navigate = useNavigate();
-  const { stats, specialties, recentPatients } = useSelector((state) => state.dashboard || {});
+  const { stats = {}, recentPatients = [] } = useSelector((state) => state.dashboard || {});
 
-  // Log specialties to debug
-  React.useEffect(() => {
-    console.log("Specialties data:", specialties);
-  }, [specialties]);
+  // Dummy patient data for previous 12 months (July 2024 to June 2025)
+  const patientData = [
+    { month: 'Jul 2024', patients: 130 },
+    { month: 'Aug 2024', patients: 140 },
+    { month: 'Sep 2024', patients: 160 },
+    { month: 'Oct 2024', patients: 175 },
+    { month: 'Nov 2024', patients: 190 },
+    { month: 'Dec 2024', patients: 165 },
+    { month: 'Jan 2025', patients: 180 },
+    { month: 'Feb 2025', patients: 160 },
+    { month: 'Mar 2025', patients: 200 },
+    { month: 'Apr 2025', patients: 210 },
+    { month: 'May 2025', patients: 235 },
+    { month: 'Jun 2025', patients: 245 },
+  ];
+
+  // Log patient data to debug
+  useEffect(() => {
+    // console.log('Patient data for graph:', patientData);
+    patientData.forEach((item, index) => {
+      if (item.month == null || item.patients == null) {
+        console.warn(`Undefined data at index ${index}:`, item);
+      }
+    });
+  }, []);
 
   // StatCard component
   const StatCard = ({ icon, title, value, onClick }) => (
@@ -28,7 +49,7 @@ export default function Dashboard() {
           <p className="text-xl font-bold text-gray-900">{value}</p>
         </div>
         <div className="p-3 rounded-full">
-          {React.cloneElement(icon, { size: 24, className: `text-primary-color` })}
+          {React.cloneElement(icon, { size: 24, className: 'text-primary-color' })}
         </div>
       </div>
     </div>
@@ -37,38 +58,26 @@ export default function Dashboard() {
   // Status color for patient tags
   const getStatusColor = (status) => {
     switch (status) {
-      case "Admitted":
-        return "blue";
-      case "Discharged":
-        return "green";
-      case "Outpatient":
-        return "gold";
+      case 'Admitted':
+        return 'blue';
+      case 'Discharged':
+        return 'green';
+      case 'Outpatient':
+        return 'gold';
       default:
-        return "default";
+        return 'default';
     }
   };
 
   // Columns for Recent Patients Table
   const patientColumns = [
+    { title: 'ID', dataIndex: 'id', key: 'id' },
+    { title: 'Name', dataIndex: 'name', key: 'name' },
+    { title: 'Department', dataIndex: 'department', key: 'department' },
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Department",
-      dataIndex: "department",
-      key: "department",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
       render: (status) => <Tag color={getStatusColor(status)}>{status}</Tag>,
     },
   ];
@@ -76,78 +85,36 @@ export default function Dashboard() {
   const { occupancyStats } = useBedListing();
 
   const handleAppointmentList = () => {
-    navigate("/appointments/list");
+    navigate('/appointments/list');
   };
 
-  // Pie chart configuration for two-level chart
-  const pieConfig = {
-    data: specialties && specialties.length > 0
-      ? [
-          ...specialties.map((item) => ({
-            type: "Outer",
-            name: item.name || "Unknown",
-            value: (item.patients || 0) + (item.doctors || 0), // Total value for label
-            patients: item.patients || 0,
-            doctors: item.doctors || 0,
-            color: ["#5AD8A6", "#FAAD14", "#5B8FF9", "#FF4D4F", "#975FE4"][specialties.indexOf(item) % 5],
-          })),
-          ...specialties.map((item) => ({
-            type: "Inner",
-            name: item.name || "Unknown",
-            value: (item.patients || 0) + (item.doctors || 0), // Total value for label
-            patients: item.patients || 0,
-            doctors: item.doctors || 0,
-            color: ["#5AD8A6", "#FAAD14", "#5B8FF9", "#FF4D4F", "#975FE4"][specialties.indexOf(item) % 5],
-          })),
-        ]
-      : [
-          { type: "Outer", name: "Cardiology", value: 60, patients: 50, doctors: 10, color: "#5AD8A6" },
-          { type: "Outer", name: "Neurology", value: 48, patients: 40, doctors: 8, color: "#FAAD14" },
-          { type: "Outer", name: "Orthopedics", value: 36, patients: 30, doctors: 6, color: "#5B8FF9" },
-          { type: "Outer", name: "Pediatrics", value: 72, patients: 60, doctors: 12, color: "#FF4D4F" },
-          { type: "Outer", name: "General Surgery", value: 54, patients: 45, doctors: 9, color: "#975FE4" },
-          { type: "Inner", name: "Cardiology", value: 60, patients: 50, doctors: 10, color: "#5AD8A6" },
-          { type: "Inner", name: "Neurology", value: 48, patients: 40, doctors: 8, color: "#FAAD14" },
-          { type: "Inner", name: "Orthopedics", value: 36, patients: 30, doctors: 6, color: "#5B8FF9" },
-          { type: "Inner", name: "Pediatrics", value: 72, patients: 60, doctors: 12, color: "#FF4D4F" },
-          { type: "Inner", name: "General Surgery", value: 54, patients: 45, doctors: 9, color: "#975FE4" },
-        ],
-    angleField: "value",
-    colorField: "name",
-    seriesField: "type",
-    radius: 1,
-    innerRadius: 0.6,
-    legend: { position: "bottom" },
-    label: {
-      formatter: (datum) => datum?.value ? `${datum.value}` : "0", // Show total value or "0" if null
-    },
-    tooltip: {
-      formatter: (datum) => ({
-        name: datum.name,
-        value: "",
-        customHtml: `<div><p>${datum.type === "Outer" ? "Patients" : "Doctors"}: ${datum[datum.type === "Outer" ? "patients" : "doctors"] || 0}</p></div>`,
-      }),
-    },
-    color: ({ name }) => {
-      const colorMap = {
-        Cardiology: "#5AD8A6",
-        Neurology: "#FAAD14",
-        Orthopedics: "#5B8FF9",
-        Pediatrics: "#FF4D4F",
-        "General Surgery": "#975FE4",
-      };
-      return colorMap[name] || "#ccc";
-    },
-    interactions: [{ type: "element-selected" }, { type: "element-active" }],
-    statistic: {
-      title: {
-        formatter: () => "My Chart",
-        style: { fontSize: 16, fontWeight: "bold" },
-      },
-      content: {
-        style: { fontSize: 12 },
+  // Line chart configuration with DemoLine styling
+  const lineConfig = {
+    data: patientData,
+    xField: 'month',
+    yField: 'patients',
+    height: 400,
+    interaction: {
+      tooltip: {
+        marker: false,
       },
     },
+    style: {
+      lineWidth: 2,
+      stroke: '#4c51bf', // Indigo-700
+    },
+    area: {
+      style: {
+        fill: 'rgba(75, 85, 199, 0.1)', // Indigo-100
+      },
+    },
+    xAxis: {
+      label: {
+        autoRotate: true,
+        style: { fontSize: 10 },
+      },
+    },
+    
   };
 
   return (
@@ -160,28 +127,30 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-        <StatCard icon={<Users />} title="Total Patients" value={stats.totalPatients} />
+        <StatCard icon={<Users />} title="Total Patients" value={stats.totalPatients || 0} />
         <StatCard
           icon={<Calendar />}
           title="Today's Appointments"
-          value={stats.todaysAppointments}
+          value={stats.todaysAppointments || 0}
           onClick={handleAppointmentList}
         />
-        <StatCard icon={<Bed />} title="Available Beds" value={stats.availableBeds} />
-        <StatCard icon={<UserCheck />} title="Doctors On Duty" value={stats.doctorsOnDuty} />
-        <StatCard icon={<AlertTriangle />} title="Emergency Cases" value={stats.emergencyCases} />
-        <StatCard icon={<Activity />} title="Surgeries Today" value={stats.surgeriesToday} />
+        <StatCard icon={<Bed />} title="Available Beds" value={stats.availableBeds || 0} />
+        <StatCard icon={<UserCheck />} title="Doctors On Duty" value={stats.doctorsOnDuty || 0} />
+        <StatCard icon={<AlertTriangle />} title="Emergency Cases" value={stats.emergencyCases || 0} />
+        <StatCard icon={<Activity />} title="Surgeries Today" value={stats.surgeriesToday || 0} />
       </div>
 
       <StatsCards occupancyStats={occupancyStats} />
 
       {/* Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-[12px]">
-        {/* My Chart (Two-Level Pie Chart) */}
+        {/* Monthly Patient Records (Line Chart) */}
         <div className="bg-white rounded-lg shadow-md p-3">
-          <h2 className="font-bold text-gray-900 mb-4">My Chart</h2>
-          {specialties && specialties.length > 0 ? (
-            <Pie {...pieConfig} />
+          <h2 className="font-bold text-gray-900 mb-4">Monthly Patient Records (Jul 2024 - Jun 2025)</h2>
+          {patientData.length > 0 ? (
+            <div style={{ height: '400px' }}>
+              <Line {...lineConfig} />
+            </div>
           ) : (
             <p className="text-gray-600">No data available</p>
           )}
@@ -193,11 +162,11 @@ export default function Dashboard() {
           <div className="overflow-x-auto">
             <Table
               columns={patientColumns}
-              dataSource={recentPatients}
-              rowKey={(record) => record.id || record.name} // Use id if available, fallback to name
+              dataSource={recentPatients || []}
+              rowKey={(record) => record.id || record.name}
               pagination={false}
               className="ant-table-custom"
-              scroll={{ x: "max-content" }}
+              scroll={{ x: 'max-content' }}
             />
           </div>
         </div>
@@ -205,3 +174,5 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export default Dashboard;
