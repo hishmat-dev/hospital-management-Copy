@@ -8,6 +8,26 @@ module.exports = {
     "app/**/*.{ts,tsx}",
     "components/**/*.{ts,tsx}",
   ],
+  safelist: [
+    "bg-blue-hosta",
+    "bg-medium-turquoise",
+    "bg-waikawa-grey",
+    "bg-vivid-cerise",
+    "bg-bright-sun",
+    "bg-primary-color",
+    "border-l-blue-hosta",
+    "border-l-medium-turquoise",
+    "border-l-waikawa-grey",
+    "border-l-vivid-cerise",
+    "border-l-bright-sun",
+    "border-l-primary-color",
+    "text-blue-hosta",
+    "text-medium-turquoise",
+    "text-waikawa-grey",
+    "text-vivid-cerise",
+    "text-bright-sun",
+    "text-primary-color",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -22,7 +42,7 @@ module.exports = {
         "bright-sun": "#FED33C",
         "primary-color":"#526bb1",
         "red-color" : "#e34d4d",
-    },
+      },
   },
   plugins: [require("tailwindcss-animate")],
 }

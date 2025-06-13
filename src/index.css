@@ -8,6 +8,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --theme-primary: #526bb1; /* Default to primary-color */
+}
+
+/* Ensure sidebar remains white */
+aside {
+  background-color: #fff !important;
+}
+
+/* Example: Apply theme color to other elements */
+.main-content {
+  @apply bg-[var(--theme-primary)] text-white;
+}
+
 /* body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -103,20 +117,4 @@ code {
 
 .status-pending {
   @apply bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium;
-}
-
-
-.allPatient-ant-table-custom .ant-table-thead > tr > th {
-  background-color: #f9fafb; /* Equivalent to bg-gray-50 */
-  color: #6b7280; /* Equivalent to text-gray-500 */
-  font-size: 12px; /* Equivalent to text-xs */
-  font-weight: 500; /* Equivalent to font-medium */
-  text-transform: uppercase;
-  letter-spacing: 0.05em; /* Equivalent to tracking-wider */
-}
-.allPatient-ant-table-custom .ant-table-tbody > tr:hover > td {
-  background-color: #f9fafb; /* Equivalent to hover:bg-gray-50 */
-}
-.allPatient-ant-table-custom .ant-table-tbody > tr > td {
-  border-bottom: 1px solid #e5e7eb; /* Equivalent to divide-y divide-gray-200 */
 }

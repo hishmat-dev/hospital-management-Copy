@@ -1,5 +1,7 @@
 import { Eye, Edit, Trash2 } from "lucide-react"
 import { Select } from "antd"
+import { useContext } from "react";
+import { ThemeContext } from "../../ThemeContext"
 
 const { Option } = Select
 
@@ -14,12 +16,13 @@ export default function ReusableTable({
   keyField = "id",
   pagination, 
 }) {
+  const { selectedTheme } = useContext(ThemeContext);
   return (
     <div className="space-y-4">
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 text-[12px]">
-            <thead className="bg-primary-color">
+            <thead className={`bg-${selectedTheme}`}>
               <tr>
                 {headers.map((header, index) => (
                   <th

@@ -1,6 +1,8 @@
 import { Search, Download, Plus, RotateCcw } from "lucide-react"
 // import { useCallback } from "react"
 import debounce from "lodash.debounce"
+import { useContext } from "react";
+import { ThemeContext } from "../../../../../ThemeContext"
 
 export default function FilterBar({ filters, onFilterChange, onExport, onAddNew, statuses, onResetFilters  = [] }) {
   // Debounce search input to avoid excessive re-renders
@@ -10,6 +12,7 @@ export default function FilterBar({ filters, onFilterChange, onExport, onAddNew,
   //   onFilterChange("status", "")
   //   onFilterChange("sortBy", "name")
   // }
+   const { selectedTheme } = useContext(ThemeContext);
 
   return (
     <div className="bg-white rounded-lg shadow-md p-3 space-y-4 text-[12px]">
@@ -25,7 +28,7 @@ export default function FilterBar({ filters, onFilterChange, onExport, onAddNew,
           </button>
           <button
             onClick={onAddNew}
-            className="bg-primary-color text-white px-4 py-2 rounded-lg  flex items-center space-x-2"
+            className={`bg-${selectedTheme} text-white px-4 py-2 rounded-lg  flex items-center space-x-2`}
           >
             <Plus size={16} />
             <span>Add Patient</span>

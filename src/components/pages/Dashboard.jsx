@@ -6,10 +6,15 @@ import { Line } from '@ant-design/plots';
 import { useBedListing } from '../../modules/Bed/pages/listing/listing.hooks';
 import StatsCards from '../../modules/Bed/pages/listing/components/StatsCards';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { ThemeContext } from "../../ThemeContext"
 
 function Dashboard() {
   const navigate = useNavigate();
   const { stats = {}, recentPatients = [] } = useSelector((state) => state.dashboard || {});
+  const { selectedTheme } = useContext(ThemeContext);
+  
+  console.log(`Selected Theme: text-${selectedTheme}`);
 
   // Dummy patient data for previous 12 months (July 2024 to June 2025)
   const patientData = [
@@ -40,7 +45,7 @@ function Dashboard() {
   // StatCard component
   const StatCard = ({ icon, title, value, onClick }) => (
     <div
-      className="bg-white rounded-lg shadow-md p-4 border-l-4 hover:cursor-pointer border-l-primary-color"
+      className={`bg-white rounded-lg shadow-md p-4 border-l-4 hover:cursor-pointer border-l-${selectedTheme}`}
       onClick={onClick}
     >
       <div className="flex items-center justify-between">
@@ -49,7 +54,7 @@ function Dashboard() {
           <p className="text-xl font-bold text-gray-900">{value}</p>
         </div>
         <div className="p-3 rounded-full">
-          {React.cloneElement(icon, { size: 24, className: 'text-primary-color' })}
+          {React.cloneElement(icon, { size: 24, className: `text-${selectedTheme}` })}
         </div>
       </div>
     </div>
@@ -121,8 +126,8 @@ function Dashboard() {
     <div className="space-y-6 text-[12px]">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-xl font-bold text-gray-900 mb-2">Hospital Dashboard</h1>
-        <p className="text-gray-600">Welcome to Workwise Hospital Management System</p>
+        <h1 className={`text-xl font-bold text-${selectedTheme} mb-2`}>Hospital Dashboard</h1>
+        <p className={`text-${selectedTheme}`}>Welcome to Workwise Hospital Management System</p>
       </div>
 
       {/* Stats Grid */}
