@@ -3,7 +3,7 @@ import { useDoctorListing } from "./listing.hooks"
 import FilterBar from "./components/FilterBar"
 import ListItem from "./components/ListItem"
 import LoadingComponent from "../../../../components/ui/LoadingComponent"
-
+import DoctorStatsCard from "./components/DoctorStatsCard"
 export default function DoctorList() {
   const {
     doctors,
@@ -41,67 +41,25 @@ export default function DoctorList() {
       />
 
       <div className="text-[12px] grid grid-cols-1 md:grid-cols-4 gap-3">
-        <Card className="bg-white shadow-md h-12">
-          <div className="flex items-center justify-between p-2 h-12">
-            <div className="flex-1">
-              <CardHeader>
-                <CardTitle className=" font-medium">Total Doctors</CardTitle>
-              </CardHeader>
-            </div>
-            <div className="flex-1 text-right">
-              <CardContent>
-                <div className=" font-bold">{doctors.length}</div>
-              </CardContent>
-            </div>
-          </div>
-        </Card>
-        <Card className="bg-white shadow-md h-12">
-          <div className="flex items-center justify-between p-2 h-12">
-            <div className="flex-1">
-              <CardHeader>
-                <CardTitle className=" font-medium">Active Doctors</CardTitle>
-              </CardHeader>
-            </div>
-            <div className="flex-1 text-right">
-              <CardContent>
-                <div className=" font-bold text-green-600">
-                  {doctors.filter((d) => d.status === "Active").length}
-                </div>
-              </CardContent>
-            </div>
-          </div>
-        </Card>
-        <Card className="bg-white shadow-md h-12">
-          <div className="flex items-center justify-between p-2 h-12">
-            <div className="flex-1">
-              <CardHeader>
-                <CardTitle className=" font-medium">Specialties</CardTitle>
-              </CardHeader>
-            </div>
-            <div className="flex-1 text-right">
-              <CardContent>
-                <div className=" font-bold">{new Set(doctors.map((d) => d.specialty)).size}</div>
-              </CardContent>
-            </div>
-          </div>
-        </Card>
-        <Card className="bg-white shadow-md h-12">
-          <div className="flex items-center justify-between p-2 h-12">
-            <div className="flex-1">
-              <CardHeader>
-                <CardTitle className=" font-medium">On Duty</CardTitle>
-              </CardHeader>
-            </div>
-            <div className="flex-1 text-right">
-              <CardContent>
-                <div className=" font-bold text-blue-600">
-                  {doctors.filter((d) => d.availability === "Available").length}
-                </div>
-              </CardContent>
-            </div>
-          </div>
-        </Card>
-      </div>
+      <DoctorStatsCard 
+        title="Total Doctors" 
+        value={doctors.length}
+      />
+      <DoctorStatsCard 
+        title="Active Doctors" 
+        value={doctors.filter((d) => d.status === "Active").length}
+        textColor="text-green-600"
+      />
+      <DoctorStatsCard 
+        title="Specialties" 
+        value={new Set(doctors.map((d) => d.specialty)).size}
+      />
+      <DoctorStatsCard 
+        title="On Duty" 
+        value={doctors.filter((d) => d.availability === "Available").length}
+        textColor="text-blue-600"
+      />
+    </div>
 
       <Card>
       <CardHeader>

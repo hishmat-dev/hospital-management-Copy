@@ -4,7 +4,7 @@ import { listingHelper } from "../../listing/listing.helper";
 import { detailHelper } from "./detail.helper";
 import logo from "../../../../../shared/workwise.svg"
 
-const LabTestDetail = ({ test, labInfo = { name: "WorkW Labs", accreditation: "CLIA Certified" } }) => {
+const LabTestDetail = ({ test, labInfo = { name: "Workw Labs", accreditation: "CLIA Certified" } }) => {
   // console.log("test", test);
 
   return (

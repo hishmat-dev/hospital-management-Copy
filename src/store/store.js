@@ -10,6 +10,7 @@ import laboratoryReducer from "../modules/Laboratory/action/slice"
 import emergencyReducer from "../modules/Emergency/action/slice"
 import nursingReducer from "../modules/Nursing/action/slice"
 import administrativeReducer from "../modules/Administrative/action/slice"
+import reportsReducer from "../modules/Reports/action/slice"
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     emergency: emergencyReducer,
     nursing: nursingReducer,
     administrative: administrativeReducer,
+    reports: reportsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

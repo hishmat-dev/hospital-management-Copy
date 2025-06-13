@@ -56,8 +56,11 @@ import TemplateList from "../../modules/Administrative/pages/LabTemplates/pages/
 import CreateTemplate from "../../modules/Administrative/pages/LabTemplates/pages/CreateTemplate"
 import ViewTemplate from "../../modules/Administrative/pages/LabTemplates/pages/ViewTemplate"
 import EditTemplate from "../../modules/Administrative/pages/LabTemplates/pages/EditTemplate"
-import PaymentRecords from "../../modules/Reports/pages/listing/PaymentRecords"
-import InvoiceRecords from "../../modules/Reports/pages/listing/InvoiceRecords"
+
+import PaymentList from "../../modules/Reports/pages/Payments/PaymentList"
+import PaymentDetail from "../../modules/Reports/pages/Payments/PaymentDetail"
+import InvoiceList from "../../modules/Reports/pages/Invoices/InvoiceList"
+import InvoiceDetail from "../../modules/Reports/pages/Invoices/InvoiceDetail"
 
 export default function AppRoutes() {
   return (
@@ -118,8 +121,11 @@ export default function AppRoutes() {
       <Route path="/admin/lab-categories/view/:id" element={<ViewCategory />} />
       <Route path="/admin/lab-categories/edit/:id" element={<EditCategory />} />
 
-      <Route path="/reports/payment" element={<PaymentRecords/>} />
-      <Route path="/reports/invoice" element={<InvoiceRecords/>} />
+      <Route path="/reports/payment" element={<PaymentList/>} />
+      <Route path="/reports/payments/detail/:id" element={<PaymentDetail/>} />
+      {/* Invoice Management Routes */}
+      <Route path="/reports/invoice" element={<InvoiceList/>} /> 
+      <Route path="/reports/invoices/detail/:id" element={<InvoiceDetail/>} />
 
       {/* Administrative Routes - Lab Templates */}
       <Route path="/admin/lab-templates" element={<TemplateList />} />

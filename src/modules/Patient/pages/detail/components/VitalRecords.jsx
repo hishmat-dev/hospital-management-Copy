@@ -93,12 +93,9 @@ export default function VitalRecords({ patient }) {
         { metric: 'Diastolic BP', value: parseInt(todayVital.bloodPressure.split('/')[1]) || 0 },
         { metric: 'Heart Rate', value: parseInt(todayVital.heartRate) || 0 },
         { metric: 'Temperature', value: parseFloat(todayVital.temperature) || 0 },
-        { metric: 'Respiratory Rate', value: parseInt(todayVital.respiratoryRate) || 0 },
-        { metric: 'Oxygen Saturation', value: parseInt(todayVital.oxygenSaturation) || 0 },
-        { metric: 'Pain Level', value: parseInt(todayVital.painLevel) || 0 },
         { metric: 'Weight', value: parseInt(todayVital.weight) || 0 },
         { metric: 'Blood Glucose', value: parseInt(todayVital.bloodGlucose) || 0 },
-        { metric: 'BMI', value: parseFloat(todayVital.bmi) || 0 },
+        
       ].filter((item) => item.value > 0)
     : [];
 
@@ -165,12 +162,12 @@ export default function VitalRecords({ patient }) {
   return (
     <div className="bg-white rounded-lg shadow p-6 text-[12px]">
       {/* Vitals Section */}
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-3">
         {/* Today's Vitals Cards */}
         <div>
           <h4 className="font-semibold text-gray-800 mb-4">Today's Vitals</h4>
           {columnData.length > 0 ? (
-            <div className="grid grid-cols-6 gap-4 mb-4">
+            <div className="grid grid-cols-6 gap-4 ">
               {columnData.map((item) => {
                 const config = metricConfig.find((m) => m.metric === item.metric);
                 if (!config) return null;
