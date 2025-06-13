@@ -7,6 +7,7 @@ import ActionButtons from "./components/ActionButtons"
 import { useDetailHooks } from "./detail.hooks"
 import profile from "../../../../components/ui/profile.jpg"
 import AppointmentsTable from "./components/AppointmentsTable"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 export default function DoctorDetail() {
   const { id } = useParams()
@@ -15,9 +16,7 @@ export default function DoctorDetail() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

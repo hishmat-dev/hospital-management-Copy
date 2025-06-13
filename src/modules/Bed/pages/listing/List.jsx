@@ -3,6 +3,7 @@ import BedCard from "./components/BedCard"
 import StatsCards from "./components/StatsCards"
 import { useBedListing } from "./listing.hooks"
 import { listingConfig } from "./listing.config"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 export default function BedList() {
   const {
@@ -26,9 +27,7 @@ export default function BedList() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

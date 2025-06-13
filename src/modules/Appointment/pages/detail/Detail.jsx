@@ -12,6 +12,7 @@ import {
   Heart,
   Send,
 } from "lucide-react"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const AppointmentDetail = () => {
   const { id } = useParams()
@@ -51,9 +52,7 @@ const AppointmentDetail = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-4 border-indigo-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

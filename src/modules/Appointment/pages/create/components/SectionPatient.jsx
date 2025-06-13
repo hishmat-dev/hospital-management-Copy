@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SectionPatient({ formData, handleChange, errors, patients = [] }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const navigate = useNavigate();
 
   const filteredPatients = patients.filter((patient) =>
     patient.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -52,7 +54,17 @@ export default function SectionPatient({ formData, handleChange, errors, patient
                   </li>
                 ))
               ) : (
-                <li className="px-4 py-2  text-gray-500">No patient found</li>
+                <>
+                  <li className="px-4 py-2  text-gray-500">No patient found</li>
+                  <button
+                    className="w-full text-left px-4 py-2 text-blue-600 hover:underline"
+                    onClick={() => {
+                      navigate("/hospital/patients/add");
+                    }}
+                  >
+                    Add New Patient
+                  </button>
+                </>
               )}
             </ul>
           )}

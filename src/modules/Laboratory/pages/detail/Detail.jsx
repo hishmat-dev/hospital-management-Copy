@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { fetchLabTests } from "../../action/slice"
 import LabTestDetail from "./components/LabTestDetail"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const LaboratoryDetail = () => {
   const { id } = useParams()
@@ -22,9 +23,7 @@ const LaboratoryDetail = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

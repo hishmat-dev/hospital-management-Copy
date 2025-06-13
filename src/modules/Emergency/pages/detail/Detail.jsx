@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { fetchEmergencyCases } from "../../action/slice"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const EmergencyDetail = () => {
   const { id } = useParams()
@@ -20,9 +21,7 @@ const EmergencyDetail = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

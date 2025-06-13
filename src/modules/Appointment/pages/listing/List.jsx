@@ -4,6 +4,7 @@ import { useAppointmentListing } from "./listing.hooks"
 import { listingConfig } from "./listing.config"
 import { Calendar, Clock, User, Stethoscope } from "lucide-react"
 import { Select } from "antd"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const { Option } = Select
 
@@ -97,9 +98,7 @@ export default function AppointmentList() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

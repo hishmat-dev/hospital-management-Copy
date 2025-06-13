@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchLabTemplates, updateLabTemplate, fetchLabCategories } from "../../../action/slice"
 import { Plus, Trash2, Save, X, ArrowLeft } from "lucide-react"
+import LoadingComponent from "../../../../../components/ui/LoadingComponent"
 
 export default function EditTemplate() {
   const { id } = useParams()
@@ -116,9 +117,7 @@ export default function EditTemplate() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

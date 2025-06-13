@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { fetchVitals } from "../../action/slice"
 import Form from "./Form"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const NursingUpdate = () => {
   const { patientName } = useParams()
@@ -21,9 +22,7 @@ const NursingUpdate = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 

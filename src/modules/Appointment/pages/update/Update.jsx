@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { fetchAppointments } from "../../action/slice"
 import Form from "./Form"
+import LoadingComponent from "../../../../components/ui/LoadingComponent"
 
 const AppointmentUpdate = () => {
   const { id } = useParams()
@@ -21,9 +22,7 @@ const AppointmentUpdate = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 bg-primary-color"></div>
-      </div>
+      <LoadingComponent/>
     )
   }
 
